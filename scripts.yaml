@@ -1,0 +1,58 @@
+dressing_aan:
+  alias: Dressing aan
+  sequence:
+  - type: turn_on
+    device_id: 123c3d9589d879146db3b7d4146b2e29
+    entity_id: light.dressinglampje_level_on_off
+    domain: light
+    brightness_pct: 20
+  mode: single
+dressing_af:
+  alias: Dressing af
+  sequence:
+  - type: turn_off
+    device_id: 123c3d9589d879146db3b7d4146b2e29
+    entity_id: light.dressinglampje_level_on_off
+    domain: light
+  mode: single
+dressing_harder:
+  alias: dressing harder
+  sequence:
+  - type: brightness_increase
+    device_id: 123c3d9589d879146db3b7d4146b2e29
+    entity_id: light.dressinglampje_level_on_off
+    domain: light
+  mode: single
+salon_aan:
+  alias: Salon aan
+  sequence:
+  - type: turn_on
+    device_id: 94130a1735478084d8fd81f1b10f04bd
+    entity_id: light.tradfri_lamp_salon_level_on_off
+    domain: light
+    brightness_pct: 40
+  mode: single
+salon_af:
+  alias: Salon af
+  sequence:
+  - type: turn_off
+    device_id: 94130a1735478084d8fd81f1b10f04bd
+    entity_id: light.tradfri_lamp_salon_level_on_off
+    domain: light
+  mode: single
+salon_zachter:
+  alias: Salon zachter
+  sequence:
+  - type: brightness_decrease
+    device_id: 94130a1735478084d8fd81f1b10f04bd
+    entity_id: light.tradfri_lamp_salon_level_on_off
+    domain: light
+  mode: single
+salon_harder:
+  alias: Salon harder
+  sequence:
+  - type: brightness_increase
+    device_id: 94130a1735478084d8fd81f1b10f04bd
+    entity_id: light.tradfri_lamp_salon_level_on_off
+    domain: light
+  mode: single
