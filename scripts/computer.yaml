@@ -1,0 +1,17 @@
+computer_licht_aan:
+  alias: Computer licht aan
+  sequence:
+  - type: turn_on
+    device_id: 0fe724dc90023e4571abfb10876f1dd7
+    entity_id: light.hue_play_1
+    domain: light
+    brightness_pct: 35
+  mode: single
+computer_licht_af:
+  alias: Computer licht af
+  sequence:
+  - type: turn_off
+    device_id: 0fe724dc90023e4571abfb10876f1dd7
+    entity_id: light.hue_play_1
+    domain: light
+  mode: single

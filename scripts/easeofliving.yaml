@@ -1,0 +1,11 @@
+beneden_alles_af:
+        sequence:
+                - service: script.kaarslampjes_af
+                  data: {}
+                - service: script.kerstlichtjes_af
+                  data: {}
+                - service: script.computer_licht_af
+                  data: {}
+                - service: script.salon_af
+                  data: {}
+

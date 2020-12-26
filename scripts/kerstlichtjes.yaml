@@ -1,0 +1,24 @@
+kerstlichtjes_aan:
+  alias: Kerstlichtjes aan
+  sequence:
+  - type: turn_on
+    device_id: b21f07e90476116d7f35ca18742aaffd
+    entity_id: switch.ikea_of_sweden_tradfri_control_outlet_34277ffe_on_off
+    domain: switch
+  - type: turn_on
+    device_id: 30d516d336cdf0d0a3ae24b010b9d689
+    entity_id: switch.tradfri_stekker_2_on_off
+    domain: switch
+  mode: single
+kerstlichtjes_af:
+  alias: Kerstlichtjes af
+  sequence:
+  - type: turn_off
+    device_id: b21f07e90476116d7f35ca18742aaffd
+    entity_id: switch.ikea_of_sweden_tradfri_control_outlet_34277ffe_on_off
+    domain: switch
+  - type: turn_off
+    device_id: 30d516d336cdf0d0a3ae24b010b9d689
+    entity_id: switch.tradfri_stekker_2_on_off
+    domain: switch
+  mode: single
