@@ -1,0 +1,56 @@
+- id: '1608914545242'
+  alias: Salon aan met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.salon_aan
+    data: {}
+  mode: single
+- id: '1608914561035'
+  alias: Salon af met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.salon_af
+    data: {}
+  mode: single
+- id: '1608920294285'
+  alias: Salon harder met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.salon_harder
+    data: {}
+  mode: single
+- id: '1608920327437'
+  alias: Salon zachter met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.salon_zachter
+    data: {}
+  mode: single

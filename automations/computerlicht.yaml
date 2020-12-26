@@ -1,0 +1,28 @@
+- id: '1608847512225'
+  alias: Computer licht aan met switch
+  description: ''
+  trigger:
+  - device_id: 76d42de4d939ba3ec9c60c7fe69963d4
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.computer_licht_aan
+    data: {}
+  mode: single
+- id: '1608847544407'
+  alias: Computer licht uit met switch
+  description: ''
+  trigger:
+  - device_id: 76d42de4d939ba3ec9c60c7fe69963d4
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.computer_licht_af
+    data: {}
+  mode: single

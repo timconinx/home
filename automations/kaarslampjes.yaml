@@ -1,0 +1,56 @@
+- id: '1608842964413'
+  alias: Kaarslampjes aan met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kaarslampjes_aan
+    data: {}
+  mode: single
+- id: '1608843088151'
+  alias: Kaarslampjes af met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.kaarslampjes_af
+    data: {}
+  mode: single
+- id: '1608843338487'
+  alias: Kaarslampjes harder met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.kaarslampjes_harder
+    data: {}
+  mode: single
+- id: '1608843392501'
+  alias: Kaarslampjes zachter met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.kaarslampjes_zachter
+    data: {}
+  mode: single

@@ -1,0 +1,28 @@
+- id: '1608845756623'
+  alias: Kerstlichtjes aan met switch
+  description: ''
+  trigger:
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kerstlichtjes_aan
+    data: {}
+  mode: single
+- id: '1608845782094'
+  alias: Kerstlichtjes af met switch
+  description: ''
+  trigger:
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.kerstlichtjes_af
+    data: {}
+  mode: single

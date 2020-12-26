@@ -1,0 +1,56 @@
+- id: '1608849893807'
+  alias: Dressing aan met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.dressing_aan
+    data: {}
+  mode: single
+- id: '1608849928296'
+  alias: Dressing af met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.dressing_af
+    data: {}
+  mode: single
+- id: '1608849976447'
+  alias: Dressing harder met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.dressing_harder
+    data: {}
+  mode: single
+- id: dressingzachtermetswitch
+  alias: Dressing zachter met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.dressing_zachter
+    data: {}
+  mode: single
