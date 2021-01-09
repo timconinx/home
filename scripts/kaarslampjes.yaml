@@ -1,50 +1,36 @@
 kaarslampjes_aan:
   alias: Kaarslampjes aan
   sequence:
-  - type: turn_on
-    device_id: d7792f24ed5ec053ac1e91c6a56967b8
-    entity_id: light.kaarslamp_1_level_on_off
-    domain: light
-    brightness_pct: 35
-  - type: turn_on
-    device_id: b3774e70723c72440c9040e205a16720
-    entity_id: light.kaarslamp_2_level_on_off
-    domain: light
-    brightness_pct: 35
+  - service: light.turn_on
+    data:
+      entity_id: light.kaarslamp_1_level_on_off
+      brightness_pct: 35
+  - service: light.turn_on
+    data:
+      entity_id: light.kaarslamp_2_level_on_off
+      brightness_pct: 35
   mode: single
 kaarslampjes_af:
   alias: Kaarslampjes af
   sequence:
-  - type: turn_off
-    device_id: d7792f24ed5ec053ac1e91c6a56967b8
+  - service: light.turn_off
     entity_id: light.kaarslamp_1_level_on_off
-    domain: light
-  - type: turn_off
-    device_id: b3774e70723c72440c9040e205a16720
+  - service: light.turn_off
     entity_id: light.kaarslamp_2_level_on_off
-    domain: light
   mode: single
 kaarslampjes_harder:
   alias: Kaarslampjes harder
   sequence:
-  - type: brightness_increase
-    device_id: d7792f24ed5ec053ac1e91c6a56967b8
+  - service: light.brightness_increase
     entity_id: light.kaarslamp_1_level_on_off
-    domain: light
-  - type: brightness_increase
-    device_id: b3774e70723c72440c9040e205a16720
+  - service: light.brightness_increase
     entity_id: light.kaarslamp_2_level_on_off
-    domain: light
   mode: single
 kaarslampjes_zachter:
   alias: Kaarslampjes zachter
   sequence:
-  - type: brightness_decrease
-    device_id: d7792f24ed5ec053ac1e91c6a56967b8
+  - service: light.brightness_decrease
     entity_id: light.kaarslamp_1_level_on_off
-    domain: light
-  - type: brightness_decrease
-    device_id: b3774e70723c72440c9040e205a16720
+  - service: light.brightness_decrease
     entity_id: light.kaarslamp_2_level_on_off
-    domain: light
   mode: single

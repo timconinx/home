@@ -1,34 +1,27 @@
 dressing_aan:
   alias: Dressing aan
   sequence:
-  - type: turn_on
-    device_id: 123c3d9589d879146db3b7d4146b2e29
-    entity_id: light.dressinglampje_level_on_off
-    domain: light
-    brightness_pct: 20
+  - service: light.turn_on
+    data:
+      entity_id: light.dressinglampje_level_on_off
+      brightness_pct: 20
   mode: single
 dressing_af:
   alias: Dressing af
   sequence:
-  - type: turn_off
-    device_id: 123c3d9589d879146db3b7d4146b2e29
+  - service: light.turn_off
     entity_id: light.dressinglampje_level_on_off
-    domain: light
   mode: single
 dressing_harder:
   alias: dressing harder
   sequence:
-  - type: brightness_increase
-    device_id: 123c3d9589d879146db3b7d4146b2e29
+  - service: light.brightness_increase
     entity_id: light.dressinglampje_level_on_off
-    domain: light
   mode: single
 dressing_zachter:
   alias: dressing zachter
   sequence:
-  - type: brightness_decrease
-    device_id: 123c3d9589d879146db3b7d4146b2e29
+  - service: light.brightness_decrease
     entity_id: light.dressinglampje_level_on_off
-    domain: light
   mode: single
 
