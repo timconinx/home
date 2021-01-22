@@ -3,25 +3,29 @@ salon_aan:
   sequence:
   - service: light.turn_on
     data:
-      entity_id: light.tradfri_lamp_salon_level_on_off
-      brightness_pct: 40
+      entity_id: light.staanlamp
+      brightness: 65
   mode: single
 salon_af:
   alias: Salon af
   sequence:
   - service: light.turn_off
-    entity_id: light.tradfri_lamp_salon_level_on_off
+    entity_id: light.staanlamp
   mode: single
 salon_zachter:
   alias: Salon zachter
   sequence:
-  - service: light.brightness_decrease
-    entity_id: light.tradfri_lamp_salon_level_on_off
+  - service: light.turn_on
+    data:
+      entity_id: light.staanlamp
+      brightness: '{{states.light.staanlamp.attributes.brightness|int - 65}}'
   mode: single
 salon_harder:
   alias: Salon harder
   sequence:
-  - service: light.brightness_increase
-    entity_id: light.tradfri_lamp_salon_level_on_off
+  - service: light.turn_on
+    data:
+      entity_id: light.staanlamp
+      brightness: '{{states.light.staanlamp.attributes.brightness|int + 65}}'
   mode: single
 
