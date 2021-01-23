@@ -10,4 +10,6 @@ beneden_alles_af:
                   data: {}
                 - service: switch.turn_off
                   entity_id: switch.tradfri_stekker_3_on_off
+                - service: switch.turn_off
+                  entity_id: switch.stekker_onder_computer
 

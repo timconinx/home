@@ -1,0 +1,28 @@
+- id: 'ondercomputeraanmetswitch'
+  alias: Onder computer aan met switch
+  description: ''
+  trigger:
+  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.turn_on
+    entity_id: switch.stekker_onder_computer
+  mode: single
+- id: 'ondercomputerafmetswitch'
+  alias: Onder computer af met switch
+  description: ''
+  trigger:
+  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: switch.turn_off
+    entity_id: switch.stekker_onder_computer
+  mode: single

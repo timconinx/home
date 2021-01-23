@@ -25,3 +25,7 @@ nest:
   project_id: !secret nest_project_id
   subscriber_id: !secret nest_subscriber_id
 
+spotify:
+  client_id: !secret spotify_tim_client
+  client_secret: !secret spotify_tim_secret
+
