@@ -5,3 +5,6 @@ tts
 .HA_VERSION
 .storage
 secrets*
+__pycache__
+custom_components
+www

@@ -2,6 +2,14 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+# https
+http:
+  server_port: 8123
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  ip_ban_enabled: true
+  login_attempts_threshold: 3
+
 # Text to speech
 tts:
   - platform: google_translate
@@ -13,11 +21,7 @@ scene: !include scenes.yaml
 wirelesstag:
   username: !secret wirelesstags_user
   password: !secret wirelesstags_pass
-sensor:
-  - platform: wirelesstag
-    monitored_conditions:
-      - temperature
-      - humidity
+
 #Nest config
 nest:
   client_id: !secret nest_client_id
@@ -29,3 +33,34 @@ spotify:
   client_id: !secret spotify_tim_client
   client_secret: !secret spotify_tim_secret
 
+sensor:
+  - platform: wirelesstag
+    monitored_conditions:
+      - temperature
+      - humidity
+  - platform: afvalbeheer
+    wastecollector: RecycleApp
+    resources:
+      - restafval
+      - gft
+      - papier
+    postcode: !secret afval_postcode
+    streetnumber: !secret afval_number
+    streetname: !secret afval_street
+  - platform: buienalarm
+    timeframe: 15
+    name: buienalarm
+    monitored_conditions:
+      - temperature
+      - precipitation
+      - precipitation_forecast_average
+      - precipitation_forecast_total
+      - next_rain_forecast
+        #- platform: untappd
+        #username: timconinx
+        #id:
+        #secret: 
+
+ourgroceries:
+  username: !secret ourgroceries_username
+  password: !secret ourgroceries_password
