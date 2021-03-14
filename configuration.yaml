@@ -56,10 +56,10 @@ sensor:
       - precipitation_forecast_average
       - precipitation_forecast_total
       - next_rain_forecast
-        #- platform: untappd
-        #username: timconinx
-        #id:
-        #secret: 
+  - platform: untappd
+    username: !secret untappd_username
+    id: !secret untappd_id
+    secret: !secret untappd_secret
 
 ourgroceries:
   username: !secret ourgroceries_username

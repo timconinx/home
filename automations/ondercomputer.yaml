@@ -10,7 +10,7 @@
   condition: []
   action:
   - service: switch.turn_on
-    entity_id: switch.stekker_onder_computer
+    entity_id: switch.stekker_zolder
   mode: single
 - id: 'ondercomputerafmetswitch'
   alias: Onder computer af met switch
@@ -24,5 +24,5 @@
   condition: []
   action:
   - service: switch.turn_off
-    entity_id: switch.stekker_onder_computer
+    entity_id: switch.stekker_zolder
   mode: single

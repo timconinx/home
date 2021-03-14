@@ -5,10 +5,14 @@ computer_licht_aan:
     data:
       entity_id: light.hue_play_1
       brightness_pct: 35
+  - service: switch.turn_on
+    entity_id: switch.stekker_onder_computer
   mode: single
 computer_licht_af:
   alias: Computer licht af
   sequence:
   - service: light.turn_off
     entity_id: light.hue_play_1
+  - service: switch.turn_off
+    entity_id: switch.stekker_onder_computer
   mode: single

@@ -3,14 +3,10 @@ kerstlichtjes_aan:
   sequence:
   - service: switch.turn_on
     entity_id: switch.tradfri_stekker_1_on_off
-  - service: switch.turn_on
-    entity_id: switch.tradfri_stekker_2_on_off
   mode: single
 kerstlichtjes_af:
   alias: Kerstlichtjes af
   sequence:
   - service: switch.turn_off
     entity_id: switch.tradfri_stekker_1_on_off
-  - service: switch.turn_off
-    entity_id: switch.tradfri_stekker_2_on_off
   mode: single
