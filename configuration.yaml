@@ -34,6 +34,14 @@ spotify:
   client_secret: !secret spotify_tim_secret
 
 sensor:
+  - platform: systemmonitor
+    resources:
+      - type: memory_use_percent
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+      - type: processor_use
+      - type: processor_temperature
   - platform: wirelesstag
     monitored_conditions:
       - temperature
