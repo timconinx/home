@@ -1,0 +1,17 @@
+threesixty_aan:
+  alias: Threesixty aan
+  sequence:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.threesixty
+      hvac_mode: auto
+  mode: single
+threesixty_af:
+  alias: Threesixty af
+  sequence:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.threesixty
+      hvac_mode: 'off'
+  mode: single
+

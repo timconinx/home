@@ -33,7 +33,23 @@ spotify:
   client_id: !secret spotify_tim_client
   client_secret: !secret spotify_tim_secret
 
+# Emby
+media_player:
+  - platform: emby
+    host: !secret emby_host
+    api_key: !secret emby_api_key
+
 sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
   - platform: systemmonitor
     resources:
       - type: memory_use_percent

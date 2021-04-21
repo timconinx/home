@@ -12,11 +12,21 @@ beneden_alles_af:
                   entity_id: switch.tradfri_stekker_3_on_off
                 - service: switch.turn_off
                   entity_id: switch.stekker_onder_computer
+                - service: fan.turn_off
+                  entity_id: fan.humidifier
 de_ochtendstond:
        sequence:
                - service: switch.turn_on
                  entity_id: switch.tradfri_stekker_3_on_off
                - service: script.dressing_aan
                  data: {}
+kinders_beneden:
+  sequence:
+    - service: script.kerstlichtjes_aan
+      data: {}
+    - service: switch.turn_on
+      entity_id: switch.tradfri_stekker_3_on_off
+    - service: script.kaarslampjes_aan
+      data: {}
 
 
