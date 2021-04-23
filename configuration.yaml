@@ -39,6 +39,14 @@ media_player:
     host: !secret emby_host
     api_key: !secret emby_api_key
 
+# Xiaomi
+fan:
+  - platform: xiaomi_miio_airpurifier
+    name: Humidifier
+    host: 192.168.1.227
+    token: !secret xiaomi_token
+    model: zhimi.humidifier.ca4
+
 sensor:
   - platform: time_date
     display_options:
