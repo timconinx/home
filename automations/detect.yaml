@@ -1,0 +1,24 @@
+- id: 'detectsoffe'
+  alias: Detecteer soffe
+  description: 'zet humidifier af als soffe boven komt'
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 5b1d4b8de830e5232b3bb2044545a722
+    entity_id: binary_sensor.motionsensor1
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  condition:
+  - alias: "sun down"  
+    condition: state
+    entity_id: sun.sun
+    state: "below_horizon"
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.stekker_zolder
+  mode: single
