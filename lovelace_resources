@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "key": "lovelace_resources",
+    "data": {
+        "items": [
+            {
+                "url": "/hacsfiles/lovelace-thermostat-dark-card/thermostat-dark-card.js",
+                "type": "module",
+                "id": "50551b10e46c49ab93b147f1e3f9e07d"
+            },
+            {
+                "url": "/hacsfiles/weather-card/weather-card.js",
+                "type": "module",
+                "id": "1ca829455e7f4d52bb1ec2e2594cf1e2"
+            },
+            {
+                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js",
+                "type": "module",
+                "id": "8f51aabfc6df4b99b1065dc5e82c8469"
+            },
+            {
+                "url": "/hacsfiles/our-groceries-card/our-groceries-card.js",
+                "type": "module",
+                "id": "9004d2c698d34ca88ff56905d4174fbf"
+            },
+            {
+                "url": "/hacsfiles/ha-lovelace-elapsed-time-card/elapsed-time-card.js",
+                "type": "module",
+                "id": "5940e638f18a4a2898fbabd30defff07"
+            },
+            {
+                "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js",
+                "type": "module",
+                "id": "a719eb4b3011474396d9cdf5dd51667e"
+            }
+        ]
+    }
+}
