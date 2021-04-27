@@ -14,6 +14,8 @@ beneden_alles_af:
                   entity_id: switch.stekker_onder_computer
                 - service: fan.turn_off
                   entity_id: fan.humidifier
+                - service: fan.turn_off
+                  entity_id: fan.humidifier_2
 de_ochtendstond:
        sequence:
                - service: switch.turn_on

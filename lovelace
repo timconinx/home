@@ -74,34 +74,10 @@
                                 {
                                     "entity": "fan.humidifier",
                                     "type": "attribute",
-                                    "name": "Geluid aan?",
-                                    "suffix": null,
-                                    "attribute": "buzzer",
-                                    "icon": "mdi:surround-sound"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Knoppen af?",
-                                    "suffix": null,
-                                    "attribute": "child_lock",
-                                    "icon": "mdi:radiobox-marked"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
                                     "name": "Doelvochtigheid",
                                     "suffix": "%",
                                     "attribute": "target_humidity",
                                     "icon": "mdi:water-percent"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Panel helderheid",
-                                    "suffix": null,
-                                    "attribute": "led_brightness",
-                                    "icon": "mdi:lightbulb"
                                 },
                                 {
                                     "entity": "fan.humidifier",
@@ -143,12 +119,20 @@
                                     "icon": "mdi:water-percent"
                                 },
                                 {
+                                    "entity": "sensor.wirelesstag_beneden_humidity",
+                                    "name": "Vocht (volgens Tag)"
+                                },
+                                {
                                     "entity": "sensor.living_room_humidity",
                                     "name": "Vocht (volgens Nest)"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_beneden_humidity",
-                                    "name": "Vocht (volgens Tag)"
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Vocht (volgens Steam Humidifier)",
+                                    "suffix": "%",
+                                    "attribute": "humidity",
+                                    "icon": "mdi:water-percent"
                                 },
                                 {
                                     "type": "divider"
@@ -162,12 +146,20 @@
                                     "icon": "mdi:thermometer"
                                 },
                                 {
+                                    "entity": "sensor.wirelesstag_beneden_temperature",
+                                    "name": "Temp (volgens Tag)"
+                                },
+                                {
                                     "entity": "sensor.living_room_temperature",
                                     "name": "Temp (volgens Nest)"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_beneden_temperature",
-                                    "name": "Temp (volgens Tag)"
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Temp (volgens Steam Humidifier)",
+                                    "suffix": "\u00b0C",
+                                    "attribute": "temperature",
+                                    "icon": "mdi:thermometer"
                                 }
                             ],
                             "title": "Woonkamer"
@@ -184,6 +176,28 @@
                         {
                             "entity": "weather.thuisje",
                             "type": "weather-forecast"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Mode",
+                                    "suffix": null,
+                                    "attribute": "mode",
+                                    "icon": "mdi:fan-auto"
+                                },
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Doelvochtigheid",
+                                    "suffix": "%",
+                                    "attribute": "target_humidity",
+                                    "icon": "mdi:water-percent"
+                                }
+                            ],
+                            "title": "Steam Humidifier"
                         },
                         {
                             "type": "media-control",
