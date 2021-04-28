@@ -8,8 +8,136 @@
                 {
                     "title": "Beneden",
                     "path": "beneden",
+                    "panel": false,
                     "badges": [],
                     "cards": [
+                        {
+                            "type": "entities",
+                            "show_header_toggle": false,
+                            "entities": [
+                                {
+                                    "entity": "weather.thuisje_hourly",
+                                    "type": "attribute",
+                                    "attribute": "temperature",
+                                    "name": "buiten",
+                                    "suffix": "\u00b0C"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "volgens Humidifier",
+                                    "suffix": "\u00b0C",
+                                    "attribute": "temperature",
+                                    "icon": "mdi:thermometer"
+                                },
+                                {
+                                    "entity": "sensor.wirelesstag_beneden_temperature",
+                                    "name": "volgens Tag"
+                                },
+                                {
+                                    "entity": "sensor.living_room_temperature",
+                                    "name": "volgens Nest"
+                                },
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "volgens Steam Humidifier",
+                                    "suffix": "\u00b0C",
+                                    "attribute": "temperature",
+                                    "icon": "mdi:thermometer"
+                                }
+                            ],
+                            "title": "Temperatuur"
+                        },
+                        {
+                            "type": "entities",
+                            "show_header_toggle": false,
+                            "entities": [
+                                {
+                                    "entity": "weather.thuisje_hourly",
+                                    "type": "attribute",
+                                    "attribute": "humidity",
+                                    "name": "buiten",
+                                    "suffix": "%"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "volgens Humidifier",
+                                    "suffix": "%",
+                                    "attribute": "humidity",
+                                    "icon": "mdi:water-percent"
+                                },
+                                {
+                                    "entity": "sensor.wirelesstag_beneden_humidity",
+                                    "name": "volgens Tag"
+                                },
+                                {
+                                    "entity": "sensor.living_room_humidity",
+                                    "name": "volgens Nest"
+                                },
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "volgens Steam Humidifier",
+                                    "suffix": "%",
+                                    "attribute": "humidity",
+                                    "icon": "mdi:water-percent"
+                                }
+                            ],
+                            "title": "Vocht"
+                        },
+                        {
+                            "type": "thermostat",
+                            "entity": "climate.living_room",
+                            "name": "Woonkamer"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "Mode",
+                                    "suffix": null,
+                                    "attribute": "mode",
+                                    "icon": "mdi:fan-auto"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "Doelvochtigheid",
+                                    "suffix": "%",
+                                    "attribute": "target_humidity",
+                                    "icon": "mdi:water-percent"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "Ingestelde motorsnelheid",
+                                    "suffix": "rpm",
+                                    "attribute": "motor_speed",
+                                    "icon": "mdi:gauge"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "Echte motorsnelheid",
+                                    "suffix": "rpm",
+                                    "attribute": "actual_speed",
+                                    "icon": "mdi:gauge"
+                                },
+                                {
+                                    "entity": "fan.humidifier",
+                                    "type": "attribute",
+                                    "name": "Waterniveau",
+                                    "suffix": null,
+                                    "attribute": "water_level",
+                                    "icon": "mdi:cup-water"
+                                }
+                            ],
+                            "title": "Humidifier"
+                        },
                         {
                             "type": "entities",
                             "entities": [
@@ -69,123 +197,6 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Mode",
-                                    "suffix": null,
-                                    "attribute": "mode",
-                                    "icon": "mdi:fan-auto"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Doelvochtigheid",
-                                    "suffix": "%",
-                                    "attribute": "target_humidity",
-                                    "icon": "mdi:water-percent"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Ingestelde motorsnelheid",
-                                    "suffix": "rpm",
-                                    "attribute": "motor_speed",
-                                    "icon": "mdi:gauge"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Echte motorsnelheid",
-                                    "suffix": "rpm",
-                                    "attribute": "actual_speed",
-                                    "icon": "mdi:gauge"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Waterniveau",
-                                    "suffix": null,
-                                    "attribute": "water_level",
-                                    "icon": "mdi:cup-water"
-                                }
-                            ],
-                            "title": "Humidifier"
-                        },
-                        {
-                            "type": "entities",
-                            "show_header_toggle": false,
-                            "entities": [
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Vocht (volgens Humidifier)",
-                                    "suffix": "%",
-                                    "attribute": "humidity",
-                                    "icon": "mdi:water-percent"
-                                },
-                                {
-                                    "entity": "sensor.wirelesstag_beneden_humidity",
-                                    "name": "Vocht (volgens Tag)"
-                                },
-                                {
-                                    "entity": "sensor.living_room_humidity",
-                                    "name": "Vocht (volgens Nest)"
-                                },
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Vocht (volgens Steam Humidifier)",
-                                    "suffix": "%",
-                                    "attribute": "humidity",
-                                    "icon": "mdi:water-percent"
-                                },
-                                {
-                                    "type": "divider"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Temp (volgens Humidifier)",
-                                    "suffix": "\u00b0C",
-                                    "attribute": "temperature",
-                                    "icon": "mdi:thermometer"
-                                },
-                                {
-                                    "entity": "sensor.wirelesstag_beneden_temperature",
-                                    "name": "Temp (volgens Tag)"
-                                },
-                                {
-                                    "entity": "sensor.living_room_temperature",
-                                    "name": "Temp (volgens Nest)"
-                                },
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Temp (volgens Steam Humidifier)",
-                                    "suffix": "\u00b0C",
-                                    "attribute": "temperature",
-                                    "icon": "mdi:thermometer"
-                                }
-                            ],
-                            "title": "Woonkamer"
-                        },
-                        {
-                            "type": "entity",
-                            "entity": "sensor.date_time"
-                        },
-                        {
-                            "type": "thermostat",
-                            "entity": "climate.living_room",
-                            "name": "Woonkamer"
-                        },
-                        {
-                            "entity": "weather.thuisje",
-                            "type": "weather-forecast"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
                                     "entity": "fan.humidifier_2",
                                     "type": "attribute",
                                     "name": "Mode",
@@ -205,6 +216,14 @@
                             "title": "Steam Humidifier"
                         },
                         {
+                            "entity": "weather.thuisje",
+                            "type": "weather-forecast"
+                        },
+                        {
+                            "type": "entity",
+                            "entity": "sensor.date_time"
+                        },
+                        {
                             "type": "media-control",
                             "entity": "media_player.libratone_zipp2_709c2c_3"
                         }
@@ -215,28 +234,6 @@
                     "title": "Eerste",
                     "badges": [],
                     "cards": [
-                        {
-                            "entity": "climate.marit",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.marten",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.wirelesstag_badkamer_humidity",
-                                    "name": "Vocht"
-                                },
-                                {
-                                    "entity": "sensor.wirelesstag_badkamer_temperature",
-                                    "name": "Temp"
-                                }
-                            ],
-                            "type": "entities",
-                            "title": "Badkamer"
-                        },
                         {
                             "type": "entities",
                             "entities": [
@@ -272,6 +269,28 @@
                                 }
                             ],
                             "title": "Marten"
+                        },
+                        {
+                            "entity": "climate.marit",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.marten",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.wirelesstag_badkamer_humidity",
+                                    "name": "Vocht"
+                                },
+                                {
+                                    "entity": "sensor.wirelesstag_badkamer_temperature",
+                                    "name": "Temp"
+                                }
+                            ],
+                            "type": "entities",
+                            "title": "Badkamer"
                         }
                     ]
                 },
