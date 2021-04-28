@@ -1,0 +1,13 @@
+- id: '1619640064633'
+  alias: 'kindersbeneden'
+  description: 'Lampjes aan voor de kinderen beneden'
+  trigger:
+  - device_id: 777de08207789a297056a51380c4e79d
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - service: script.kinders_beneden
+  mode: single

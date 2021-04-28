@@ -50,11 +50,16 @@
                                     "entity": "switch.tradfri_stekker_1_on_off"
                                 },
                                 {
+                                    "entity": "switch.stekker_onder_computer"
+                                },
+                                {
                                     "entity": "switch.tradfri_stekker_3_on_off",
                                     "name": "Stekker Traplichtjes"
                                 },
                                 {
-                                    "entity": "switch.stekker_onder_computer"
+                                    "entity": "switch.stekker_gang",
+                                    "icon": "mdi:flash",
+                                    "name": "Stekker Ananas"
                                 }
                             ],
                             "title": "Stekkers",
