@@ -14,13 +14,13 @@ http:
 tts:
   - platform: google_translate
 
+recorder:
+  purge_keep_days: 2
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
 script: !include_dir_merge_named scripts 
 scene: !include scenes.yaml
-wirelesstag:
-  username: !secret wirelesstags_user
-  password: !secret wirelesstags_pass
 
 #Nest config
 nest:
@@ -71,10 +71,6 @@ sensor:
       - type: load_15m
       - type: processor_use
       - type: processor_temperature
-  - platform: wirelesstag
-    monitored_conditions:
-      - temperature
-      - humidity
   - platform: afvalbeheer
     wastecollector: RecycleApp
     resources:

@@ -31,7 +31,7 @@
                                     "icon": "mdi:thermometer"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_beneden_temperature",
+                                    "entity": "sensor.lumi_living_temperature",
                                     "name": "volgens Tag"
                                 },
                                 {
@@ -69,7 +69,7 @@
                                     "icon": "mdi:water-percent"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_beneden_humidity",
+                                    "entity": "sensor.lumi_living_humidity",
                                     "name": "volgens Tag"
                                 },
                                 {
@@ -181,8 +181,9 @@
                                     "entity": "switch.stekker_onder_computer"
                                 },
                                 {
-                                    "entity": "switch.tradfri_stekker_3_on_off",
-                                    "name": "Stekker Traplichtjes"
+                                    "entity": "switch.stekker_trap",
+                                    "name": "Stekker Traplichtjes",
+                                    "icon": "mdi:flash"
                                 },
                                 {
                                     "entity": "switch.stekker_gang",
@@ -238,16 +239,13 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.wirelesstag_marit_temperature",
-                                    "name": "Temp (volgens Tag)"
+                                    "entity": "sensor.lumi_marit_temperature"
                                 },
                                 {
-                                    "entity": "sensor.marit_inside_temperature",
-                                    "name": "Temp (volgens Airco)"
+                                    "entity": "sensor.lumi_marit_humidity"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_marit_humidity",
-                                    "name": "Vocht"
+                                    "entity": "sensor.lumi_marit_pressure"
                                 }
                             ],
                             "title": "Marit"
@@ -256,16 +254,13 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.wirelesstag_marten_temperature",
-                                    "name": "Temp (volgens Tag)"
+                                    "entity": "sensor.lumi_marten_temperature"
                                 },
                                 {
-                                    "entity": "sensor.marten_inside_temperature",
-                                    "name": "Temp (volgens Airco)"
+                                    "entity": "sensor.lumi_marten_humidity"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_marten_humidity",
-                                    "name": "Vocht"
+                                    "entity": "sensor.lumi_marten_pressure"
                                 }
                             ],
                             "title": "Marten"
@@ -281,12 +276,13 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.wirelesstag_badkamer_humidity",
-                                    "name": "Vocht"
+                                    "entity": "sensor.lumi_badkamer_temperature"
                                 },
                                 {
-                                    "entity": "sensor.wirelesstag_badkamer_temperature",
-                                    "name": "Temp"
+                                    "entity": "sensor.lumi_badkamer_humidity"
+                                },
+                                {
+                                    "entity": "sensor.lumi_badkamer_pressure"
                                 }
                             ],
                             "type": "entities",
@@ -307,16 +303,16 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.wirelesstag_zolder_temperature",
-                                    "name": "Temp (volgens Tag)"
+                                    "entity": "sensor.zolder_temperature",
+                                    "name": "Temperatuur"
                                 },
                                 {
-                                    "entity": "sensor.zolder_inside_temperature",
-                                    "name": "Temp (volgens Airco)"
-                                },
-                                {
-                                    "entity": "sensor.wirelesstag_zolder_humidity",
+                                    "entity": "sensor.zolder_humidity",
                                     "name": "Vocht"
+                                },
+                                {
+                                    "entity": "sensor.zolder_pressure",
+                                    "name": "Luchtdruk"
                                 },
                                 {
                                     "type": "divider"

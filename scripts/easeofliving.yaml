@@ -9,7 +9,7 @@ beneden_alles_af:
                 - service: script.salon_af
                   data: {}
                 - service: switch.turn_off
-                  entity_id: switch.tradfri_stekker_3_on_off
+                  entity_id: switch.stekker_trap
                 - service: switch.turn_off
                   entity_id: switch.stekker_onder_computer
                 - service: switch.turn_off
@@ -21,7 +21,7 @@ beneden_alles_af:
 de_ochtendstond:
        sequence:
                - service: switch.turn_on
-                 entity_id: switch.tradfri_stekker_3_on_off
+                 entity_id: switch.stekker_trap
                - service: script.dressing_aan
                  data: {}
 kinders_beneden:
@@ -29,7 +29,7 @@ kinders_beneden:
     - service: script.kerstlichtjes_aan
       data: {}
     - service: switch.turn_on
-      entity_id: switch.tradfri_stekker_3_on_off
+      entity_id: switch.stekker_trap
     - service: script.kaarslampjes_aan
       data: {}
 
