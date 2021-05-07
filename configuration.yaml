@@ -15,7 +15,20 @@ tts:
   - platform: google_translate
 
 recorder:
-  purge_keep_days: 2
+  db_url: postgresql://@/homeassistant
+  exclude:
+    domains:
+      - media_player
+    entities:
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - sensor.date_time_utc
+      - sensor.date_time_iso
+      - sensor.time_date
+      - sensor.time_utc
+      - sensor.beat
+      - sensor.internet_time
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations

@@ -9,5 +9,6 @@
     subtype: remote_button_short_press
   condition: []
   action:
-  - service: script.kinders_beneden
+  - service: switch.toggle
+    entity_id: switch.stekker_trap
   mode: single
