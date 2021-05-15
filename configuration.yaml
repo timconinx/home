@@ -14,6 +14,10 @@ http:
 tts:
   - platform: google_translate
 
+spotcast:
+  sp_dc: !secret tim_sp_dc
+  sp_key: !secret tim_sp_key
+
 recorder:
   db_url: postgresql://@/homeassistant
   exclude:

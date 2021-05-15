@@ -23,6 +23,22 @@
                                     "suffix": "\u00b0C"
                                 },
                                 {
+                                    "entity": "weather.thuisje_hourly",
+                                    "type": "attribute",
+                                    "attribute": "wind_speed",
+                                    "name": "Windsnelheid",
+                                    "suffix": "km/u",
+                                    "icon": "mdi:weather-windy"
+                                },
+                                {
+                                    "entity": "weather.thuisje_hourly",
+                                    "type": "attribute",
+                                    "attribute": "wind_bearing",
+                                    "name": "Windrichting",
+                                    "suffix": "\u00b0",
+                                    "icon": "mdi:compass"
+                                },
+                                {
                                     "entity": "fan.humidifier",
                                     "type": "attribute",
                                     "name": "volgens Humidifier",
@@ -59,6 +75,18 @@
                                     "attribute": "humidity",
                                     "name": "buiten",
                                     "suffix": "%"
+                                },
+                                {
+                                    "entity": "weather.thuisje_hourly",
+                                    "type": "attribute",
+                                    "attribute": "pressure",
+                                    "name": "druk buiten",
+                                    "suffix": "hPa",
+                                    "icon": "mdi:gauge-full"
+                                },
+                                {
+                                    "entity": "sensor.lumi_living_pressure",
+                                    "name": "druk binnen"
                                 },
                                 {
                                     "entity": "fan.humidifier",
@@ -139,6 +167,32 @@
                             "title": "Humidifier"
                         },
                         {
+                            "entity": "weather.thuisje",
+                            "type": "weather-forecast"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Mode",
+                                    "suffix": null,
+                                    "attribute": "mode",
+                                    "icon": "mdi:fan-auto"
+                                },
+                                {
+                                    "entity": "fan.humidifier_2",
+                                    "type": "attribute",
+                                    "name": "Doelvochtigheid",
+                                    "suffix": "%",
+                                    "attribute": "target_humidity",
+                                    "icon": "mdi:water-percent"
+                                }
+                            ],
+                            "title": "Steam Humidifier"
+                        },
+                        {
                             "type": "entities",
                             "entities": [
                                 {
@@ -156,20 +210,6 @@
                             ],
                             "title": "Lampjes",
                             "show_header_toggle": false
-                        },
-                        {
-                            "type": "button",
-                            "name": "Beneden alles af",
-                            "icon": "hass:power",
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "script.beneden_alles_af"
-                            },
-                            "show_icon": true,
-                            "icon_height": "75px",
-                            "hold_action": {
-                                "action": "none"
-                            }
                         },
                         {
                             "type": "entities",
@@ -195,38 +235,75 @@
                             "show_header_toggle": false
                         },
                         {
-                            "type": "entities",
-                            "entities": [
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Mode",
-                                    "suffix": null,
-                                    "attribute": "mode",
-                                    "icon": "mdi:fan-auto"
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "picture",
+                                            "image": "https://cdn-profiles.tunein.com/s308770/images/logoq.png?t=157070",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "media_player.play_media",
+                                                "service_data": {
+                                                    "media_content_type": "music",
+                                                    "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s308770&partnerId=16&username=timconinx",
+                                                    "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "picture",
+                                            "image": "https://cdn-profiles.tunein.com/s2611/images/logoq.jpg",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "media_player.play_media",
+                                                "service_data": {
+                                                    "media_content_type": "music",
+                                                    "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s2611&formats=aac,ogg,mp3,wmpro,wma,wmvoice&partnerId=16&serial=b577ead4739e8966396abc81d5db4e12",
+                                                    "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "picture",
+                                            "image": "https://cdn-profiles.tunein.com/s306462/images/logoq.jpg",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "media_player.play_media",
+                                                "service_data": {
+                                                    "media_content_type": "music",
+                                                    "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s306462&formats=aac,ogg,mp3,wmpro,wma,wmvoice,hls,real&partnerId=16",
+                                                    "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                }
+                                            }
+                                        }
+                                    ]
                                 },
                                 {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Doelvochtigheid",
-                                    "suffix": "%",
-                                    "attribute": "target_humidity",
-                                    "icon": "mdi:water-percent"
+                                    "type": "media-control",
+                                    "entity": "media_player.libratone_zipp2_709c2c_3"
                                 }
-                            ],
-                            "title": "Steam Humidifier"
-                        },
-                        {
-                            "entity": "weather.thuisje",
-                            "type": "weather-forecast"
+                            ]
                         },
                         {
                             "type": "entity",
                             "entity": "sensor.date_time"
                         },
                         {
-                            "type": "media-control",
-                            "entity": "media_player.libratone_zipp2_709c2c_3"
+                            "type": "button",
+                            "name": "Beneden alles af",
+                            "icon": "hass:power",
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "script.beneden_alles_af"
+                            },
+                            "show_icon": true,
+                            "icon_height": "75px",
+                            "hold_action": {
+                                "action": "none"
+                            }
                         }
                     ]
                 },
