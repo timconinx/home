@@ -42,6 +42,11 @@
                 "url": "/hacsfiles/spotify-card/spotify-card.js",
                 "type": "module",
                 "id": "d770311357614da4bc6fbf463999781b"
+            },
+            {
+                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js",
+                "type": "module",
+                "id": "2d86653721d14413ba82ed28e81c6c0a"
             }
         ]
     }

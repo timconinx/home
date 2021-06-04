@@ -12,228 +12,646 @@
                     "badges": [],
                     "cards": [
                         {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "entity",
+                                    "entity": "sensor.date_time",
+                                    "name": " "
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "weather-forecast",
+                                            "entity": "weather.thuisje"
+                                        },
+                                        {
+                                            "type": "thermostat",
+                                            "entity": "climate.living_room",
+                                            "name": "Woonkamer"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "show_header_toggle": false,
+                                            "entities": [
+                                                {
+                                                    "entity": "weather.thuisje_hourly",
+                                                    "type": "attribute",
+                                                    "attribute": "temperature",
+                                                    "name": "buiten",
+                                                    "suffix": "\u00b0C"
+                                                },
+                                                {
+                                                    "entity": "weather.thuisje_hourly",
+                                                    "type": "attribute",
+                                                    "attribute": "wind_speed",
+                                                    "name": "Windsnelheid",
+                                                    "suffix": "km/u",
+                                                    "icon": "mdi:weather-windy"
+                                                },
+                                                {
+                                                    "entity": "weather.thuisje_hourly",
+                                                    "type": "attribute",
+                                                    "attribute": "wind_bearing",
+                                                    "name": "Windrichting",
+                                                    "suffix": "\u00b0",
+                                                    "icon": "mdi:compass"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Humidifier",
+                                                    "suffix": "\u00b0C",
+                                                    "attribute": "temperature",
+                                                    "icon": "mdi:thermometer"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_living_temperature",
+                                                    "name": "Tag"
+                                                },
+                                                {
+                                                    "entity": "sensor.living_room_temperature",
+                                                    "name": "Nest"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier_2",
+                                                    "type": "attribute",
+                                                    "name": "Steam Humidifier",
+                                                    "suffix": "\u00b0C",
+                                                    "attribute": "temperature",
+                                                    "icon": "mdi:thermometer"
+                                                }
+                                            ],
+                                            "title": "Temperatuur"
+                                        },
+                                        {
+                                            "type": "entities",
+                                            "show_header_toggle": false,
+                                            "entities": [
+                                                {
+                                                    "entity": "weather.thuisje_hourly",
+                                                    "type": "attribute",
+                                                    "attribute": "humidity",
+                                                    "name": "buiten",
+                                                    "suffix": "%"
+                                                },
+                                                {
+                                                    "entity": "weather.thuisje_hourly",
+                                                    "type": "attribute",
+                                                    "attribute": "pressure",
+                                                    "name": "druk buiten",
+                                                    "suffix": "hPa",
+                                                    "icon": "mdi:gauge-full"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_living_pressure",
+                                                    "name": "druk binnen"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Humidifier",
+                                                    "suffix": "%",
+                                                    "attribute": "humidity",
+                                                    "icon": "mdi:water-percent"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_living_humidity",
+                                                    "name": "Tag"
+                                                },
+                                                {
+                                                    "entity": "sensor.living_room_humidity",
+                                                    "name": "Nest"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier_2",
+                                                    "type": "attribute",
+                                                    "name": "Steam Humidifier",
+                                                    "suffix": "%",
+                                                    "attribute": "humidity",
+                                                    "icon": "mdi:water-percent"
+                                                }
+                                            ],
+                                            "title": "Vocht"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "markdown",
+                                    "content": "# Berichten"
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "sensor.washer_washer_machine_state",
+                                            "state": "run"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "entities",
+                                        "entities": [
+                                            {
+                                                "entity": "sensor.washer_washer_completion_time",
+                                                "name": "Klaar"
+                                            },
+                                            {
+                                                "entity": "sensor.washer_washer_job_state",
+                                                "name": "Fase"
+                                            }
+                                        ],
+                                        "title": "Wasmachine aan"
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.meteoalarm",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "custom:meteoalarm-card",
+                                        "entity": "binary_sensor.meteoalarm",
+                                        "override_headline": false
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Knoppen",
+                    "path": "knoppen",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "button",
+                                    "name": "Beneden alles af",
+                                    "icon": "hass:power",
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "script.beneden_alles_af"
+                                    },
+                                    "show_icon": true,
+                                    "icon_height": "75px",
+                                    "hold_action": {
+                                        "action": "none"
+                                    }
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "light.hue_play_1",
+                                                    "name": "Computer"
+                                                },
+                                                {
+                                                    "entity": "light.woonkamer_zha_group_0x0002",
+                                                    "name": "Kaarslampjes"
+                                                },
+                                                {
+                                                    "entity": "light.staanlamp",
+                                                    "name": "Staanlamp"
+                                                }
+                                            ],
+                                            "title": "Lampjes",
+                                            "show_header_toggle": false
+                                        },
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "switch.tradfri_stekker_1_on_off",
+                                                    "name": "Huislampje"
+                                                },
+                                                {
+                                                    "entity": "switch.stekker_onder_computer",
+                                                    "name": "Computer"
+                                                },
+                                                {
+                                                    "entity": "switch.stekker_trap",
+                                                    "name": "Traplichtjes",
+                                                    "icon": "mdi:flash"
+                                                },
+                                                {
+                                                    "entity": "switch.stekker_gang",
+                                                    "icon": "mdi:flash",
+                                                    "name": "Ananas"
+                                                }
+                                            ],
+                                            "title": "Stekkers",
+                                            "show_header_toggle": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Mode",
+                                                    "suffix": null,
+                                                    "attribute": "mode",
+                                                    "icon": "mdi:fan-auto"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Doelvochtigheid",
+                                                    "suffix": "%",
+                                                    "attribute": "target_humidity",
+                                                    "icon": "mdi:water-percent"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "s ingesteld",
+                                                    "suffix": "rpm",
+                                                    "attribute": "motor_speed",
+                                                    "icon": "mdi:gauge"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "s real",
+                                                    "suffix": "rpm",
+                                                    "attribute": "actual_speed",
+                                                    "icon": "mdi:gauge"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Waterniveau",
+                                                    "suffix": null,
+                                                    "attribute": "water_level",
+                                                    "icon": "mdi:cup-water"
+                                                }
+                                            ],
+                                            "title": "Humidifier"
+                                        },
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "fan.humidifier_2",
+                                                    "type": "attribute",
+                                                    "name": "Mode",
+                                                    "suffix": null,
+                                                    "attribute": "mode",
+                                                    "icon": "mdi:fan-auto"
+                                                },
+                                                {
+                                                    "entity": "fan.humidifier_2",
+                                                    "type": "attribute",
+                                                    "name": "Doelvochtigheid",
+                                                    "suffix": "%",
+                                                    "attribute": "target_humidity",
+                                                    "icon": "mdi:water-percent"
+                                                }
+                                            ],
+                                            "title": "Steam Humidifier"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "path": "eerste",
+                    "title": "Eerste",
+                    "panel": false,
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "thermostat",
+                                            "entity": "climate.marit"
+                                        },
+                                        {
+                                            "type": "thermostat",
+                                            "entity": "climate.marten"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "glance",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.lumi_marit_temperature"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_marit_humidity"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_marit_pressure"
+                                                }
+                                            ],
+                                            "show_name": false
+                                        },
+                                        {
+                                            "type": "glance",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.lumi_marten_temperature"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_marten_humidity"
+                                                },
+                                                {
+                                                    "entity": "sensor.lumi_marten_pressure"
+                                                }
+                                            ],
+                                            "show_name": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.lumi_badkamer_temperature"
+                                        },
+                                        {
+                                            "entity": "sensor.lumi_badkamer_humidity"
+                                        },
+                                        {
+                                            "entity": "sensor.lumi_badkamer_pressure"
+                                        }
+                                    ],
+                                    "show_name": false,
+                                    "title": "Badkamer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Zolder",
+                    "path": "zolder",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "thermostat",
+                                    "entity": "climate.zolder"
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.zolder_temperature",
+                                            "name": "Temperatuur"
+                                        },
+                                        {
+                                            "entity": "sensor.zolder_humidity",
+                                            "name": "Vocht"
+                                        },
+                                        {
+                                            "entity": "sensor.zolder_pressure",
+                                            "name": "Luchtdruk"
+                                        },
+                                        {
+                                            "type": "divider"
+                                        }
+                                    ],
+                                    "show_header_toggle": false,
+                                    "footer": {
+                                        "type": "buttons",
+                                        "entities": [
+                                            {
+                                                "entity": "switch.stekker_zolder",
+                                                "name": "Humidifier"
+                                            },
+                                            {
+                                                "entity": "light.dressinglampje_level_on_off",
+                                                "name": "Dressing"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "media-control",
+                                    "entity": "media_player.tim_s_radio"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Kelder",
+                    "path": "kelder",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.washer_washer_completion_time",
+                                            "name": "Benodigde tijd"
+                                        },
+                                        {
+                                            "entity": "sensor.washer_washer_job_state",
+                                            "name": "Job status"
+                                        },
+                                        {
+                                            "entity": "sensor.washer_washer_machine_state",
+                                            "name": "Machine status"
+                                        }
+                                    ],
+                                    "title": "Wasmachine"
+                                },
+                                {
+                                    "type": "button",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "entity": "switch.stekker_kelder_voor_buiten",
+                                    "icon_height": "48px"
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.hp_officejet_5740_series_black_ink"
+                                        },
+                                        {
+                                            "entity": "sensor.hp_officejet_5740_series_tri_color_ink"
+                                        },
+                                        {
+                                            "entity": "sensor.hp_officejet_5740_series"
+                                        },
+                                        {
+                                            "entity": "sensor.hl_l2340d_black_toner_remaining"
+                                        },
+                                        {
+                                            "entity": "sensor.hl_l2340d_drum_remaining_life"
+                                        },
+                                        {
+                                            "entity": "sensor.hl_l2340d_page_counter"
+                                        },
+                                        {
+                                            "entity": "sensor.hl_l2340d_status"
+                                        }
+                                    ],
+                                    "title": "Printers",
+                                    "state_color": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Andere sensoren",
+                    "path": "sensoren",
+                    "badges": [
+                        {
+                            "entity": "air_quality.thuisje"
+                        },
+                        {
+                            "entity": "binary_sensor.meteoalarm"
+                        },
+                        {
+                            "entity": "sensor.ac2003_battery_level"
+                        },
+                        {
+                            "entity": "sensor.sophitje_battery_level_2"
+                        },
+                        {
+                            "entity": "sensor.memory_use_percent"
+                        },
+                        {
+                            "entity": "sensor.load_1m"
+                        },
+                        {
+                            "entity": "sensor.load_5m"
+                        },
+                        {
+                            "entity": "sensor.load_15m"
+                        },
+                        {
+                            "entity": "sensor.processor_use_percent"
+                        },
+                        {
+                            "entity": "sensor.processor_temperature"
+                        },
+                        {
+                            "entity": "binary_sensor.fritz_box_7530_connectivity"
+                        },
+                        {
+                            "entity": "sensor.fritz_box_7530_external_ip"
+                        },
+                        {
+                            "entity": "sensor.fritz_box_7530_uptime"
+                        }
+                    ],
+                    "cards": [
+                        {
                             "type": "entities",
-                            "show_header_toggle": false,
                             "entities": [
                                 {
-                                    "entity": "weather.thuisje_hourly",
-                                    "type": "attribute",
-                                    "attribute": "temperature",
-                                    "name": "buiten",
-                                    "suffix": "\u00b0C"
+                                    "entity": "sensor.recycleapp_restafval",
+                                    "name": "RestAfval"
                                 },
                                 {
-                                    "entity": "weather.thuisje_hourly",
-                                    "type": "attribute",
-                                    "attribute": "wind_speed",
-                                    "name": "Windsnelheid",
-                                    "suffix": "km/u",
-                                    "icon": "mdi:weather-windy"
+                                    "entity": "sensor.recycleapp_gft",
+                                    "name": "GFT/Plastiek"
                                 },
                                 {
-                                    "entity": "weather.thuisje_hourly",
-                                    "type": "attribute",
-                                    "attribute": "wind_bearing",
-                                    "name": "Windrichting",
-                                    "suffix": "\u00b0",
-                                    "icon": "mdi:compass"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "volgens Humidifier",
-                                    "suffix": "\u00b0C",
-                                    "attribute": "temperature",
-                                    "icon": "mdi:thermometer"
-                                },
-                                {
-                                    "entity": "sensor.lumi_living_temperature",
-                                    "name": "volgens Tag"
-                                },
-                                {
-                                    "entity": "sensor.living_room_temperature",
-                                    "name": "volgens Nest"
-                                },
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "volgens Steam Humidifier",
-                                    "suffix": "\u00b0C",
-                                    "attribute": "temperature",
-                                    "icon": "mdi:thermometer"
+                                    "entity": "sensor.recycleapp_papier",
+                                    "name": "Papier"
                                 }
-                            ],
-                            "title": "Temperatuur"
+                            ]
                         },
                         {
-                            "type": "entities",
-                            "show_header_toggle": false,
-                            "entities": [
-                                {
-                                    "entity": "weather.thuisje_hourly",
-                                    "type": "attribute",
-                                    "attribute": "humidity",
-                                    "name": "buiten",
-                                    "suffix": "%"
-                                },
-                                {
-                                    "entity": "weather.thuisje_hourly",
-                                    "type": "attribute",
-                                    "attribute": "pressure",
-                                    "name": "druk buiten",
-                                    "suffix": "hPa",
-                                    "icon": "mdi:gauge-full"
-                                },
-                                {
-                                    "entity": "sensor.lumi_living_pressure",
-                                    "name": "druk binnen"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "volgens Humidifier",
-                                    "suffix": "%",
-                                    "attribute": "humidity",
-                                    "icon": "mdi:water-percent"
-                                },
-                                {
-                                    "entity": "sensor.lumi_living_humidity",
-                                    "name": "volgens Tag"
-                                },
-                                {
-                                    "entity": "sensor.living_room_humidity",
-                                    "name": "volgens Nest"
-                                },
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "volgens Steam Humidifier",
-                                    "suffix": "%",
-                                    "attribute": "humidity",
-                                    "icon": "mdi:water-percent"
-                                }
-                            ],
-                            "title": "Vocht"
+                            "type": "custom:our-groceries-card",
+                            "title": "Boodschappen",
+                            "show_header": true,
+                            "entity": "sensor.our_groceries",
+                            "show_crossed_off": false
                         },
                         {
-                            "type": "thermostat",
-                            "entity": "climate.living_room",
-                            "name": "Woonkamer"
+                            "type": "button",
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "shell_command.restart_unifi",
+                                "service_data": {},
+                                "target": {}
+                            },
+                            "name": "Restart Unifi (for memory)"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "shell_command.restart_lms",
+                                "service_data": {},
+                                "target": {}
+                            },
+                            "name": "Restart Radio's"
                         },
                         {
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Mode",
-                                    "suffix": null,
-                                    "attribute": "mode",
-                                    "icon": "mdi:fan-auto"
+                                    "entity": "binary_sensor.fritz_box_7530_connectivity",
+                                    "name": "Connectivity"
                                 },
                                 {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Doelvochtigheid",
-                                    "suffix": "%",
-                                    "attribute": "target_humidity",
-                                    "icon": "mdi:water-percent"
+                                    "entity": "sensor.fritz_box_7530_external_ip",
+                                    "name": "External IP"
                                 },
                                 {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Ingestelde motorsnelheid",
-                                    "suffix": "rpm",
-                                    "attribute": "motor_speed",
-                                    "icon": "mdi:gauge"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Echte motorsnelheid",
-                                    "suffix": "rpm",
-                                    "attribute": "actual_speed",
-                                    "icon": "mdi:gauge"
-                                },
-                                {
-                                    "entity": "fan.humidifier",
-                                    "type": "attribute",
-                                    "name": "Waterniveau",
-                                    "suffix": null,
-                                    "attribute": "water_level",
-                                    "icon": "mdi:cup-water"
+                                    "entity": "sensor.fritz_box_7530_uptime",
+                                    "name": "Up since"
                                 }
                             ],
-                            "title": "Humidifier"
-                        },
-                        {
-                            "entity": "weather.thuisje",
-                            "type": "weather-forecast"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Mode",
-                                    "suffix": null,
-                                    "attribute": "mode",
-                                    "icon": "mdi:fan-auto"
-                                },
-                                {
-                                    "entity": "fan.humidifier_2",
-                                    "type": "attribute",
-                                    "name": "Doelvochtigheid",
-                                    "suffix": "%",
-                                    "attribute": "target_humidity",
-                                    "icon": "mdi:water-percent"
-                                }
-                            ],
-                            "title": "Steam Humidifier"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "light.hue_play_1",
-                                    "name": "Computer"
-                                },
-                                {
-                                    "entity": "light.woonkamer_zha_group_0x0002",
-                                    "name": "Kaarslampjes"
-                                },
-                                {
-                                    "entity": "light.staanlamp",
-                                    "name": "Staanlamp"
-                                }
-                            ],
-                            "title": "Lampjes",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.tradfri_stekker_1_on_off"
-                                },
-                                {
-                                    "entity": "switch.stekker_onder_computer"
-                                },
-                                {
-                                    "entity": "switch.stekker_trap",
-                                    "name": "Stekker Traplichtjes",
-                                    "icon": "mdi:flash"
-                                },
-                                {
-                                    "entity": "switch.stekker_gang",
-                                    "icon": "mdi:flash",
-                                    "name": "Stekker Ananas"
-                                }
-                            ],
-                            "title": "Stekkers",
-                            "show_header_toggle": false
-                        },
+                            "title": "FRITZ!Box 7530"
+                        }
+                    ]
+                },
+                {
+                    "title": "Media",
+                    "path": "radio",
+                    "panel": false,
+                    "badges": [],
+                    "cards": [
                         {
                             "type": "vertical-stack",
                             "cards": [
@@ -284,318 +702,6 @@
                                 {
                                     "type": "media-control",
                                     "entity": "media_player.libratone_zipp2_709c2c_3"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entity",
-                            "entity": "sensor.date_time"
-                        },
-                        {
-                            "type": "button",
-                            "name": "Beneden alles af",
-                            "icon": "hass:power",
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "script.beneden_alles_af"
-                            },
-                            "show_icon": true,
-                            "icon_height": "75px",
-                            "hold_action": {
-                                "action": "none"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "path": "eerste",
-                    "title": "Eerste",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.lumi_marit_temperature"
-                                },
-                                {
-                                    "entity": "sensor.lumi_marit_humidity"
-                                },
-                                {
-                                    "entity": "sensor.lumi_marit_pressure"
-                                }
-                            ],
-                            "title": "Marit"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.lumi_marten_temperature"
-                                },
-                                {
-                                    "entity": "sensor.lumi_marten_humidity"
-                                },
-                                {
-                                    "entity": "sensor.lumi_marten_pressure"
-                                }
-                            ],
-                            "title": "Marten"
-                        },
-                        {
-                            "entity": "climate.marit",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.marten",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.lumi_badkamer_temperature"
-                                },
-                                {
-                                    "entity": "sensor.lumi_badkamer_humidity"
-                                },
-                                {
-                                    "entity": "sensor.lumi_badkamer_pressure"
-                                }
-                            ],
-                            "type": "entities",
-                            "title": "Badkamer"
-                        }
-                    ]
-                },
-                {
-                    "title": "Zolder",
-                    "path": "zolder",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entity": "climate.zolder",
-                            "type": "thermostat"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.zolder_temperature",
-                                    "name": "Temperatuur"
-                                },
-                                {
-                                    "entity": "sensor.zolder_humidity",
-                                    "name": "Vocht"
-                                },
-                                {
-                                    "entity": "sensor.zolder_pressure",
-                                    "name": "Luchtdruk"
-                                },
-                                {
-                                    "type": "divider"
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "climate.threesixty",
-                                            "state": "off"
-                                        }
-                                    ],
-                                    "row": {
-                                        "entity": "climate.threesixty",
-                                        "name": "ThreeSixty",
-                                        "type": "button",
-                                        "action_name": "zet aan",
-                                        "tap_action": {
-                                            "action": "call-service",
-                                            "service": "script.threesixty_aan"
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "climate.threesixty",
-                                            "state_not": "off"
-                                        }
-                                    ],
-                                    "row": {
-                                        "entity": "climate.threesixty",
-                                        "name": "ThreeSixty",
-                                        "type": "button",
-                                        "action_name": "zet af",
-                                        "tap_action": {
-                                            "action": "call-service",
-                                            "service": "script.threesixty_af"
-                                        }
-                                    }
-                                },
-                                {
-                                    "entity": "switch.stekker_zolder",
-                                    "name": "Power humidifier"
-                                },
-                                {
-                                    "entity": "light.dressinglampje_level_on_off",
-                                    "name": "Dressing"
-                                }
-                            ],
-                            "title": "Zolder",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "entity": "media_player.tim_s_radio",
-                            "type": "media-control"
-                        }
-                    ]
-                },
-                {
-                    "title": "Andere sensoren",
-                    "path": "sensoren",
-                    "badges": [
-                        {
-                            "entity": "air_quality.thuisje"
-                        },
-                        {
-                            "entity": "binary_sensor.meteoalarmeu"
-                        },
-                        {
-                            "entity": "sensor.ac2003_battery_level"
-                        },
-                        {
-                            "entity": "sensor.sophitje_battery_level_2"
-                        },
-                        {
-                            "entity": "sensor.memory_use_percent"
-                        },
-                        {
-                            "entity": "sensor.load_1m"
-                        },
-                        {
-                            "entity": "sensor.load_5m"
-                        },
-                        {
-                            "entity": "sensor.load_15m"
-                        },
-                        {
-                            "entity": "sensor.processor_use_percent"
-                        },
-                        {
-                            "entity": "sensor.processor_temperature"
-                        }
-                    ],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.hp_officejet_5740_series_black_ink"
-                                },
-                                {
-                                    "entity": "sensor.hp_officejet_5740_series_tri_color_ink"
-                                },
-                                {
-                                    "entity": "sensor.hp_officejet_5740_series"
-                                },
-                                {
-                                    "entity": "sensor.hl_l2340d_black_toner_remaining"
-                                },
-                                {
-                                    "entity": "sensor.hl_l2340d_drum_remaining_life"
-                                },
-                                {
-                                    "entity": "sensor.hl_l2340d_page_counter"
-                                },
-                                {
-                                    "entity": "sensor.hl_l2340d_status"
-                                }
-                            ],
-                            "title": "Kelder",
-                            "type": "entities",
-                            "state_color": true
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.recycleapp_restafval",
-                                    "name": "RestAfval"
-                                },
-                                {
-                                    "entity": "sensor.recycleapp_gft",
-                                    "name": "GFT/Plastiek"
-                                },
-                                {
-                                    "entity": "sensor.recycleapp_papier",
-                                    "name": "Papier"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.buienalarm_temperature",
-                                    "name": "BuienAlarm Temperatuur"
-                                },
-                                {
-                                    "entity": "sensor.buienalarm_next_rain_forecast",
-                                    "name": "BuienAlarm Regen verwacht"
-                                },
-                                {
-                                    "entity": "sensor.buienalarm_precipitation",
-                                    "name": "BuienAlarm Regen"
-                                },
-                                {
-                                    "entity": "sensor.buienalarm_precipitation_forecast_average",
-                                    "name": "BuienAlarm Regen Gemiddeld"
-                                },
-                                {
-                                    "entity": "sensor.buienalarm_precipitation_forecast_total",
-                                    "name": "BuienAlarm Regen Totaal"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:our-groceries-card",
-                            "title": "Boodschappen",
-                            "show_header": true,
-                            "entity": "sensor.our_groceries",
-                            "show_crossed_off": false
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.washer_washer_completion_time",
-                                    "name": "Benodigde tijd"
-                                },
-                                {
-                                    "entity": "sensor.washer_washer_job_state",
-                                    "name": "Job status"
-                                },
-                                {
-                                    "entity": "sensor.washer_washer_machine_state",
-                                    "name": "Machine status"
-                                }
-                            ],
-                            "title": "Wasmachine"
-                        }
-                    ]
-                },
-                {
-                    "title": "Radio",
-                    "path": "radio",
-                    "panel": true,
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "iframe",
-                                    "url": "https://lms.nauwelaerts.synology.me",
-                                    "aspect_ratio": "40%"
                                 },
                                 {
                                     "type": "horizontal-stack",
@@ -611,8 +717,12 @@
                                     ]
                                 },
                                 {
-                                    "entity": "media_player.shield",
+                                    "entity": "media_player.shieldtv",
                                     "type": "media-control"
+                                },
+                                {
+                                    "type": "media-control",
+                                    "entity": "media_player.emby_lenovo_tab_m8"
                                 }
                             ]
                         }

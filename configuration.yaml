@@ -39,6 +39,10 @@ automation: !include_dir_merge_list automations
 script: !include_dir_merge_named scripts 
 scene: !include scenes.yaml
 
+shell_command:
+  restart_unifi: sudo /home/homeassistant/rootbin/restartunifi.sh
+  restart_lms: sudo /home/homeassistant/rootbin/restartlms.sh
+
 #Nest config
 nest:
   client_id: !secret nest_client_id
@@ -55,6 +59,9 @@ media_player:
   - platform: emby
     host: !secret emby_host
     api_key: !secret emby_api_key
+  - platform: androidtv
+    name: ShieldTV
+    host: 192.168.1.120
 
 # Xiaomi
 fan:
@@ -68,6 +75,12 @@ fan:
     host: 192.168.1.247
     token: !secret xiaomi_token2
     model: deerma.humidifier.jsq
+
+binary_sensor:
+  - platform: meteoalarm
+    country: "BE"
+    province: "Brabant"
+    language: "ne"
 
 sensor:
   - platform: time_date
@@ -97,15 +110,6 @@ sensor:
     postcode: !secret afval_postcode
     streetnumber: !secret afval_number
     streetname: !secret afval_street
-  - platform: buienalarm
-    timeframe: 15
-    name: buienalarm
-    monitored_conditions:
-      - temperature
-      - precipitation
-      - precipitation_forecast_average
-      - precipitation_forecast_total
-      - next_rain_forecast
   - platform: untappd
     username: !secret untappd_username
     id: !secret untappd_id
