@@ -64,12 +64,8 @@
                                                     "icon": "mdi:compass"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Humidifier",
-                                                    "suffix": "\u00b0C",
-                                                    "attribute": "temperature",
-                                                    "icon": "mdi:thermometer"
+                                                    "entity": "sensor.humidifier_temperature",
+                                                    "name": "Humidifier"
                                                 },
                                                 {
                                                     "entity": "sensor.lumi_living_temperature",
@@ -80,12 +76,16 @@
                                                     "name": "Nest"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier_2",
+                                                    "entity": "fan.steam_humidifier",
                                                     "type": "attribute",
                                                     "name": "Steam Humidifier",
                                                     "suffix": "\u00b0C",
                                                     "attribute": "temperature",
                                                     "icon": "mdi:thermometer"
+                                                },
+                                                {
+                                                    "entity": "sensor.fan_temperature",
+                                                    "name": "Fan"
                                                 }
                                             ],
                                             "title": "Temperatuur"
@@ -114,12 +114,8 @@
                                                     "name": "druk binnen"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Humidifier",
-                                                    "suffix": "%",
-                                                    "attribute": "humidity",
-                                                    "icon": "mdi:water-percent"
+                                                    "entity": "sensor.humidifier_humidity",
+                                                    "name": "Humidifier"
                                                 },
                                                 {
                                                     "entity": "sensor.lumi_living_humidity",
@@ -130,12 +126,16 @@
                                                     "name": "Nest"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier_2",
+                                                    "entity": "fan.steam_humidifier",
                                                     "type": "attribute",
                                                     "name": "Steam Humidifier",
                                                     "suffix": "%",
                                                     "attribute": "humidity",
                                                     "icon": "mdi:water-percent"
+                                                },
+                                                {
+                                                    "entity": "sensor.fan_humidity",
+                                                    "name": "Fan"
                                                 }
                                             ],
                                             "title": "Vocht"
@@ -160,7 +160,7 @@
                                         }
                                     ],
                                     "card": {
-                                        "type": "entities",
+                                        "type": "glance",
                                         "entities": [
                                             {
                                                 "entity": "sensor.washer_washer_completion_time",
@@ -171,7 +171,11 @@
                                                 "name": "Fase"
                                             }
                                         ],
-                                        "title": "Wasmachine aan"
+                                        "title": "Wasmachine aan",
+                                        "show_name": false,
+                                        "show_state": true,
+                                        "show_icon": false,
+                                        "state_color": false
                                     }
                                 },
                                 {
@@ -270,53 +274,18 @@
                                             "type": "entities",
                                             "entities": [
                                                 {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Mode",
-                                                    "suffix": null,
-                                                    "attribute": "mode",
-                                                    "icon": "mdi:fan-auto"
+                                                    "entity": "humidifier.humidifier"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Doelvochtigheid",
-                                                    "suffix": "%",
-                                                    "attribute": "target_humidity",
-                                                    "icon": "mdi:water-percent"
-                                                },
-                                                {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "s ingesteld",
-                                                    "suffix": "rpm",
-                                                    "attribute": "motor_speed",
-                                                    "icon": "mdi:gauge"
-                                                },
-                                                {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "s real",
-                                                    "suffix": "rpm",
-                                                    "attribute": "actual_speed",
-                                                    "icon": "mdi:gauge"
-                                                },
-                                                {
-                                                    "entity": "fan.humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Waterniveau",
-                                                    "suffix": null,
-                                                    "attribute": "water_level",
-                                                    "icon": "mdi:cup-water"
+                                                    "entity": "fan.fan"
                                                 }
-                                            ],
-                                            "title": "Humidifier"
+                                            ]
                                         },
                                         {
                                             "type": "entities",
                                             "entities": [
                                                 {
-                                                    "entity": "fan.humidifier_2",
+                                                    "entity": "fan.steam_humidifier",
                                                     "type": "attribute",
                                                     "name": "Mode",
                                                     "suffix": null,
@@ -324,7 +293,7 @@
                                                     "icon": "mdi:fan-auto"
                                                 },
                                                 {
-                                                    "entity": "fan.humidifier_2",
+                                                    "entity": "fan.steam_humidifier",
                                                     "type": "attribute",
                                                     "name": "Doelvochtigheid",
                                                     "suffix": "%",
