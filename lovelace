@@ -56,11 +56,8 @@
                                                     "icon": "mdi:weather-windy"
                                                 },
                                                 {
-                                                    "entity": "weather.thuisje_hourly",
-                                                    "type": "attribute",
-                                                    "attribute": "wind_bearing",
+                                                    "entity": "sensor.berekende_windrichting",
                                                     "name": "Windrichting",
-                                                    "suffix": "\u00b0",
                                                     "icon": "mdi:compass"
                                                 },
                                                 {
@@ -84,8 +81,17 @@
                                                     "icon": "mdi:thermometer"
                                                 },
                                                 {
-                                                    "entity": "sensor.fan_temperature",
-                                                    "name": "Fan"
+                                                    "type": "conditional",
+                                                    "conditions": [
+                                                        {
+                                                            "entity": "fan.fan",
+                                                            "state_not": "unavailable"
+                                                        }
+                                                    ],
+                                                    "row": {
+                                                        "entity": "sensor.fan_temperature",
+                                                        "name": "Fan"
+                                                    }
                                                 }
                                             ],
                                             "title": "Temperatuur"
@@ -134,8 +140,17 @@
                                                     "icon": "mdi:water-percent"
                                                 },
                                                 {
-                                                    "entity": "sensor.fan_humidity",
-                                                    "name": "Fan"
+                                                    "type": "conditional",
+                                                    "conditions": [
+                                                        {
+                                                            "entity": "fan.fan",
+                                                            "state_not": "unavailable"
+                                                        }
+                                                    ],
+                                                    "row": {
+                                                        "entity": "sensor.fan_humidity",
+                                                        "name": "Fan"
+                                                    }
                                                 }
                                             ],
                                             "title": "Vocht"
@@ -190,6 +205,19 @@
                                         "type": "custom:meteoalarm-card",
                                         "entity": "binary_sensor.meteoalarm",
                                         "override_headline": false
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.battery_tim_low",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "markdown",
+                                        "content": "## Batterij GSM Tim opladen"
                                     }
                                 }
                             ]
@@ -277,7 +305,16 @@
                                                     "entity": "humidifier.humidifier"
                                                 },
                                                 {
-                                                    "entity": "fan.fan"
+                                                    "type": "conditional",
+                                                    "conditions": [
+                                                        {
+                                                            "entity": "fan.fan",
+                                                            "state_not": "unavailable"
+                                                        }
+                                                    ],
+                                                    "row": {
+                                                        "entity": "fan.fan"
+                                                    }
                                                 }
                                             ]
                                         },

@@ -123,3 +123,38 @@ sensor:
 ourgroceries:
   username: !secret ourgroceries_username
   password: !secret ourgroceries_password
+
+template:
+  - binary_sensor:
+    - name: Battery Tim Low
+      unique_id: batterytimlow
+      state: "{{ states('sensor.ac2003_battery_level')|int < 25 }}"
+    sensor:
+    - name: Berekende Windrichting
+      unique_id: berekendewindrichting
+      state: >
+        {% set wind = {
+          "bearing" : state_attr('weather.thuisje_hourly', 'wind_bearing')
+        } %}
+
+        {% if wind.bearing < 22 %}
+          N
+        {%- elif wind.bearing < 67 -%}
+          NO
+        {%- elif wind.bearing < 112 -%}
+          O
+        {%- elif wind.bearing < 157 -%}
+          ZO
+        {%- elif wind.bearing < 202 -%}
+          Z
+        {%- elif wind.bearing < 247 -%}
+          ZW
+        {%- elif wind.bearing < 292 -%}
+          W
+        {%- elif wind.bearing < 337 -%}
+          NW
+        {%- else -%}
+          N
+        {%- endif %}
+
+
