@@ -61,8 +61,12 @@
                                                     "icon": "mdi:compass"
                                                 },
                                                 {
-                                                    "entity": "sensor.humidifier_temperature",
-                                                    "name": "Humidifier"
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Humidifier",
+                                                    "suffix": "\u00b0C",
+                                                    "attribute": "temperature",
+                                                    "icon": "mdi:thermometer"
                                                 },
                                                 {
                                                     "entity": "sensor.lumi_living_temperature",
@@ -89,8 +93,12 @@
                                                         }
                                                     ],
                                                     "row": {
-                                                        "entity": "sensor.fan_temperature",
-                                                        "name": "Fan"
+                                                        "entity": "fan.fan",
+                                                        "type": "attribute",
+                                                        "name": "Fan",
+                                                        "suffix": "\u00b0C",
+                                                        "attribute": "temperature",
+                                                        "icon": "mdi:thermometer"
                                                     }
                                                 }
                                             ],
@@ -120,8 +128,12 @@
                                                     "name": "druk binnen"
                                                 },
                                                 {
-                                                    "entity": "sensor.humidifier_humidity",
-                                                    "name": "Humidifier"
+                                                    "entity": "fan.humidifier",
+                                                    "type": "attribute",
+                                                    "name": "Humidifier",
+                                                    "suffix": "%",
+                                                    "attribute": "humidity",
+                                                    "icon": "mdi:water-percent"
                                                 },
                                                 {
                                                     "entity": "sensor.lumi_living_humidity",
@@ -148,8 +160,12 @@
                                                         }
                                                     ],
                                                     "row": {
-                                                        "entity": "sensor.fan_humidity",
-                                                        "name": "Fan"
+                                                        "entity": "fan.fan",
+                                                        "type": "attribute",
+                                                        "name": "Fan",
+                                                        "suffix": "%",
+                                                        "attribute": "humidity",
+                                                        "icon": "mdi:water-percent"
                                                     }
                                                 }
                                             ],
@@ -302,7 +318,7 @@
                                             "type": "entities",
                                             "entities": [
                                                 {
-                                                    "entity": "humidifier.humidifier"
+                                                    "entity": "fan.humidifier"
                                                 },
                                                 {
                                                     "type": "conditional",
@@ -548,9 +564,6 @@
                     "path": "sensoren",
                     "badges": [
                         {
-                            "entity": "air_quality.thuisje"
-                        },
-                        {
                             "entity": "binary_sensor.meteoalarm"
                         },
                         {
@@ -649,6 +662,41 @@
                                 }
                             ],
                             "title": "FRITZ!Box 7530"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.alien2_cpu_speed"
+                                },
+                                {
+                                    "entity": "sensor.alien2_c_space_used"
+                                },
+                                {
+                                    "entity": "sensor.alien2_d_space_used"
+                                },
+                                {
+                                    "entity": "sensor.alien2_e_space_used"
+                                },
+                                {
+                                    "entity": "sensor.alien2_f_space_used"
+                                },
+                                {
+                                    "entity": "sensor.alien2_g_space_used"
+                                },
+                                {
+                                    "entity": "sensor.alien2_kernel"
+                                },
+                                {
+                                    "entity": "sensor.alien2_load"
+                                },
+                                {
+                                    "entity": "sensor.alien2_memory_free"
+                                },
+                                {
+                                    "entity": "sensor.alien2_memory_used_2"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -731,6 +779,20 @@
                                     "entity": "media_player.emby_lenovo_tab_m8"
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "title": "RadioServer",
+                    "path": "radioserver",
+                    "panel": true,
+                    "icon": "",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "iframe",
+                            "url": "https://lms.nauwelaerts.synology.me",
+                            "aspect_ratio": "50%"
                         }
                     ]
                 }
