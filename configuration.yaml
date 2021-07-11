@@ -129,7 +129,11 @@ template:
     - name: Battery Tim Low
       unique_id: batterytimlow
       state: "{{ states('sensor.ac2003_battery_level')|int < 25 }}"
-    sensor:
+  - binary_sensor:
+    - name: Battery Kinders Low
+      unique_id: batterykinderslow
+      state: "{{ states('sensor.tablet_kinders_battery_level')|int < 25 }}"
+  - sensor:
     - name: Berekende Windrichting
       unique_id: berekendewindrichting
       state: >
