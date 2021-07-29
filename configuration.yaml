@@ -83,7 +83,7 @@ fan:
 
 binary_sensor:
   - platform: meteoalarm
-    country: "BE"
+    country: "belgium"
     province: "Brabant"
     language: "ne"
 
@@ -159,6 +159,21 @@ template:
           NW
         {%- else -%}
           N
+        {%- endif %}
+  - sensor:
+    - name: CO2Waarde
+      unique_id: co2waarde
+      state: >
+        {% if states('sensor.netatmo_indoor_co2')|int < 700 %}
+          Perfect
+        {%- elif states('sensor.netatmo_indoor_co2')|int < 900 %}
+          Goed
+        {%- elif states('sensor.netatmo_indoor_co2')|int < 1100 %}
+          OK
+        {%- elif states('sensor.netatmo_indoor_co2')|int < 1600 %}
+          Middelmatig
+        {%- else %}
+          Slecht
         {%- endif %}
 
 

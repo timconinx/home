@@ -6,6 +6,251 @@
             "title": "thuisje",
             "views": [
                 {
+                    "title": "Overzicht",
+                    "path": "overzicht",
+                    "type": "custom:grid-layout",
+                    "layout": {
+                        "grid-template-columns": "auto 30px 30% 30px",
+                        "grid-template-rows": "auto",
+                        "grid-template-areas": "\"main . sidebar .\"\n"
+                    },
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "custom:layout-card",
+                            "layout_type": "custom:masonry-layout",
+                            "layout": {
+                                "width": 200,
+                                "max_cols": 2
+                            },
+                            "cards": [
+                                {
+                                    "type": "entity",
+                                    "entity": "sensor.date_time",
+                                    "name": " "
+                                },
+                                {
+                                    "type": "weather-forecast",
+                                    "entity": "weather.thuisje"
+                                },
+                                {
+                                    "type": "glance",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.netatmo_indoor_co2",
+                                            "name": "value"
+                                        },
+                                        {
+                                            "entity": "sensor.co2waarde",
+                                            "icon": "mdi:molecule-co2"
+                                        }
+                                    ],
+                                    "name": "CO2",
+                                    "show_icon": false,
+                                    "show_state": true,
+                                    "show_name": false,
+                                    "title": "CO2",
+                                    "card_mod": {
+                                        "style": "ha-card {\n  background:\n    {% if is_state('sensor.co2waarde', 'Perfect') %}\n      green\n    {% elif is_state('sensor.co2waarde', 'Goed') %}\n      teal\n    {% elif is_state('sensor.co2waarde', 'OK') %}\n      steelblue\n    {% elif is_state('sensor.co2waarde', 'Middelmatig') %}\n      yellow\n    {% else %}\n      red\n    {% endif %}\n    ;\n}\n"
+                                    }
+                                },
+                                {
+                                    "type": "vertical-stack",
+                                    "cards": [
+                                        {
+                                            "type": "button",
+                                            "name": "Beneden alles af",
+                                            "icon": "hass:power-sleep",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.beneden_alles_af"
+                                            },
+                                            "show_icon": true,
+                                            "icon_height": "75px",
+                                            "hold_action": {
+                                                "action": "none"
+                                            }
+                                        },
+                                        {
+                                            "type": "button",
+                                            "name": "Beneden alles aan",
+                                            "icon": "hass:power",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.beneden_alles_aan"
+                                            },
+                                            "show_icon": true,
+                                            "icon_height": "75px",
+                                            "hold_action": {
+                                                "action": "none"
+                                            }
+                                        },
+                                        {
+                                            "type": "button",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            },
+                                            "entity": "switch.stekker_kelder_voor_buiten",
+                                            "icon_height": "75px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "vertical-stack",
+                                    "cards": [
+                                        {
+                                            "type": "horizontal-stack",
+                                            "cards": [
+                                                {
+                                                    "type": "picture",
+                                                    "image": "https://cdn-profiles.tunein.com/s308770/images/logoq.png?t=157070",
+                                                    "tap_action": {
+                                                        "action": "call-service",
+                                                        "service": "media_player.play_media",
+                                                        "service_data": {
+                                                            "media_content_type": "music",
+                                                            "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s308770&partnerId=16&username=timconinx",
+                                                            "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "picture",
+                                                    "image": "https://cdn-profiles.tunein.com/s2611/images/logoq.jpg",
+                                                    "tap_action": {
+                                                        "action": "call-service",
+                                                        "service": "media_player.play_media",
+                                                        "service_data": {
+                                                            "media_content_type": "music",
+                                                            "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s2611&formats=aac,ogg,mp3,wmpro,wma,wmvoice&partnerId=16&serial=b577ead4739e8966396abc81d5db4e12",
+                                                            "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "picture",
+                                                    "image": "https://cdn-profiles.tunein.com/s306462/images/logoq.jpg",
+                                                    "tap_action": {
+                                                        "action": "call-service",
+                                                        "service": "media_player.play_media",
+                                                        "service_data": {
+                                                            "media_content_type": "music",
+                                                            "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s306462&formats=aac,ogg,mp3,wmpro,wma,wmvoice,hls,real&partnerId=16",
+                                                            "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "media-control",
+                                            "entity": "media_player.libratone_zipp2_709c2c_3"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "view_layout": {
+                                "grid-area": "main"
+                            }
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "view_layout": {
+                                "grid-area": "sidebar"
+                            },
+                            "cards": [
+                                {
+                                    "type": "markdown",
+                                    "content": "# Berichten"
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "sensor.washer_washer_machine_state",
+                                            "state": "run"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "glance",
+                                        "entities": [
+                                            {
+                                                "entity": "sensor.washer_washer_completion_time",
+                                                "name": "Klaar"
+                                            },
+                                            {
+                                                "entity": "sensor.washer_washer_job_state",
+                                                "name": "Fase"
+                                            }
+                                        ],
+                                        "title": "Wasmachine aan",
+                                        "show_name": false,
+                                        "show_state": true,
+                                        "show_icon": false,
+                                        "state_color": false
+                                    }
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "conditional",
+                                            "conditions": [
+                                                {
+                                                    "entity": "binary_sensor.meteoalarm",
+                                                    "state": "on"
+                                                }
+                                            ],
+                                            "card": {
+                                                "type": "custom:meteoalarm-card",
+                                                "style": {
+                                                    "width": "60%"
+                                                },
+                                                "entity": "binary_sensor.meteoalarm",
+                                                "override_headline": false
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.battery_tim_low",
+                                            "state": "on"
+                                        },
+                                        {
+                                            "entity": "sensor.ac2003_battery_state",
+                                            "state": "discharging"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "markdown",
+                                        "content": "## Batterij GSM Tim opladen"
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.battery_kinders_low",
+                                            "state": "on"
+                                        },
+                                        {
+                                            "entity": "sensor.tablet_kinders_battery_state",
+                                            "state": "discharging"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "markdown",
+                                        "content": "## Batterij Tablet Kinders opladen"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "title": "Beneden",
                     "path": "beneden",
                     "panel": false,
@@ -15,23 +260,9 @@
                             "type": "vertical-stack",
                             "cards": [
                                 {
-                                    "type": "entity",
-                                    "entity": "sensor.date_time",
-                                    "name": " "
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "weather-forecast",
-                                            "entity": "weather.thuisje"
-                                        },
-                                        {
-                                            "type": "thermostat",
-                                            "entity": "climate.living_room",
-                                            "name": "Woonkamer"
-                                        }
-                                    ]
+                                    "type": "thermostat",
+                                    "entity": "climate.living_room",
+                                    "name": "Woonkamer"
                                 },
                                 {
                                     "type": "horizontal-stack",
@@ -174,191 +405,100 @@
                                     ]
                                 }
                             ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "markdown",
-                                    "content": "# Berichten"
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "sensor.washer_washer_machine_state",
-                                            "state": "run"
-                                        }
-                                    ],
-                                    "card": {
-                                        "type": "glance",
-                                        "entities": [
-                                            {
-                                                "entity": "sensor.washer_washer_completion_time",
-                                                "name": "Klaar"
-                                            },
-                                            {
-                                                "entity": "sensor.washer_washer_job_state",
-                                                "name": "Fase"
-                                            }
-                                        ],
-                                        "title": "Wasmachine aan",
-                                        "show_name": false,
-                                        "show_state": true,
-                                        "show_icon": false,
-                                        "state_color": false
-                                    }
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "binary_sensor.meteoalarm",
-                                            "state": "on"
-                                        }
-                                    ],
-                                    "card": {
-                                        "type": "custom:meteoalarm-card",
-                                        "entity": "binary_sensor.meteoalarm",
-                                        "override_headline": false
-                                    }
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "binary_sensor.battery_tim_low",
-                                            "state": "on"
-                                        }
-                                    ],
-                                    "card": {
-                                        "type": "markdown",
-                                        "content": "## Batterij GSM Tim opladen"
-                                    }
-                                }
-                            ]
                         }
                     ]
                 },
                 {
                     "title": "Knoppen",
                     "path": "knoppen",
+                    "type": "custom:masonry-layout",
                     "badges": [],
                     "cards": [
                         {
-                            "type": "vertical-stack",
-                            "cards": [
+                            "type": "entities",
+                            "entities": [
                                 {
-                                    "type": "button",
-                                    "name": "Beneden alles af",
-                                    "icon": "hass:power",
-                                    "tap_action": {
-                                        "action": "call-service",
-                                        "service": "script.beneden_alles_af"
-                                    },
-                                    "show_icon": true,
-                                    "icon_height": "75px",
-                                    "hold_action": {
-                                        "action": "none"
+                                    "entity": "light.hue_play_1",
+                                    "name": "Computer"
+                                },
+                                {
+                                    "entity": "light.woonkamer_zha_group_0x0002",
+                                    "name": "Kaarslampjes"
+                                },
+                                {
+                                    "entity": "light.staanlamp",
+                                    "name": "Staanlamp"
+                                }
+                            ],
+                            "title": "Lampjes",
+                            "show_header_toggle": false
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.tradfri_stekker_1_on_off",
+                                    "name": "Huislampje"
+                                },
+                                {
+                                    "entity": "switch.stekker_onder_computer",
+                                    "name": "Computer"
+                                },
+                                {
+                                    "entity": "switch.stekker_trap",
+                                    "name": "Traplichtjes",
+                                    "icon": "mdi:flash"
+                                },
+                                {
+                                    "entity": "switch.stekker_gang",
+                                    "icon": "mdi:flash",
+                                    "name": "Ananas"
+                                }
+                            ],
+                            "title": "Stekkers",
+                            "show_header_toggle": false
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "fan.humidifier"
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "fan.fan",
+                                            "state_not": "unavailable"
+                                        }
+                                    ],
+                                    "row": {
+                                        "entity": "fan.fan"
                                     }
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "light.hue_play_1",
-                                                    "name": "Computer"
-                                                },
-                                                {
-                                                    "entity": "light.woonkamer_zha_group_0x0002",
-                                                    "name": "Kaarslampjes"
-                                                },
-                                                {
-                                                    "entity": "light.staanlamp",
-                                                    "name": "Staanlamp"
-                                                }
-                                            ],
-                                            "title": "Lampjes",
-                                            "show_header_toggle": false
-                                        },
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "switch.tradfri_stekker_1_on_off",
-                                                    "name": "Huislampje"
-                                                },
-                                                {
-                                                    "entity": "switch.stekker_onder_computer",
-                                                    "name": "Computer"
-                                                },
-                                                {
-                                                    "entity": "switch.stekker_trap",
-                                                    "name": "Traplichtjes",
-                                                    "icon": "mdi:flash"
-                                                },
-                                                {
-                                                    "entity": "switch.stekker_gang",
-                                                    "icon": "mdi:flash",
-                                                    "name": "Ananas"
-                                                }
-                                            ],
-                                            "title": "Stekkers",
-                                            "show_header_toggle": false
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "fan.humidifier"
-                                                },
-                                                {
-                                                    "type": "conditional",
-                                                    "conditions": [
-                                                        {
-                                                            "entity": "fan.fan",
-                                                            "state_not": "unavailable"
-                                                        }
-                                                    ],
-                                                    "row": {
-                                                        "entity": "fan.fan"
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "fan.steam_humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Mode",
-                                                    "suffix": null,
-                                                    "attribute": "mode",
-                                                    "icon": "mdi:fan-auto"
-                                                },
-                                                {
-                                                    "entity": "fan.steam_humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Doelvochtigheid",
-                                                    "suffix": "%",
-                                                    "attribute": "target_humidity",
-                                                    "icon": "mdi:water-percent"
-                                                }
-                                            ],
-                                            "title": "Steam Humidifier"
-                                        }
-                                    ]
                                 }
                             ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "fan.steam_humidifier",
+                                    "type": "attribute",
+                                    "name": "Mode",
+                                    "suffix": null,
+                                    "attribute": "mode",
+                                    "icon": "mdi:fan-auto"
+                                },
+                                {
+                                    "entity": "fan.steam_humidifier",
+                                    "type": "attribute",
+                                    "name": "Doelvochtigheid",
+                                    "suffix": "%",
+                                    "attribute": "target_humidity",
+                                    "icon": "mdi:water-percent"
+                                }
+                            ],
+                            "title": "Steam Humidifier"
                         }
                     ]
                 },
@@ -570,6 +710,9 @@
                             "entity": "sensor.ac2003_battery_level"
                         },
                         {
+                            "entity": "sensor.tablet_kinders_battery_level"
+                        },
+                        {
                             "entity": "sensor.sophitje_battery_level_2"
                         },
                         {
@@ -666,36 +809,27 @@
                         {
                             "type": "entities",
                             "entities": [
-                                {
-                                    "entity": "sensor.alien2_cpu_speed"
-                                },
-                                {
-                                    "entity": "sensor.alien2_c_space_used"
-                                },
-                                {
-                                    "entity": "sensor.alien2_d_space_used"
-                                },
-                                {
-                                    "entity": "sensor.alien2_e_space_used"
-                                },
-                                {
-                                    "entity": "sensor.alien2_f_space_used"
-                                },
-                                {
-                                    "entity": "sensor.alien2_g_space_used"
-                                },
-                                {
-                                    "entity": "sensor.alien2_kernel"
-                                },
-                                {
-                                    "entity": "sensor.alien2_load"
-                                },
-                                {
-                                    "entity": "sensor.alien2_memory_free"
-                                },
-                                {
-                                    "entity": "sensor.alien2_memory_used_2"
-                                }
+                                "sensor.netatmo_indoor_co2",
+                                "sensor.netatmo_indoor_humidity",
+                                "sensor.netatmo_indoor_noise",
+                                "sensor.netatmo_indoor_pressure",
+                                "sensor.netatmo_indoor_temperature",
+                                "sensor.netatmo_indoor_pressure_trend",
+                                "sensor.netatmo_indoor_reachability",
+                                "sensor.netatmo_indoor_temperature_trend",
+                                "sensor.netatmo_indoor_wifi",
+                                "sensor.netatmo_indoor_wifi_level"
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.netatmo_outdoor_humidity",
+                                "sensor.netatmo_outdoor_temperature",
+                                "sensor.netatmo_outdoor_radio",
+                                "sensor.netatmo_outdoor_radio_level",
+                                "sensor.netatmo_outdoor_reachability",
+                                "sensor.netatmo_outdoor_temperature_trend"
                             ]
                         }
                     ]
@@ -771,8 +905,17 @@
                                     ]
                                 },
                                 {
-                                    "entity": "media_player.shieldtv",
-                                    "type": "media-control"
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "media-control",
+                                            "entity": "media_player.shieldtv"
+                                        },
+                                        {
+                                            "type": "media-control",
+                                            "entity": "media_player.emby_shield"
+                                        }
+                                    ]
                                 },
                                 {
                                     "type": "media-control",

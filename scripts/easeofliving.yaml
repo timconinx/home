@@ -1,3 +1,15 @@
+beneden_alles_aan:
+        sequence:
+                - service: script.kaarslampjes_aan
+                  data: {}
+                - service: script.kerstlichtjes_aan
+                  data: {}
+                - service: script.salon_aan
+                  data: {}
+                - service: switch.turn_on
+                  entity_id: switch.stekker_trap
+                - service: switch.turn_on
+                  entity_id: switch.stekker_gang
 beneden_alles_af:
         sequence:
                 - service: script.kaarslampjes_af
