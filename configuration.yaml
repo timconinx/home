@@ -133,6 +133,18 @@ template:
     - name: Battery Kinders Low
       unique_id: batterykinderslow
       state: "{{ states('sensor.tablet_kinders_battery_level')|int < 25 }}"
+  - binary_sensor:
+    - name: Battery Sophie Low
+      unique_id: batterysophielow
+      state: "{{ state_attr('device_tracker.life360_sophie', 'battery')|int < 25 }}"
+  - binary_sensor:
+    - name: Battery Sophie Charging
+      unique_id: batterysophiecharging
+      state: "{{ state_attr('device_tracker.life360_sophie', 'battery_charging') }}"
+  - sensor:
+    - name: Battery Sophie
+      unique_id: batterysophie
+      state: "{{ state_attr('device_tracker.life360_sophie', 'battery') }}"
   - sensor:
     - name: Berekende Windrichting
       unique_id: berekendewindrichting

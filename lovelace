@@ -202,7 +202,7 @@
                                                 }
                                             ],
                                             "card": {
-                                                "type": "custom:meteoalarm-card",
+                                                "type": "entity",
                                                 "style": {
                                                     "width": "60%"
                                                 },
@@ -227,6 +227,23 @@
                                     "card": {
                                         "type": "markdown",
                                         "content": "## Batterij GSM Tim opladen"
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.battery_sophie_low",
+                                            "state": "on"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.battery_sophie_charging",
+                                            "state": "off"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "markdown",
+                                        "content": "## Batterij GSM Sophie opladen"
                                     }
                                 },
                                 {
@@ -713,7 +730,7 @@
                             "entity": "sensor.tablet_kinders_battery_level"
                         },
                         {
-                            "entity": "sensor.sophitje_battery_level_2"
+                            "entity": "sensor.battery_sophie"
                         },
                         {
                             "entity": "sensor.memory_use_percent"
