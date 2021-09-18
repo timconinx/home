@@ -14,7 +14,7 @@
                 "id": "1ca829455e7f4d52bb1ec2e2594cf1e2"
             },
             {
-                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js",
+                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381130",
                 "type": "module",
                 "id": "8f51aabfc6df4b99b1065dc5e82c8469"
             },
@@ -29,17 +29,17 @@
                 "id": "5940e638f18a4a2898fbabd30defff07"
             },
             {
-                "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js",
+                "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js?hacstag=253019926252",
                 "type": "module",
                 "id": "a719eb4b3011474396d9cdf5dd51667e"
             },
             {
-                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202107280",
+                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202108310",
                 "type": "module",
                 "id": "941bab264848478d9d1894eb77ff378a"
             },
             {
-                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663190",
+                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631102",
                 "type": "module",
                 "id": "2d86653721d14413ba82ed28e81c6c0a"
             },
@@ -49,7 +49,7 @@
                 "id": "c6a52c47bf194d46a43b2ac5e8505313"
             },
             {
-                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866230",
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866231",
                 "type": "module",
                 "id": "2363fb2bbe2e45d8a4def97c4b656799"
             }

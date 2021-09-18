@@ -1,5 +1,6 @@
 deps
 *.log
+*.log.1
 *.db
 tts
 .HA_VERSION

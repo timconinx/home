@@ -126,6 +126,10 @@ ourgroceries:
 
 template:
   - binary_sensor:
+    - name: Too much memory
+      unique_id: toomuchmemory
+      state: "{{ states('sensor.memory_use_percent')|int > 60 }}"
+  - binary_sensor:
     - name: Battery Tim Low
       unique_id: batterytimlow
       state: "{{ states('sensor.ac2003_battery_level')|int < 25 }}"
