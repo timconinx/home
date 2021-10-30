@@ -61,7 +61,7 @@ media_player:
     api_key: !secret emby_api_key
   - platform: androidtv
     name: ShieldTV
-    host: 192.168.1.120
+    host: 192.168.1.197
 
 # Xiaomi
 fan:
@@ -145,6 +145,19 @@ template:
     - name: Battery Sophie Charging
       unique_id: batterysophiecharging
       state: "{{ state_attr('device_tracker.life360_sophie', 'battery_charging') }}"
+  - sensor:
+    - name: Droogkast status
+      unique_id: droogkaststatus
+      state: >
+        {% if states('sensor.stekker_droogkast_electrical_measurement')|int < 1 %}
+          off
+        {%- elif states('sensor.stekker_droogkast_electrical_measurement')|int < 50 -%}
+          standby
+        {%- elif states('sensor.stekker_droogkast_electrical_measurement')|int < 250 -%}
+          koude lucht
+        {%- else -%}
+          drogen
+        {%- endif %}
   - sensor:
     - name: Battery Sophie
       unique_id: batterysophie

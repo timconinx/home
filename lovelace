@@ -139,7 +139,10 @@
                                             "entity": "media_player.spotify_tim",
                                             "info": "short",
                                             "idle_view": "when_paused",
-                                            "volume_stateless": true
+                                            "volume_stateless": true,
+                                            "hide": {
+                                                "progress": true
+                                            }
                                         }
                                     ]
                                 }
@@ -154,15 +157,15 @@
                                 {
                                     "type": "gauge",
                                     "min": 0,
-                                    "max": 1500,
                                     "entity": "sensor.netatmo_indoor_co2",
                                     "needle": true,
                                     "severity": {
                                         "green": 0,
-                                        "yellow": 1000,
-                                        "red": 1200
+                                        "yellow": 1180,
+                                        "red": 2250
                                     },
-                                    "name": "CO2"
+                                    "name": "CO2",
+                                    "max": 2500
                                 },
                                 {
                                     "type": "markdown",
@@ -189,6 +192,31 @@
                                             }
                                         ],
                                         "title": "Wasmachine aan",
+                                        "show_name": false,
+                                        "show_state": true,
+                                        "show_icon": false,
+                                        "state_color": false
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.droogkast_drogend",
+                                            "state_not": "off"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "glance",
+                                        "entities": [
+                                            {
+                                                "entity": "sensor.droogkast_status"
+                                            },
+                                            {
+                                                "entity": "sensor.stekker_droogkast_electrical_measurement"
+                                            }
+                                        ],
+                                        "title": "Droogkast aan",
                                         "show_name": false,
                                         "show_state": true,
                                         "show_icon": false,
