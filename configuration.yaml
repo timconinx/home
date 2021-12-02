@@ -14,6 +14,10 @@ http:
 tts:
   - platform: google_translate
 
+frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+
 spotcast:
   sp_dc: !secret tim_sp_dc
   sp_key: !secret tim_sp_key
@@ -63,6 +67,9 @@ media_player:
     name: ShieldTV
     host: 192.168.1.197
 
+sonoff:
+  username: !secret sonoff_username
+  password: !secret sonoff_password
 # Xiaomi
 fan:
   - platform: xiaomi_miio_airpurifier
@@ -75,17 +82,17 @@ fan:
     host: 192.168.1.247
     token: !secret xiaomi_token2
     model: deerma.humidifier.jsq
-  - platform: xiaomi_miio_fan
-    name: Fan
-    host: 192.168.1.245
-    token: !secret xiaomi_token3
-    model: zhimi.fan.za5
+      #- platform: xiaomi_miio_airpurifier
+      #name: Fan
+      #host: 192.168.1.245
+      #token: !secret xiaomi_token3
+      #model: zhimi.fan.za5
 
 binary_sensor:
   - platform: meteoalarm
     country: "belgium"
     province: "Brabant"
-    language: "ne"
+    language: "nl-BE"
 
 sensor:
   - platform: time_date

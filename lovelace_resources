@@ -14,7 +14,7 @@
                 "id": "1ca829455e7f4d52bb1ec2e2594cf1e2"
             },
             {
-                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381130",
+                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381150",
                 "type": "module",
                 "id": "8f51aabfc6df4b99b1065dc5e82c8469"
             },
@@ -29,22 +29,22 @@
                 "id": "5940e638f18a4a2898fbabd30defff07"
             },
             {
-                "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js?hacstag=253019926254",
+                "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js?hacstag=253019926255",
                 "type": "module",
                 "id": "a719eb4b3011474396d9cdf5dd51667e"
             },
             {
-                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202110202",
+                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202110210",
                 "type": "module",
                 "id": "941bab264848478d9d1894eb77ff378a"
             },
             {
-                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631110",
+                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631121",
                 "type": "module",
                 "id": "2d86653721d14413ba82ed28e81c6c0a"
             },
             {
-                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=1909275243012",
+                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524311",
                 "type": "module",
                 "id": "c6a52c47bf194d46a43b2ac5e8505313"
             },
@@ -52,6 +52,11 @@
                 "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866231",
                 "type": "module",
                 "id": "2363fb2bbe2e45d8a4def97c4b656799"
+            },
+            {
+                "url": "/hacsfiles/person-entity-card/person-entity-card-bundle.js?hacstag=413430860073",
+                "type": "module",
+                "id": "b1e67d5ccd8a4c48becf55ca41edb475"
             }
         ]
     }

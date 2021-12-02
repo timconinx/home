@@ -202,7 +202,7 @@
                                     "type": "conditional",
                                     "conditions": [
                                         {
-                                            "entity": "binary_sensor.droogkast_drogend",
+                                            "entity": "sensor.droogkast_status",
                                             "state_not": "off"
                                         }
                                     ],
@@ -305,6 +305,20 @@
                                     "card": {
                                         "type": "markdown",
                                         "content": "## Memory resetten"
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "sensor.hacs",
+                                            "state_not": "0"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "entity",
+                                        "entity": "sensor.hacs",
+                                        "name": "HACS"
                                     }
                                 }
                             ],
@@ -502,21 +516,33 @@
                             "entities": [
                                 {
                                     "entity": "switch.tradfri_stekker_1_on_off",
-                                    "name": "Huislampje"
+                                    "name": "Huislampje",
+                                    "icon": "mdi:greenhouse"
                                 },
                                 {
                                     "entity": "switch.stekker_onder_computer",
-                                    "name": "Computer"
+                                    "name": "Computer",
+                                    "icon": "mdi:laptop"
                                 },
                                 {
                                     "entity": "switch.stekker_trap",
                                     "name": "Traplichtjes",
-                                    "icon": "mdi:flash"
+                                    "icon": "mdi:stairs"
                                 },
                                 {
                                     "entity": "switch.stekker_gang",
-                                    "icon": "mdi:flash",
+                                    "icon": "mdi:fruit-pineapple",
                                     "name": "Ananas"
+                                },
+                                {
+                                    "entity": "switch.sonoff_1",
+                                    "name": "Boomlichtjes",
+                                    "icon": "mdi:pine-tree"
+                                },
+                                {
+                                    "entity": "switch.sonoff_2",
+                                    "name": "Guirlande",
+                                    "icon": "mdi:string-lights"
                                 }
                             ],
                             "title": "Stekkers",
@@ -652,8 +678,17 @@
                             "type": "vertical-stack",
                             "cards": [
                                 {
-                                    "type": "thermostat",
-                                    "entity": "climate.zolder"
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "thermostat",
+                                            "entity": "climate.zolder"
+                                        },
+                                        {
+                                            "type": "thermostat",
+                                            "entity": "climate.zb1_cloud_444415"
+                                        }
+                                    ]
                                 },
                                 {
                                     "type": "entities",
@@ -722,6 +757,21 @@
                                         }
                                     ],
                                     "title": "Wasmachine"
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.droogkast_status"
+                                        },
+                                        {
+                                            "entity": "sensor.stekker_droogkast_electrical_measurement"
+                                        },
+                                        {
+                                            "entity": "sensor.stekker_droogkast_smartenergy_summation_delivered"
+                                        }
+                                    ],
+                                    "title": "Droogkast"
                                 },
                                 {
                                     "type": "button",
@@ -840,7 +890,8 @@
                                 "service_data": {},
                                 "target": {}
                             },
-                            "name": "Restart Unifi (for memory)"
+                            "name": "Restart Unifi (for memory)",
+                            "icon": "mdi:memory"
                         },
                         {
                             "type": "button",
@@ -850,7 +901,19 @@
                                 "service_data": {},
                                 "target": {}
                             },
-                            "name": "Restart Radio's"
+                            "name": "Restart Radio's",
+                            "icon": "mdi:radio"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "script.reconnect_netatmo",
+                                "service_data": {},
+                                "target": {}
+                            },
+                            "name": "Reconnect Netatmo",
+                            "icon": "mdi:molecule-co2"
                         },
                         {
                             "type": "entities",

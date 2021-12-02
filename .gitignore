@@ -5,6 +5,7 @@ deps
 tts
 .HA_VERSION
 .storage
+.sonoff.json
 secrets*
 __pycache__
 custom_components
