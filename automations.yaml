@@ -1,0 +1,287 @@
+- id: '1608847512225'
+  alias: Computer licht aan met switch
+  description: ''
+  trigger:
+  - device_id: 76d42de4d939ba3ec9c60c7fe69963d4
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.computer_licht_aan
+    data: {}
+  mode: single
+- id: '1608847544407'
+  alias: Computer licht uit met switch
+  description: ''
+  trigger:
+  - device_id: 76d42de4d939ba3ec9c60c7fe69963d4
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.computer_licht_af
+    data: {}
+  mode: single
+- id: detectsoffe
+  alias: Detecteer boeven
+  description: knip ananas aan wanneer beweging aan de auto na zonsondergang
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 5b1d4b8de830e5232b3bb2044545a722
+    entity_id: binary_sensor.beweging
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition:
+  - condition: sun
+    after: sunset
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.stekker_gang
+  mode: single
+- id: '1608849893807'
+  alias: Dressing aan met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.dressing_aan
+    data: {}
+  mode: single
+- id: '1608849928296'
+  alias: Dressing af met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.dressing_af
+    data: {}
+  mode: single
+- id: '1608849976447'
+  alias: Dressing harder met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.dressing_harder
+    data: {}
+  mode: single
+- id: dressingzachtermetswitch
+  alias: Dressing zachter met switch
+  description: ''
+  trigger:
+  - device_id: daa7669e321fc00eafaa21f1c545add7
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.dressing_zachter
+    data: {}
+  mode: single
+- id: '1619640064633'
+  alias: kindersbeneden
+  description: Lampjes aan voor de kinderen beneden
+  trigger:
+  - device_id: 777de08207789a297056a51380c4e79d
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - service: switch.toggle
+    entity_id: switch.stekker_trap
+  mode: single
+- id: '1608842964413'
+  alias: Kaarslampjes aan met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kaarslampjes_aan
+    data: {}
+  mode: single
+- id: '1608843088151'
+  alias: Kaarslampjes af met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.kaarslampjes_af
+    data: {}
+  mode: single
+- id: '1608843338487'
+  alias: Kaarslampjes harder met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.kaarslampjes_harder
+    data: {}
+  mode: single
+- id: '1608843392501'
+  alias: Kaarslampjes zachter met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.kaarslampjes_zachter
+    data: {}
+  mode: single
+- id: '1608845756623'
+  alias: Kerstlichtjes aan met switch
+  description: ''
+  trigger:
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kerstlichtjes_aan
+    data: {}
+  mode: single
+- id: '1608845782094'
+  alias: Kerstlichtjes af met switch
+  description: ''
+  trigger:
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.kerstlichtjes_af
+    data: {}
+  mode: single
+- id: ondercomputeraanmetswitch
+  alias: Onder computer aan met switch
+  description: ''
+  trigger:
+  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.turn_on
+    entity_id: switch.stekker_zolder
+  mode: single
+- id: ondercomputerafmetswitch
+  alias: Onder computer af met switch
+  description: ''
+  trigger:
+  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: switch.turn_off
+    entity_id: switch.stekker_zolder
+  mode: single
+- id: '1608914545242'
+  alias: Salon aan met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.salon_aan
+    data: {}
+  mode: single
+- id: '1608914561035'
+  alias: Salon af met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.salon_af
+    data: {}
+  mode: single
+- id: '1608920294285'
+  alias: Salon harder met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - service: script.salon_harder
+    data: {}
+  mode: single
+- id: '1608920327437'
+  alias: Salon zachter met switch
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_down
+  condition: []
+  action:
+  - service: script.salon_zachter
+    data: {}
+  mode: single
