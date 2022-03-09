@@ -1,0 +1,66 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_marten",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "title": "Home",
+                    "cards": [
+                        {
+                            "type": "light",
+                            "entity": "light.bureaulampje_marten"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.bureaulampje_marit"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.kaarslamp_commode"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.kaarslamp_salon"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "entity": "switch.stekker_trap",
+                            "name": "Traplichtjes",
+                            "icon": "mdi:stairs"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "entity": "switch.stekker_gang",
+                            "name": "Ananas",
+                            "icon": "mdi:fruit-pineapple"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "entity": "switch.sonoff_2",
+                            "name": "Guirlande",
+                            "icon": "mdi:string-lights"
+                        },
+                        {
+                            "type": "button",
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "entity": "light.schakelaar_salon"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

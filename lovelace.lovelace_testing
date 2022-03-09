@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_testing",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "title": "Home",
+                    "cards": [
+                        {
+                            "type": "area",
+                            "area": "c6eaece8b0df456c8dae881317467a39"
+                        },
+                        {
+                            "type": "area",
+                            "area": "badkamer"
+                        },
+                        {
+                            "type": "area",
+                            "area": "097d496d710e4c2ca923713f3e6b0742"
+                        },
+                        {
+                            "type": "area",
+                            "area": "gang"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
