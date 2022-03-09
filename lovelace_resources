@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "minor_version": 1,
     "key": "lovelace_resources",
     "data": {
         "items": [
@@ -12,11 +13,6 @@
                 "url": "/hacsfiles/weather-card/weather-card.js",
                 "type": "module",
                 "id": "1ca829455e7f4d52bb1ec2e2594cf1e2"
-            },
-            {
-                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381150",
-                "type": "module",
-                "id": "8f51aabfc6df4b99b1065dc5e82c8469"
             },
             {
                 "url": "/hacsfiles/our-groceries-card/our-groceries-card.js",
@@ -34,29 +30,44 @@
                 "id": "a719eb4b3011474396d9cdf5dd51667e"
             },
             {
-                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202110210",
+                "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202201313",
                 "type": "module",
                 "id": "941bab264848478d9d1894eb77ff378a"
             },
             {
-                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631121",
+                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631141",
                 "type": "module",
                 "id": "2d86653721d14413ba82ed28e81c6c0a"
             },
             {
-                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524311",
+                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524312",
                 "type": "module",
                 "id": "c6a52c47bf194d46a43b2ac5e8505313"
             },
             {
-                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866231",
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242",
                 "type": "module",
                 "id": "2363fb2bbe2e45d8a4def97c4b656799"
             },
             {
-                "url": "/hacsfiles/person-entity-card/person-entity-card-bundle.js?hacstag=413430860073",
+                "url": "/hacsfiles/person-entity-card/person-entity-card-bundle.js?hacstag=413430860075",
                 "type": "module",
                 "id": "b1e67d5ccd8a4c48becf55ca41edb475"
+            },
+            {
+                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375125",
+                "type": "module",
+                "id": "8831f4f9fbfb4e2f9f55f9ac2576b295"
+            },
+            {
+                "url": "/hacsfiles/lovelace-fan-xiaomi/fan-xiaomi.js?hacstag=214792276134",
+                "type": "module",
+                "id": "b48f23dd3db840f1b4c897e08ede3d67"
+            },
+            {
+                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381161",
+                "type": "module",
+                "id": "829d0d2e6daa4b19aa47f3bcb9ba8ff7"
             }
         ]
     }

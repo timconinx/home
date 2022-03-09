@@ -4,36 +4,15 @@
     switch.stekker_onder_computer:
       friendly_name: Stekker onder computer
       state: 'on'
-    light.kaarslamp_1_level_on_off:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 76
-      off_brightness:
-      friendly_name: Kaarslamp 1 level, on_off
-      supported_features: 41
-      state: 'on'
-    light.kaarslamp_2_level_on_off:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 76
-      off_brightness:
-      friendly_name: Kaarslamp 2 level, on_off
-      supported_features: 41
-      state: 'on'
     switch.tradfri_stekker_1_on_off:
       friendly_name: Stekker Huislampje
       state: 'on'
     light.hue_play_1:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
       supported_color_modes:
       - color_temp
-      - hs
+      - xy
       color_mode: color_temp
       brightness: 89
       color_temp: 366
@@ -47,45 +26,58 @@
       xy_color:
       - 0.524
       - 0.387
-      effect: none
+      mode: normal
+      dynamics: none
       friendly_name: Hue Play 1
-      supported_features: 63
+      supported_features: 40
       state: 'on'
     switch.stekker_trap:
       temperature: 39
       model: chuangmi.plug.hmi206
-      friendly_name: Stekker Trap
       icon: mdi:power-socket
+      friendly_name: Stekker Trap
       state: 'on'
     switch.stekker_gang:
-      temperature: 40
+      temperature: 34
       model: chuangmi.plug.hmi206
-      friendly_name: Stekker gang
       icon: mdi:power-socket
+      friendly_name: Stekker gang
       state: 'on'
-    switch.sonoff_1:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -46
-      friendly_name: Sonoff01
+    light.bureaulampje_marit:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 48
+      off_brightness:
+      friendly_name: Bureaulampje Marit
+      supported_features: 41
       state: 'on'
-    switch.sonoff_2:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -54
-      friendly_name: Sonoff02
+    light.bureaulampje_marten:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 65
+      off_brightness:
+      friendly_name: Bureaulampje Marten
+      supported_features: 41
       state: 'on'
-    switch.sonoff_3:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -48
-      friendly_name: Sonoff03
+    light.kaarslamp_commode:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 66
+      off_brightness:
+      friendly_name: Kaarslamp Commode
+      supported_features: 41
+      state: 'on'
+    light.kaarslamp_salon:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 76
+      off_brightness:
+      friendly_name: Kaarslamp Salon
+      supported_features: 41
       state: 'on'
   icon: mdi:lightbulb-group
 - id: '1638746988177'
@@ -94,69 +86,66 @@
     switch.stekker_onder_computer:
       friendly_name: Stekker onder computer
       state: 'off'
-    light.kaarslamp_1_level_on_off:
-      supported_color_modes:
-      - brightness
-      off_brightness:
-      friendly_name: Kaarslamp 1 level, on_off
-      supported_features: 41
-      state: 'off'
-    light.kaarslamp_2_level_on_off:
-      supported_color_modes:
-      - brightness
-      off_brightness:
-      friendly_name: Kaarslamp 2 level, on_off
-      supported_features: 41
-      state: 'off'
     switch.tradfri_stekker_1_on_off:
       friendly_name: Stekker Huislampje
       state: 'off'
     light.hue_play_1:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
       supported_color_modes:
       - color_temp
-      - hs
+      - xy
+      mode: normal
+      dynamics: none
       friendly_name: Hue Play 1
-      supported_features: 63
+      supported_features: 40
       state: 'off'
     switch.stekker_trap:
-      temperature: 39
+      temperature: 28
       model: chuangmi.plug.hmi206
-      friendly_name: Stekker Trap
       icon: mdi:power-socket
+      friendly_name: Stekker Trap
       state: 'off'
     switch.stekker_gang:
       temperature: 40
       model: chuangmi.plug.hmi206
-      friendly_name: Stekker gang
       icon: mdi:power-socket
-      state: 'off'
-    switch.sonoff_1:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -46
-      friendly_name: Sonoff01
+      friendly_name: Stekker gang
       state: 'off'
     switch.sonoff_2:
       manufacturer: SONOFF
       model: S26
       sw_version: PSA-B01-GL v3.5.1
       cloud: online
-      rssi: -54
+      rssi: -60
       friendly_name: Sonoff02
       state: 'off'
-    switch.sonoff_3:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -48
-      friendly_name: Sonoff03
+    light.kaarslamp_commode:
+      supported_color_modes:
+      - brightness
+      off_brightness:
+      friendly_name: Kaarslamp Commode
+      supported_features: 41
+      state: 'off'
+    light.bureaulampje_marit:
+      supported_color_modes:
+      - brightness
+      off_brightness:
+      friendly_name: Bureaulampje Marit
+      supported_features: 41
+      state: 'off'
+    light.bureaulampje_marten:
+      supported_color_modes:
+      - brightness
+      off_brightness:
+      friendly_name: Bureaulampje Marten
+      supported_features: 41
+      state: 'off'
+    light.kaarslamp_salon:
+      supported_color_modes:
+      - brightness
+      off_brightness:
+      friendly_name: Kaarslamp Salon
+      supported_features: 41
       state: 'off'
   icon: mdi:lightbulb-group

@@ -2,6 +2,8 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+automation: !include automations.yaml
+
 # https
 http:
   server_port: 8123
@@ -9,6 +11,13 @@ http:
   ssl_key: !secret ssl_key
   ip_ban_enabled: true
   login_attempts_threshold: 3
+
+notify:
+  - platform: html5
+    name: mynotifier
+    vapid_pub_key: !secret vapid_pub_key
+    vapid_prv_key: !secret vapid_prv_key
+    vapid_email: !secret vapid_email
 
 # Text to speech
 tts:
@@ -40,8 +49,11 @@ recorder:
 
 group: !include groups.yaml
 script: !include_dir_merge_named scripts 
-automation: !include automations.yaml
 scene: !include scenes.yaml
+
+homeassistant:
+  media_dirs:
+    media: /mnt/NAS/music
 
 shell_command:
   restart_unifi: sudo /home/homeassistant/rootbin/restartunifi.sh
@@ -63,9 +75,6 @@ media_player:
   - platform: emby
     host: !secret emby_host
     api_key: !secret emby_api_key
-  - platform: androidtv
-    name: ShieldTV
-    host: 192.168.1.197
 
 sonoff:
   username: !secret sonoff_username
@@ -77,11 +86,11 @@ fan:
     host: 192.168.1.227
     token: !secret xiaomi_token
     model: zhimi.humidifier.ca4
-  - platform: xiaomi_miio_airpurifier
-    name: Steam Humidifier
-    host: 192.168.1.247
-    token: !secret xiaomi_token2
-    model: deerma.humidifier.jsq
+      #- platform: xiaomi_miio_airpurifier
+      #name: Steam Humidifier
+      #host: 192.168.1.247
+      #token: !secret xiaomi_token2
+      #model: deerma.humidifier.jsq
       #- platform: xiaomi_miio_airpurifier
       #name: Fan
       #host: 192.168.1.245
@@ -152,6 +161,10 @@ template:
     - name: Battery Sophie Charging
       unique_id: batterysophiecharging
       state: "{{ state_attr('device_tracker.life360_sophie', 'battery_charging') }}"
+  - binary_sensor:
+    - name: Humidifier Water Level Low
+      unique_id: humidifierwaterlevellow
+      state: "{{ state_attr('fan.humidifier', 'water_level')|int < 25 }}"
   - sensor:
     - name: Droogkast status
       unique_id: droogkaststatus
@@ -169,6 +182,10 @@ template:
     - name: Battery Sophie
       unique_id: batterysophie
       state: "{{ state_attr('device_tracker.life360_sophie', 'battery') }}"
+  - sensor:
+    - name: Humidifier Water Level
+      unique_id: humidifierwaterlevel
+      state: "{{ state_attr('fan.humidifier', 'water_level') }}"
   - sensor:
     - name: Berekende Windrichting
       unique_id: berekendewindrichting

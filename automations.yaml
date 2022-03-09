@@ -28,24 +28,33 @@
   mode: single
 - id: detectsoffe
   alias: Detecteer boeven
-  description: knip ananas aan wanneer beweging aan de auto na zonsondergang
+  description: knip toilet aan wanneer beweging aan de auto na zonsondergang
   trigger:
   - type: motion
     platform: device
-    device_id: 5b1d4b8de830e5232b3bb2044545a722
-    entity_id: binary_sensor.beweging
+    device_id: d96497e327bb579b168acbf6fee74b6c
+    entity_id: binary_sensor.waakhond_buiten_ias_zone
     domain: binary_sensor
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 0
   condition:
   - condition: sun
     after: sunset
+  - condition: device
+    type: is_off
+    device_id: 0fe724dc90023e4571abfb10876f1dd7
+    entity_id: light.hue_play_1
+    domain: light
   action:
-  - service: switch.turn_on
+  - service: light.turn_on
     target:
-      entity_id: switch.stekker_gang
+      device_id: 01b7a129f2b2f754edd93b2d541ac326
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    target:
+      device_id: 01b7a129f2b2f754edd93b2d541ac326
   mode: single
 - id: '1608849893807'
   alias: Dressing aan met switch
@@ -117,62 +126,6 @@
   - service: switch.toggle
     entity_id: switch.stekker_trap
   mode: single
-- id: '1608842964413'
-  alias: Kaarslampjes aan met switch
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - service: script.kaarslampjes_aan
-    data: {}
-  mode: single
-- id: '1608843088151'
-  alias: Kaarslampjes af met switch
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - service: script.kaarslampjes_af
-    data: {}
-  mode: single
-- id: '1608843338487'
-  alias: Kaarslampjes harder met switch
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_up
-  condition: []
-  action:
-  - service: script.kaarslampjes_harder
-    data: {}
-  mode: single
-- id: '1608843392501'
-  alias: Kaarslampjes zachter met switch
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_down
-  condition: []
-  action:
-  - service: script.kaarslampjes_zachter
-    data: {}
-  mode: single
 - id: '1608845756623'
   alias: Kerstlichtjes aan met switch
   description: ''
@@ -200,34 +153,6 @@
   action:
   - service: script.kerstlichtjes_af
     data: {}
-  mode: single
-- id: ondercomputeraanmetswitch
-  alias: Onder computer aan met switch
-  description: ''
-  trigger:
-  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - service: switch.turn_on
-    entity_id: switch.stekker_zolder
-  mode: single
-- id: ondercomputerafmetswitch
-  alias: Onder computer af met switch
-  description: ''
-  trigger:
-  - device_id: 507b15c5840feffe8a6c0095cbbcfa92
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - service: switch.turn_off
-    entity_id: switch.stekker_zolder
   mode: single
 - id: '1608914545242'
   alias: Salon aan met switch
@@ -284,4 +209,76 @@
   action:
   - service: script.salon_zachter
     data: {}
+  mode: single
+- id: '1642267001589'
+  alias: Knopje Marten
+  description: ''
+  trigger:
+  - device_id: 05fd3cb025ead0edd7264c4738a53077
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: 94130a1735478084d8fd81f1b10f04bd
+    entity_id: light.bureaulampje_marten
+    domain: light
+  mode: single
+- id: '1644534044224'
+  alias: kachel zolder aan
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - device_id: 2092aa47292b1f8833c908139c0c4e6b
+    domain: climate
+    entity_id: climate.heater_zolder
+    type: set_hvac_mode
+    hvac_mode: heat
+  mode: single
+- id: '1644534062689'
+  alias: kachel zolder af
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - device_id: 2092aa47292b1f8833c908139c0c4e6b
+    domain: climate
+    entity_id: climate.heater_zolder
+    type: set_hvac_mode
+    hvac_mode: 'off'
+  mode: single
+- id: '1644923246067'
+  alias: Toilet licht uit als er niemand is
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: 5b1d4b8de830e5232b3bb2044545a722
+    entity_id: binary_sensor.beweging
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: sun
+    before: sunset
+  action:
+  - type: turn_off
+    device_id: 01b7a129f2b2f754edd93b2d541ac326
+    entity_id: light.schakelaar_toilet
+    domain: light
   mode: single

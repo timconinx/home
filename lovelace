@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "minor_version": 1,
     "key": "lovelace",
     "data": {
         "config": {
@@ -43,26 +44,38 @@
                                             "icon": "hass:power-sleep",
                                             "tap_action": {
                                                 "action": "call-service",
-                                                "service": "script.beneden_alles_af"
+                                                "service": "scene.turn_on",
+                                                "service_data": {},
+                                                "target": {
+                                                    "entity_id": "scene.alles_af"
+                                                }
                                             },
                                             "show_icon": true,
                                             "icon_height": "75px",
                                             "hold_action": {
                                                 "action": "none"
-                                            }
+                                            },
+                                            "entity": "scene.alles_af",
+                                            "show_state": false
                                         },
                                         {
                                             "type": "button",
-                                            "name": "Beneden alles aan",
-                                            "icon": "hass:power",
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.beneden_alles_aan"
-                                            },
                                             "show_icon": true,
                                             "icon_height": "75px",
                                             "hold_action": {
                                                 "action": "none"
+                                            },
+                                            "entity": "scene.alles_aan",
+                                            "show_state": false,
+                                            "show_name": true,
+                                            "name": "Beneden alles aan",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "scene.turn_on",
+                                                "service_data": {},
+                                                "target": {
+                                                    "entity_id": "scene.alles_aan"
+                                                }
                                             }
                                         },
                                         {
@@ -109,7 +122,7 @@
                                                 },
                                                 {
                                                     "type": "picture",
-                                                    "image": "https://cdn-profiles.tunein.com/s306462/images/logoq.jpg",
+                                                    "image": "https://cdn-profiles.tunein.com/s306462/images/logod.png?t=1",
                                                     "tap_action": {
                                                         "action": "call-service",
                                                         "service": "media_player.play_media",
@@ -129,9 +142,9 @@
                                             "idle_view": "when_paused",
                                             "volume_stateless": true,
                                             "hide": {
-                                                "controls": true,
                                                 "volume": true,
-                                                "mute": true
+                                                "mute": true,
+                                                "progress": true
                                             }
                                         },
                                         {
@@ -320,6 +333,25 @@
                                         "entity": "sensor.hacs",
                                         "name": "HACS"
                                     }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "binary_sensor.humidifier_water_level_low",
+                                            "state": "on"
+                                        },
+                                        {
+                                            "entity": "fan.humidifier",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "entity",
+                                        "entity": "sensor.humidifier_water_level",
+                                        "name": "Humidifier Level Low",
+                                        "unit": "%"
+                                    }
                                 }
                             ],
                             "view_layout": {
@@ -384,31 +416,6 @@
                                                 {
                                                     "entity": "sensor.living_room_temperature",
                                                     "name": "Nest"
-                                                },
-                                                {
-                                                    "entity": "fan.steam_humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Steam Humidifier",
-                                                    "suffix": "\u00b0C",
-                                                    "attribute": "temperature",
-                                                    "icon": "mdi:thermometer"
-                                                },
-                                                {
-                                                    "type": "conditional",
-                                                    "conditions": [
-                                                        {
-                                                            "entity": "fan.fan",
-                                                            "state_not": "unavailable"
-                                                        }
-                                                    ],
-                                                    "row": {
-                                                        "entity": "fan.fan",
-                                                        "type": "attribute",
-                                                        "name": "Fan",
-                                                        "suffix": "\u00b0C",
-                                                        "attribute": "temperature",
-                                                        "icon": "mdi:thermometer"
-                                                    }
                                                 }
                                             ],
                                             "title": "Temperatuur"
@@ -451,31 +458,6 @@
                                                 {
                                                     "entity": "sensor.living_room_humidity",
                                                     "name": "Nest"
-                                                },
-                                                {
-                                                    "entity": "fan.steam_humidifier",
-                                                    "type": "attribute",
-                                                    "name": "Steam Humidifier",
-                                                    "suffix": "%",
-                                                    "attribute": "humidity",
-                                                    "icon": "mdi:water-percent"
-                                                },
-                                                {
-                                                    "type": "conditional",
-                                                    "conditions": [
-                                                        {
-                                                            "entity": "fan.fan",
-                                                            "state_not": "unavailable"
-                                                        }
-                                                    ],
-                                                    "row": {
-                                                        "entity": "fan.fan",
-                                                        "type": "attribute",
-                                                        "name": "Fan",
-                                                        "suffix": "%",
-                                                        "attribute": "humidity",
-                                                        "icon": "mdi:water-percent"
-                                                    }
                                                 }
                                             ],
                                             "title": "Vocht"
@@ -493,102 +475,119 @@
                     "badges": [],
                     "cards": [
                         {
-                            "type": "entities",
-                            "entities": [
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
+                                    "type": "custom:mushroom-light-card",
                                     "entity": "light.hue_play_1",
+                                    "show_brightness_control": true,
                                     "name": "Computer"
                                 },
                                 {
-                                    "entity": "light.woonkamer_zha_group_0x0002",
-                                    "name": "Kaarslampjes"
+                                    "type": "custom:mushroom-light-card",
+                                    "entity": "light.kaarslamp_commode",
+                                    "show_brightness_control": true
                                 },
                                 {
-                                    "entity": "light.staanlamp",
-                                    "name": "Staanlamp"
-                                }
-                            ],
-                            "title": "Lampjes",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.tradfri_stekker_1_on_off",
-                                    "name": "Huislampje",
-                                    "icon": "mdi:greenhouse"
+                                    "type": "custom:mushroom-light-card",
+                                    "entity": "light.kaarslamp_salon",
+                                    "show_brightness_control": true
                                 },
                                 {
-                                    "entity": "switch.stekker_onder_computer",
-                                    "name": "Computer",
-                                    "icon": "mdi:laptop"
+                                    "type": "custom:mushroom-light-card",
+                                    "entity": "light.bureaulampje_marten",
+                                    "show_brightness_control": true
                                 },
                                 {
-                                    "entity": "switch.stekker_trap",
-                                    "name": "Traplichtjes",
-                                    "icon": "mdi:stairs"
-                                },
-                                {
-                                    "entity": "switch.stekker_gang",
-                                    "icon": "mdi:fruit-pineapple",
-                                    "name": "Ananas"
-                                },
-                                {
-                                    "entity": "switch.sonoff_1",
-                                    "name": "Boomlichtjes",
-                                    "icon": "mdi:pine-tree"
-                                },
-                                {
-                                    "entity": "switch.sonoff_2",
-                                    "name": "Guirlande",
-                                    "icon": "mdi:string-lights"
-                                }
-                            ],
-                            "title": "Stekkers",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "fan.humidifier"
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "fan.fan",
-                                            "state_not": "unavailable"
-                                        }
-                                    ],
-                                    "row": {
-                                        "entity": "fan.fan"
-                                    }
+                                    "type": "custom:mushroom-light-card",
+                                    "entity": "light.bureaulampje_marit",
+                                    "show_brightness_control": true
                                 }
                             ]
                         },
                         {
-                            "type": "entities",
-                            "entities": [
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
-                                    "entity": "fan.steam_humidifier",
-                                    "type": "attribute",
-                                    "name": "Mode",
-                                    "suffix": null,
-                                    "attribute": "mode",
-                                    "icon": "mdi:fan-auto"
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "switch.tradfri_stekker_1_on_off",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "secondary_info": "none",
+                                    "icon": "mdi:greenhouse",
+                                    "name": "Huislampje"
                                 },
                                 {
-                                    "entity": "fan.steam_humidifier",
-                                    "type": "attribute",
-                                    "name": "Doelvochtigheid",
-                                    "suffix": "%",
-                                    "attribute": "target_humidity",
-                                    "icon": "mdi:water-percent"
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "switch.stekker_onder_computer",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:laptop",
+                                    "name": "Computer"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "switch.stekker_trap",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:stairs",
+                                    "name": "Traplichtjes"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "switch.stekker_gang",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:fruit-pineapple",
+                                    "name": "Ananas"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "switch.sonoff_2",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:string-lights",
+                                    "name": "Guirlande"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "light.schakelaar_salon",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:sofa",
+                                    "name": "Salon"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "light.schakelaar_toilet",
+                                    "secondary_info": "none",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "icon": "mdi:toilet",
+                                    "name": "Toilet"
+                                },
+                                {
+                                    "type": "custom:mushroom-fan-card",
+                                    "entity": "fan.humidifier",
+                                    "show_oscillate_control": true,
+                                    "icon_animation": true,
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
                                 }
-                            ],
-                            "title": "Steam Humidifier"
+                            ]
                         }
                     ]
                 },
@@ -686,7 +685,7 @@
                                         },
                                         {
                                             "type": "thermostat",
-                                            "entity": "climate.zb1_cloud_444415"
+                                            "entity": "climate.heater_zolder"
                                         }
                                     ]
                                 },
@@ -855,6 +854,9 @@
                         },
                         {
                             "entity": "sensor.fritz_box_7530_uptime"
+                        },
+                        {
+                            "entity": "sun.sun"
                         }
                     ],
                     "cards": [
@@ -963,6 +965,72 @@
                             "type": "weather-forecast",
                             "entity": "weather.thuisje_hourly",
                             "show_forecast": false
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "light.hue_play_1",
+                                    "name": "Computer"
+                                },
+                                {
+                                    "entity": "light.kaarslamp_commode"
+                                },
+                                {
+                                    "entity": "light.kaarslamp_salon"
+                                },
+                                {
+                                    "entity": "light.bureaulampje_marit"
+                                },
+                                {
+                                    "entity": "light.bureaulampje_marten"
+                                }
+                            ],
+                            "title": "Lampjes",
+                            "show_header_toggle": false
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.tradfri_stekker_1_on_off",
+                                    "name": "Huislampje",
+                                    "icon": "mdi:greenhouse"
+                                },
+                                {
+                                    "entity": "switch.stekker_onder_computer",
+                                    "name": "Computer",
+                                    "icon": "mdi:laptop"
+                                },
+                                {
+                                    "entity": "switch.stekker_trap",
+                                    "name": "Traplichtjes",
+                                    "icon": "mdi:stairs"
+                                },
+                                {
+                                    "entity": "switch.stekker_gang",
+                                    "icon": "mdi:fruit-pineapple",
+                                    "name": "Ananas"
+                                },
+                                {
+                                    "entity": "switch.sonoff_2",
+                                    "name": "Guirlande",
+                                    "icon": "mdi:string-lights"
+                                }
+                            ],
+                            "title": "Stekkers",
+                            "show_header_toggle": false
+                        },
+                        {
+                            "type": "entity",
+                            "entity": "fan.humidifier",
+                            "attribute": "water_level",
+                            "unit": "%",
+                            "name": "Humidifier water level"
+                        },
+                        {
+                            "type": "entity",
+                            "entity": "binary_sensor.beweging"
                         }
                     ]
                 },
@@ -1006,7 +1074,7 @@
                                         },
                                         {
                                             "type": "picture",
-                                            "image": "https://cdn-profiles.tunein.com/s306462/images/logoq.jpg",
+                                            "image": "https://cdn-profiles.tunein.com/s306462/images/logod.png?t=1",
                                             "tap_action": {
                                                 "action": "call-service",
                                                 "service": "media_player.play_media",
