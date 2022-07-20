@@ -103,11 +103,11 @@ fan:
     host: 192.168.1.227
     token: !secret xiaomi_token
     model: zhimi.humidifier.ca4
-  - platform: xiaomi_miio_airpurifier
-    name: Steam Humidifier
-    host: 192.168.1.19
-    token: !secret xiaomi_token2
-    model: deerma.humidifier.jsq
+      #- platform: xiaomi_miio_airpurifier
+      #name: Steam Humidifier
+      #host: 192.168.1.19
+      #token: !secret xiaomi_token2
+      #model: deerma.humidifier.jsq
   - platform: xiaomi_miio_fan
     name: Fan
     host: 192.168.1.245
@@ -192,7 +192,7 @@ template:
         {% if states('counter.hp_oj_pages')|int <= 10 %}
           0.99
         {%- else -%}
-          {{ 0.99 + (states('counter.hp_oj_pages')|int - 10) * 0.1 }}
+          {{ 0.99 + (states('counter.hp_oj_pages')|int // 10) }}
         {%- endif %}
   - sensor:
     - name: Bakfiets Oplader status

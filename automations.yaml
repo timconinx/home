@@ -317,9 +317,9 @@
   alias: HP II increase pages
   description: ''
   trigger:
-  - platform: numeric_state
+  - platform: state
     entity_id: sensor.hp_printer_printer
-    above: '0'
+    to:
   condition: []
   action:
   - service: counter.increment
