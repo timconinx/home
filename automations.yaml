@@ -282,3 +282,63 @@
     entity_id: light.schakelaar_toilet
     domain: light
   mode: single
+- id: '1647694398246'
+  alias: Toilet licht aan als iemand binnenkomt
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 5b1d4b8de830e5232b3bb2044545a722
+    entity_id: binary_sensor.beweging
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 01b7a129f2b2f754edd93b2d541ac326
+    entity_id: light.schakelaar_toilet
+    domain: light
+  mode: single
+- id: '1648588862573'
+  alias: TV af op message
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: HomeAss
+    payload: TVOFF
+  condition: []
+  action:
+  - service: androidtv.adb_command
+    data:
+      command: SLEEP
+    target:
+      device_id: 54a36ef4ee02425ebaa8dbcd8f59e6fb
+  mode: single
+- id: '1658314503511'
+  alias: HP II increase pages
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.hp_printer_printer
+    above: '0'
+  condition: []
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.hp_oj_pages
+  mode: single
+- id: '1658322629430'
+  alias: HP II pages reset
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:01
+  condition:
+  - condition: template
+    value_template: '{{ now().day == 14 }}'
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.hp_oj_pages
+  mode: single

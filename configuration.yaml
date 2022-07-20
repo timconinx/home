@@ -47,11 +47,25 @@ recorder:
       - sensor.beat
       - sensor.internet_time
 
+logger:
+  default: warn
+  logs:
+    pytraccar: info
+    homeassistant.components.traccar: info
+    homeassistant.components.device_tracker: info
+
 group: !include groups.yaml
 script: !include_dir_merge_named scripts 
 scene: !include scenes.yaml
 
 homeassistant:
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+      trusted_users:
+        192.168.1.116: d532ccf3eda44a4bb67d04d47bd1e199
   media_dirs:
     media: /mnt/NAS/music
 
@@ -60,15 +74,18 @@ shell_command:
   restart_lms: sudo /home/homeassistant/rootbin/restartlms.sh
 
 #Nest config
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-  project_id: !secret nest_project_id
-  subscriber_id: !secret nest_subscriber_id
+#wgoogle:
+#wclient_id: !secret google_client_id
+#wclient_secret: !secret google_client_secret
+#nest:
+#client_id: !secret nest_client_id
+#client_secret: !secret nest_client_secret
+#project_id: !secret nest_project_id
+#subscriber_id: !secret nest_subscriber_id
 
-spotify:
-  client_id: !secret spotify_tim_client
-  client_secret: !secret spotify_tim_secret
+    #spotify:
+    #client_id: !secret spotify_tim_client
+    #client_secret: !secret spotify_tim_secret
 
 # Emby
 media_player:
@@ -86,16 +103,16 @@ fan:
     host: 192.168.1.227
     token: !secret xiaomi_token
     model: zhimi.humidifier.ca4
-      #- platform: xiaomi_miio_airpurifier
-      #name: Steam Humidifier
-      #host: 192.168.1.247
-      #token: !secret xiaomi_token2
-      #model: deerma.humidifier.jsq
-      #- platform: xiaomi_miio_airpurifier
-      #name: Fan
-      #host: 192.168.1.245
-      #token: !secret xiaomi_token3
-      #model: zhimi.fan.za5
+  - platform: xiaomi_miio_airpurifier
+    name: Steam Humidifier
+    host: 192.168.1.19
+    token: !secret xiaomi_token2
+    model: deerma.humidifier.jsq
+  - platform: xiaomi_miio_fan
+    name: Fan
+    host: 192.168.1.245
+    token: !secret xiaomi_token3
+    model: zhimi.fan.za5
 
 binary_sensor:
   - platform: meteoalarm
@@ -140,6 +157,13 @@ ourgroceries:
   username: !secret ourgroceries_username
   password: !secret ourgroceries_password
 
+device_tracker:
+  - platform: traccar
+    host: localhost
+    verify_ssl: false
+    username: !secret traccar_username
+    password: !secret traccar_password
+
 template:
   - binary_sensor:
     - name: Too much memory
@@ -156,15 +180,31 @@ template:
   - binary_sensor:
     - name: Battery Sophie Low
       unique_id: batterysophielow
-      state: "{{ state_attr('device_tracker.life360_sophie', 'battery')|int < 25 }}"
-  - binary_sensor:
-    - name: Battery Sophie Charging
-      unique_id: batterysophiecharging
-      state: "{{ state_attr('device_tracker.life360_sophie', 'battery_charging') }}"
+      state: "{{ states('sensor.sophitje_battery_level_2')|int < 25 }}"
   - binary_sensor:
     - name: Humidifier Water Level Low
       unique_id: humidifierwaterlevellow
       state: "{{ state_attr('fan.humidifier', 'water_level')|int < 25 }}"
+  - sensor:
+    - name: HP II Kost
+      unique_id: hpiikost
+      state: >
+        {% if states('counter.hp_oj_pages')|int <= 10 %}
+          0.99
+        {%- else -%}
+          {{ 0.99 + (states('counter.hp_oj_pages')|int - 10) * 0.1 }}
+        {%- endif %}
+  - sensor:
+    - name: Bakfiets Oplader status
+      unique_id: bakfietsopladerstatus
+      state: >
+        {% if states('switch.bfloader') == "off" %}
+          off
+        {%- elif state_attr('switch.bfloader', 'current_consumption')|int < 10 -%}
+          not loading
+        {%- else -%}
+          loading
+        {%- endif %}
   - sensor:
     - name: Droogkast status
       unique_id: droogkaststatus
@@ -178,10 +218,6 @@ template:
         {%- else -%}
           drogen
         {%- endif %}
-  - sensor:
-    - name: Battery Sophie
-      unique_id: batterysophie
-      state: "{{ state_attr('device_tracker.life360_sophie', 'battery') }}"
   - sensor:
     - name: Humidifier Water Level
       unique_id: humidifierwaterlevel

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.lovelace_hittegolf",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "theme": "Backend-selected",
+          "title": "Hittegolf!!",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "square": false,
+                  "columns": 3,
+                  "type": "grid",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-climate-card",
+                      "entity": "climate.zolder",
+                      "fill_container": false,
+                      "show_temperature_control": true,
+                      "collapsible_controls": true,
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-climate-card",
+                      "entity": "climate.marten",
+                      "fill_container": false,
+                      "show_temperature_control": true,
+                      "collapsible_controls": true,
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-climate-card",
+                      "entity": "climate.marit",
+                      "fill_container": false,
+                      "show_temperature_control": true,
+                      "collapsible_controls": true,
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "hours_to_show": 12,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.zolder_temperature",
+                      "detail": 1,
+                      "name": "T Zolder"
+                    },
+                    {
+                      "hours_to_show": 12,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.lumi_marten_temperature",
+                      "detail": 1,
+                      "name": "T Marten"
+                    },
+                    {
+                      "hours_to_show": 12,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.lumi_marit_temperature",
+                      "detail": 1,
+                      "name": "T Marit"
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "hours_to_show": 12,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.mean_temperature_downstairs",
+                      "detail": 1,
+                      "icon": "mdi:thermometer",
+                      "name": "Temp Binnen"
+                    },
+                    {
+                      "hours_to_show": 12,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.netatmo_outdoor_temperature",
+                      "detail": 2,
+                      "name": "Temp Buiten"
+                    },
+                    {
+                      "show_current": false,
+                      "show_forecast": true,
+                      "type": "weather-forecast",
+                      "entity": "weather.thuisje_hourly",
+                      "secondary_info_attribute": "wind_bearing"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
