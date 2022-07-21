@@ -30,11 +30,6 @@
         "id": "a719eb4b3011474396d9cdf5dd51667e"
       },
       {
-        "url": "/hacsfiles/home-assistant-neerslag-card/neerslag-card.js?hacstag=342944383202207080",
-        "type": "module",
-        "id": "941bab264848478d9d1894eb77ff378a"
-      },
-      {
         "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663200",
         "type": "module",
         "id": "2d86653721d14413ba82ed28e81c6c0a"

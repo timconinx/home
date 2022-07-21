@@ -189,10 +189,10 @@ template:
     - name: HP II Kost
       unique_id: hpiikost
       state: >
-        {% if states('counter.hp_oj_pages')|int <= 10 %}
+        {% if states('counter.hp_oj_pages')|int < 10 %}
           0.99
         {%- else -%}
-          {{ 0.99 + (states('counter.hp_oj_pages')|int // 10) }}
+          {{ 0.99 + ((states('counter.hp_oj_pages')|int -1) // 10) }}
         {%- endif %}
   - sensor:
     - name: Bakfiets Oplader status

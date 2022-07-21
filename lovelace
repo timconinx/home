@@ -233,6 +233,11 @@
                   "name": "Vocht"
                 },
                 {
+                  "type": "custom:neerslag-card",
+                  "entity": "sensor.neerslag_buienradar_regen_data",
+                  "title": "Neerslag"
+                },
+                {
                   "type": "conditional",
                   "conditions": [
                     {
@@ -1268,11 +1273,6 @@
               "name": "Tim (traccar)"
             },
             {
-              "type": "custom:neerslag-card",
-              "entity": "sensor.neerslag_buienalarm_regen_data",
-              "title": "Neerslag"
-            },
-            {
               "type": "custom:mushroom-climate-card",
               "entity": "climate.zolder",
               "fill_container": false,
@@ -1281,6 +1281,11 @@
               "tap_action": {
                 "action": "more-info"
               }
+            },
+            {
+              "type": "custom:neerslag-card",
+              "entity": "sensor.neerslag_buienalarm_regen_data",
+              "title": "Neerslag"
             }
           ]
         },
