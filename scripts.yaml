@@ -1,0 +1,54 @@
+computer_licht_aan:
+  alias: Computer licht aan
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.hue_play_1
+      brightness_pct: 35
+  - service: switch.turn_on
+    entity_id: switch.stekker_onder_computer
+  mode: single
+computer_licht_af:
+  alias: Computer licht af
+  sequence:
+  - service: light.turn_off
+    entity_id: light.hue_play_1
+  - service: switch.turn_off
+    entity_id: switch.stekker_onder_computer
+  mode: single
+dressing_aan:
+  alias: Dressing aan
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.dressinglampje_level_on_off
+      brightness_pct: 20
+  mode: single
+dressing_af:
+  alias: Dressing af
+  sequence:
+  - service: light.turn_off
+    entity_id: light.dressinglampje_level_on_off
+  mode: single
+dressing_harder:
+  alias: dressing harder
+  sequence:
+  - service: light.brightness_increase
+    entity_id: light.dressinglampje_level_on_off
+  mode: single
+dressing_zachter:
+  alias: dressing zachter
+  sequence:
+  - service: light.brightness_decrease
+    entity_id: light.dressinglampje_level_on_off
+  mode: single
+de_ochtendstond:
+  sequence:
+  - service: switch.turn_on
+    entity_id: switch.stekker_marten_switch
+  - service: switch.turn_on
+    entity_id: switch.stekker_trap
+  - service: script.dressing_aan
+    data: {}
+  alias: de_morgenstond
+  mode: single
