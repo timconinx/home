@@ -49,13 +49,16 @@ recorder:
 
 logger:
   default: warn
-  logs:
-    pytraccar: info
-    homeassistant.components.traccar: info
-    homeassistant.components.device_tracker: info
+    #logs:
+    #homeassistant.components.zha: debug
+    #zigpy: debug
+    #logs:
+    #pytraccar: info
+    #homeassistant.components.traccar: info
+    #homeassistant.components.device_tracker: info
 
 group: !include groups.yaml
-script: !include_dir_merge_named scripts 
+script: !include scripts.yaml
 scene: !include scenes.yaml
 
 homeassistant:
@@ -66,12 +69,19 @@ homeassistant:
         - 192.168.1.0/24
       trusted_users:
         192.168.1.116: d532ccf3eda44a4bb67d04d47bd1e199
+        192.168.1.112: 1f229a830b52445597e3b468fad6c88b
   media_dirs:
     media: /mnt/NAS/music
 
 shell_command:
   restart_unifi: sudo /home/homeassistant/rootbin/restartunifi.sh
   restart_lms: sudo /home/homeassistant/rootbin/restartlms.sh
+
+zha:
+  zigpy_config:
+    ota:
+      otau_directory: /config/zigpy_ota
+      ikea_provider: true
 
 #Nest config
 #wgoogle:
@@ -103,16 +113,16 @@ fan:
     host: 192.168.1.227
     token: !secret xiaomi_token
     model: zhimi.humidifier.ca4
-      #- platform: xiaomi_miio_airpurifier
-      #name: Steam Humidifier
-      #host: 192.168.1.19
-      #token: !secret xiaomi_token2
-      #model: deerma.humidifier.jsq
-  - platform: xiaomi_miio_fan
-    name: Fan
-    host: 192.168.1.245
-    token: !secret xiaomi_token3
-    model: zhimi.fan.za5
+  - platform: xiaomi_miio_airpurifier
+    name: Steam Humidifier
+    host: 192.168.1.19
+    token: !secret xiaomi_token2
+    model: deerma.humidifier.jsq
+      #- platform: xiaomi_miio_fan
+      #name: Fan
+      #host: 192.168.1.245
+      #token: !secret xiaomi_token3
+      #model: zhimi.fan.za5
 
 binary_sensor:
   - platform: meteoalarm
@@ -148,21 +158,30 @@ sensor:
     postcode: !secret afval_postcode
     streetnumber: !secret afval_number
     streetname: !secret afval_street
+    dateobject: 1
+    builtiniconsnew: 1
   - platform: untappd
     username: !secret untappd_username
     id: !secret untappd_id
     secret: !secret untappd_secret
+  - platform: fusion_solar_openapi
+    credentials:
+      username: !secret fusionsolar_username
+      password: !secret fusionsolar_password
+    plants:
+      - id: !secret fusionsolar_station
+        name: "zonthuis"
 
 ourgroceries:
   username: !secret ourgroceries_username
   password: !secret ourgroceries_password
 
-device_tracker:
-  - platform: traccar
-    host: localhost
-    verify_ssl: false
-    username: !secret traccar_username
-    password: !secret traccar_password
+    #device_tracker:
+    #- platform: traccar
+    #host: localhost
+    #verify_ssl: false
+    #username: !secret traccar_username
+    #password: !secret traccar_password
 
 template:
   - binary_sensor:
@@ -185,6 +204,61 @@ template:
     - name: Humidifier Water Level Low
       unique_id: humidifierwaterlevellow
       state: "{{ state_attr('fan.humidifier', 'water_level')|int < 25 }}"
+  - binary_sensor:
+    - name: Battery Capacity Low
+      unique_id: batterycapacitylow
+      state: "{{ states('sensor.battery_state_of_capacity')|int < 3 }}"
+  - binary_sensor:
+    - name: Restafval Ophaling
+      unique_id: restafvalophaling
+      state: >
+        {% if as_datetime(states('sensor.recycleapp_restafval')) < now().replace(tzinfo=None) %}
+          {% if as_datetime(states('sensor.recycleapp_restafval')).day == now().day and now().hour < 9 %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% else %}
+          {% if (as_datetime(states('sensor.recycleapp_restafval')) - now().replace(tzinfo=None)) < timedelta(hours=8) %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% endif -%}
+  - binary_sensor:
+    - name: GFT Ophaling
+      unique_id: gftophaling
+      state: >
+        {% if as_datetime(states('sensor.recycleapp_gft')) < now().replace(tzinfo=None) %}
+          {% if as_datetime(states('sensor.recycleapp_gft')).day == now().day and now().hour < 9 %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% else %}
+          {% if (as_datetime(states('sensor.recycleapp_gft')) - now().replace(tzinfo=None)) < timedelta(hours=8) %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% endif -%}
+  - binary_sensor:
+    - name: Papier Ophaling
+      unique_id: papierophaling
+      state: >
+        {% if as_datetime(states('sensor.recycleapp_papier')) < now().replace(tzinfo=None) %}
+          {% if as_datetime(states('sensor.recycleapp_papier')).day == now().day and now().hour < 9 %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% else %}
+          {% if (as_datetime(states('sensor.recycleapp_papier')) - now().replace(tzinfo=None)) < timedelta(hours=8) %}
+            True
+          {% else %}
+            False
+          {% endif -%}
+        {% endif -%}
   - sensor:
     - name: HP II Kost
       unique_id: hpiikost

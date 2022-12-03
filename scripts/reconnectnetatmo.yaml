@@ -1,7 +1,0 @@
-reconnect_netatmo:
-  alias: Reconnect Netatmo
-  sequence:
-    - service: unifi.reconnect_client
-      data:
-        device_id: ee1420932d7a3a57f9a753a47bd24bd3
-  mode: single

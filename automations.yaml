@@ -126,90 +126,6 @@
   - service: switch.toggle
     entity_id: switch.stekker_trap
   mode: single
-- id: '1608845756623'
-  alias: Kerstlichtjes aan met switch
-  description: ''
-  trigger:
-  - device_id: 0156f8e1a492a2d497abf8671b8a1032
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - service: script.kerstlichtjes_aan
-    data: {}
-  mode: single
-- id: '1608845782094'
-  alias: Kerstlichtjes af met switch
-  description: ''
-  trigger:
-  - device_id: 0156f8e1a492a2d497abf8671b8a1032
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - service: script.kerstlichtjes_af
-    data: {}
-  mode: single
-- id: '1608914545242'
-  alias: Salon aan met switch
-  description: ''
-  trigger:
-  - device_id: 33f3807eb386401973cc13e8468cb19a
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - service: script.salon_aan
-    data: {}
-  mode: single
-- id: '1608914561035'
-  alias: Salon af met switch
-  description: ''
-  trigger:
-  - device_id: 33f3807eb386401973cc13e8468cb19a
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - service: script.salon_af
-    data: {}
-  mode: single
-- id: '1608920294285'
-  alias: Salon harder met switch
-  description: ''
-  trigger:
-  - device_id: 33f3807eb386401973cc13e8468cb19a
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_up
-  condition: []
-  action:
-  - service: script.salon_harder
-    data: {}
-  mode: single
-- id: '1608920327437'
-  alias: Salon zachter met switch
-  description: ''
-  trigger:
-  - device_id: 33f3807eb386401973cc13e8468cb19a
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_down
-  condition: []
-  action:
-  - service: script.salon_zachter
-    data: {}
-  mode: single
 - id: '1642267001589'
   alias: Knopje Marten
   description: ''
@@ -225,40 +141,6 @@
     device_id: 94130a1735478084d8fd81f1b10f04bd
     entity_id: light.bureaulampje_marten
     domain: light
-  mode: single
-- id: '1644534044224'
-  alias: kachel zolder aan
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - device_id: 2092aa47292b1f8833c908139c0c4e6b
-    domain: climate
-    entity_id: climate.heater_zolder
-    type: set_hvac_mode
-    hvac_mode: heat
-  mode: single
-- id: '1644534062689'
-  alias: kachel zolder af
-  description: ''
-  trigger:
-  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - device_id: 2092aa47292b1f8833c908139c0c4e6b
-    domain: climate
-    entity_id: climate.heater_zolder
-    type: set_hvac_mode
-    hvac_mode: 'off'
   mode: single
 - id: '1644923246067'
   alias: Toilet licht uit als er niemand is
@@ -341,4 +223,120 @@
     data: {}
     target:
       entity_id: counter.hp_oj_pages
+  mode: single
+- id: '1667595438523'
+  alias: Warmte Ventilator Toggle
+  description: Switch voor warmte ventilator aan/af te zetten
+  trigger:
+  - device_id: f7cc2232cf146037944830ede1441112
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: 8c330a9920c2867ec545b59fa49f07d5
+    entity_id: switch.sonoff_2
+    domain: switch
+  mode: single
+- id: '1667597198546'
+  alias: Warmte ventilator altijd aan
+  description: Wanneer verwarming opspringt moet de ventilator aan
+  trigger:
+  - platform: state
+    entity_id:
+    - climate.living_room
+    attribute: hvac_action
+    to: heating
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 8c330a9920c2867ec545b59fa49f07d5
+    entity_id: switch.sonoff_2
+    domain: switch
+  mode: single
+- id: '1667858408439'
+  alias: Computer power toggle
+  description: ''
+  trigger:
+  - device_id: 6806e2eb4514a4ae38dfe3efb92a9fbd
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: e1cf860cf9cc7eeae8e888d696d5b511
+    entity_id: switch.lumi_lumi_plug_maeu01_switch
+    domain: switch
+  mode: single
+- id: '1667859651620'
+  alias: Kerstlichtjes met groot licht
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: c103650e1bbc5f448a1dd2c476e46b9b
+    entity_id: light.schakelaar_salon
+    domain: light
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 31f93545d5ec6277a0a2c97d4c4de52c
+    entity_id: switch.sonoff_1
+    domain: switch
+  mode: single
+- id: '1668355492738'
+  alias: Stekker Marten aan met switch
+  description: ''
+  trigger:
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  - device_id: 35dc19ef4cbbdfcd9c925a7029066f56
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - type: toggle
+    device_id: 699039d35483eae11a0e9d58f46d1c6a
+    entity_id: switch.stekker_marten_switch
+    domain: switch
+  mode: single
+- id: '1668355988143'
+  alias: smorgens stekker marten af na 3 minuten
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 699039d35483eae11a0e9d58f46d1c6a
+    entity_id: switch.stekker_marten_switch
+    domain: switch
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+  condition:
+  - condition: time
+    before: 09:00:00
+    after: 06:00:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  action:
+  - type: turn_off
+    device_id: 699039d35483eae11a0e9d58f46d1c6a
+    entity_id: switch.stekker_marten_switch
+    domain: switch
   mode: single

@@ -8,13 +8,24 @@
       friendly_name: Stekker Huislampje
       state: 'on'
     light.hue_play_1:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
       min_mireds: 153
       max_mireds: 500
+      effect_list:
+      - None
+      - candle
+      - fire
       supported_color_modes:
       - color_temp
       - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Hue Play 1
+      supported_features: 44
       color_mode: color_temp
       brightness: 89
+      color_temp_kelvin: 2732
       color_temp: 366
       hs_color:
       - 28.327
@@ -26,13 +37,10 @@
       xy_color:
       - 0.524
       - 0.387
-      mode: normal
-      dynamics: none
-      friendly_name: Hue Play 1
-      supported_features: 40
+      effect: None
       state: 'on'
     switch.stekker_trap:
-      temperature: 39
+      temperature: 34
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
@@ -46,40 +54,51 @@
     light.bureaulampje_marit:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 48
+      off_with_transition: false
       off_brightness:
       friendly_name: Bureaulampje Marit
-      supported_features: 41
+      supported_features: 40
+      color_mode: brightness
+      brightness: 48
       state: 'on'
     light.bureaulampje_marten:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 65
+      off_with_transition: false
       off_brightness:
       friendly_name: Bureaulampje Marten
-      supported_features: 41
+      supported_features: 40
+      color_mode: brightness
+      brightness: 65
       state: 'on'
     light.kaarslamp_commode:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 66
+      off_with_transition: false
       off_brightness:
       friendly_name: Kaarslamp Commode
-      supported_features: 41
+      supported_features: 40
+      color_mode: brightness
+      brightness: 66
       state: 'on'
     light.kaarslamp_salon:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 76
+      off_with_transition: false
       off_brightness:
       friendly_name: Kaarslamp Salon
-      supported_features: 41
+      supported_features: 40
+      color_mode: brightness
+      brightness: 76
+      state: 'on'
+    switch.sonoff_1:
+      friendly_name: Sonoff01
+      state: 'on'
+    switch.sonoff_3:
+      friendly_name: Sonoff03
       state: 'on'
   icon: mdi:lightbulb-group
+  metadata: {}
 - id: '1638746988177'
   name: Alles af
   entities:
@@ -90,62 +109,71 @@
       friendly_name: Stekker Huislampje
       state: 'off'
     light.hue_play_1:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
       min_mireds: 153
       max_mireds: 500
+      effect_list:
+      - None
+      - candle
+      - fire
       supported_color_modes:
       - color_temp
       - xy
       mode: normal
       dynamics: none
       friendly_name: Hue Play 1
-      supported_features: 40
+      supported_features: 44
       state: 'off'
     switch.stekker_trap:
-      temperature: 28
-      model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
+      temperature: 36
+      model: chuangmi.plug.hmi206
       state: 'off'
     switch.stekker_gang:
-      temperature: 40
-      model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
-      state: 'off'
-    switch.sonoff_2:
-      manufacturer: SONOFF
-      model: S26
-      sw_version: PSA-B01-GL v3.5.1
-      cloud: online
-      rssi: -60
-      friendly_name: Sonoff02
+      temperature: 37
+      model: chuangmi.plug.hmi206
       state: 'off'
     light.kaarslamp_commode:
       supported_color_modes:
       - brightness
-      off_brightness:
+      off_with_transition: false
+      off_brightness: 66
       friendly_name: Kaarslamp Commode
-      supported_features: 41
+      supported_features: 40
       state: 'off'
     light.bureaulampje_marit:
       supported_color_modes:
       - brightness
-      off_brightness:
+      off_with_transition: false
+      off_brightness: 48
       friendly_name: Bureaulampje Marit
-      supported_features: 41
+      supported_features: 40
       state: 'off'
     light.bureaulampje_marten:
       supported_color_modes:
       - brightness
-      off_brightness:
+      off_with_transition: false
+      off_brightness: 65
       friendly_name: Bureaulampje Marten
-      supported_features: 41
+      supported_features: 40
       state: 'off'
     light.kaarslamp_salon:
       supported_color_modes:
       - brightness
-      off_brightness:
+      off_with_transition: false
+      off_brightness: 76
       friendly_name: Kaarslamp Salon
-      supported_features: 41
+      supported_features: 40
+      state: 'off'
+    switch.sonoff_1:
+      friendly_name: Sonoff01
+      state: 'off'
+    switch.sonoff_3:
+      friendly_name: Sonoff03
       state: 'off'
   icon: mdi:lightbulb-group
+  metadata: {}

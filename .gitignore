@@ -15,4 +15,5 @@ known_devices*
 html5_push_registrations.conf
 backups/
 google_calendars.yaml
-zigbee.db-journal
+zigbee.db*
+zigpy_ota

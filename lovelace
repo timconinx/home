@@ -159,29 +159,6 @@
                       "hide": {
                         "progress": true
                       }
-                    },
-                    {
-                      "type": "entities",
-                      "entities": [
-                        {
-                          "type": "custom:fold-entity-row",
-                          "head": {
-                            "type": "section",
-                            "label": "HP Instant Ink"
-                          },
-                          "entities": [
-                            {
-                              "entity": "counter.hp_oj_pages",
-                              "name": "pages"
-                            },
-                            {
-                              "entity": "sensor.hp_ii_kost",
-                              "name": "euros",
-                              "icon": "mdi:currency-eur"
-                            }
-                          ]
-                        }
-                      ]
                     }
                   ]
                 }
@@ -194,48 +171,54 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "gauge",
-                  "min": 0,
-                  "entity": "sensor.netatmo_indoor_co2",
-                  "needle": true,
-                  "severity": {
-                    "green": 0,
-                    "yellow": 1180,
-                    "red": 2250
-                  },
-                  "name": "CO2",
-                  "max": 2500
-                },
-                {
-                  "type": "gauge",
-                  "entity": "sensor.mean_humidity_downstairs",
-                  "needle": true,
-                  "min": 30,
-                  "max": 70,
-                  "segments": [
+                  "type": "conditional",
+                  "conditions": [
                     {
-                      "from": 20,
-                      "color": "#804b4f"
+                      "entity": "sensor.battery_status",
+                      "state": "Running"
                     },
                     {
-                      "from": 40,
-                      "color": "#00CED1"
-                    },
-                    {
-                      "from": 50,
-                      "color": "#0000FF"
-                    },
-                    {
-                      "from": 60,
-                      "color": "#2F4F4F"
+                      "entity": "binary_sensor.battery_capacity_low",
+                      "state": "off"
                     }
                   ],
-                  "name": "Vocht"
+                  "card": {
+                    "type": "gauge",
+                    "entity": "sensor.battery_state_of_capacity",
+                    "name": "Batterij niveau",
+                    "min": 0,
+                    "max": 102
+                  }
                 },
                 {
-                  "type": "custom:neerslag-card",
-                  "entity": "sensor.neerslag_buienradar_regen_data",
-                  "title": "Neerslag"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "sun.sun",
+                      "state_not": "below_horizon"
+                    }
+                  ],
+                  "card": {
+                    "type": "gauge",
+                    "entity": "sensor.inverter_input_power",
+                    "name": "Power van panelen",
+                    "min": -20,
+                    "max": 4000
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "sensor.buienradar_precipitation_forecast_total",
+                      "state_not": "0.0"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:neerslag-card",
+                    "entity": "sensor.neerslag_buienradar_regen_data",
+                    "title": "Neerslag Verwacht"
+                  }
                 },
                 {
                   "type": "conditional",
@@ -437,6 +420,75 @@
                     "name": "Huishoudapparaten",
                     "show_state": true
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "binary_sensor.restafval_ophaling",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "show_state": false,
+                    "type": "glance",
+                    "entities": [
+                      {
+                        "entity": "sensor.recycleapp_restafval",
+                        "name": "Restafval buiten",
+                        "image": "https://github.com/MrTheoW/Iconstash/raw/main/Static/Apps%26Services%26Vendors/Home%20Assistant/MijnAfvalWijzer/restafval-grey.png"
+                      }
+                    ],
+                    "state_color": false
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "binary_sensor.gft_ophaling",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "show_state": false,
+                    "type": "glance",
+                    "entities": [
+                      {
+                        "entity": "sensor.recycleapp_gft",
+                        "name": "GFT & PMD buiten",
+                        "image": "https://github.com/MrTheoW/Iconstash/raw/main/Static/Apps%26Services%26Vendors/Home%20Assistant/MijnAfvalWijzer/gft-grey.png"
+                      }
+                    ],
+                    "state_color": false
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "binary_sensor.papier_ophaling",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "show_state": false,
+                    "type": "glance",
+                    "entities": [
+                      {
+                        "entity": "sensor.recycleapp_papier",
+                        "name": "Papier buiten",
+                        "image": "https://github.com/MrTheoW/Iconstash/raw/main/Static/Apps%26Services%26Vendors/Home%20Assistant/MijnAfvalWijzer/papier-grey.png"
+                      }
+                    ],
+                    "state_color": false
+                  }
                 }
               ],
               "view_layout": {
@@ -449,10 +501,21 @@
           "title": "Beneden",
           "path": "beneden",
           "panel": false,
+          "type": "custom:grid-layout",
+          "layout": {
+            "grid-template-columns": "auto 30px 30% 30px",
+            "grid-template-rows": "auto",
+            "grid-template-areas": "\"main . sidebar .\"\n"
+          },
           "badges": [],
           "cards": [
             {
-              "type": "vertical-stack",
+              "type": "custom:layout-card",
+              "layout_type": "custom:masonry-layout",
+              "layout": {
+                "width": 400,
+                "max_cols": 1
+              },
               "cards": [
                 {
                   "type": "thermostat",
@@ -572,17 +635,84 @@
                       "title": "Vocht"
                     }
                   ]
+                }
+              ],
+              "view_layout": {
+                "grid-area": "main"
+              }
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "min": 0,
+                  "entity": "sensor.netatmo_indoor_co2",
+                  "needle": true,
+                  "severity": {
+                    "green": 0,
+                    "yellow": 1180,
+                    "red": 2250
+                  },
+                  "name": "CO2",
+                  "max": 2500
                 },
                 {
-                  "hours_to_show": 24,
-                  "graph": "line",
-                  "type": "sensor",
+                  "type": "gauge",
+                  "entity": "sensor.mean_humidity_downstairs",
+                  "needle": true,
+                  "min": 30,
+                  "max": 70,
+                  "segments": [
+                    {
+                      "from": 30,
+                      "color": "#804b4f"
+                    },
+                    {
+                      "from": 40,
+                      "color": "#00CED1"
+                    },
+                    {
+                      "from": 50,
+                      "color": "#0000FF"
+                    },
+                    {
+                      "from": 60,
+                      "color": "#2F4F4F"
+                    }
+                  ],
+                  "name": "Vocht"
+                },
+                {
+                  "type": "gauge",
                   "entity": "sensor.lucht_living_voc_level",
-                  "detail": 1,
-                  "name": "Luchtkwaliteit Living",
-                  "unit": "ppb"
+                  "name": "TVOC",
+                  "needle": true,
+                  "min": 0,
+                  "max": 2000,
+                  "segments": [
+                    {
+                      "from": 0,
+                      "color": "green"
+                    },
+                    {
+                      "from": 220,
+                      "color": "yellow"
+                    },
+                    {
+                      "from": 660,
+                      "color": "orange"
+                    },
+                    {
+                      "from": 1430,
+                      "color": "red"
+                    }
+                  ]
                 }
-              ]
+              ],
+              "view_layout": {
+                "grid-area": "sidebar"
+              }
             }
           ]
         },
@@ -692,13 +822,33 @@
                 },
                 {
                   "type": "custom:mushroom-entity-card",
-                  "entity": "light.schakelaar_toilet",
+                  "entity": "switch.sonoff_1",
+                  "icon": "mdi:string-lights",
+                  "name": "Guirlande",
                   "secondary_info": "none",
                   "tap_action": {
                     "action": "toggle"
-                  },
-                  "icon": "mdi:toilet",
-                  "name": "Toilet"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "switch.sonoff_3",
+                  "name": "Lichtjes buiten",
+                  "icon": "mdi:string-lights",
+                  "secondary_info": "none",
+                  "tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "switch.stekker_marten_switch",
+                  "name": "Lampjes Marten",
+                  "icon": "mdi:button-cursor",
+                  "secondary_info": "none",
+                  "tap_action": {
+                    "action": "toggle"
+                  }
                 },
                 {
                   "type": "custom:mushroom-fan-card",
@@ -865,15 +1015,11 @@
                     "entities": [
                       {
                         "entity": "switch.stekker_zolder",
-                        "name": "Humidifier"
+                        "name": "Computers"
                       },
                       {
                         "entity": "light.dressinglampje_level_on_off",
                         "name": "Dressing"
-                      },
-                      {
-                        "entity": "switch.sonoff_3",
-                        "name": "Computers"
                       }
                     ]
                   }
@@ -1108,17 +1254,6 @@
               "icon": "mdi:radio"
             },
             {
-              "type": "button",
-              "tap_action": {
-                "action": "call-service",
-                "service": "script.reconnect_netatmo",
-                "service_data": {},
-                "target": {}
-              },
-              "name": "Reconnect Netatmo",
-              "icon": "mdi:molecule-co2"
-            },
-            {
               "type": "entities",
               "entities": [
                 {
@@ -1154,12 +1289,21 @@
             {
               "type": "entities",
               "entities": [
-                "sensor.netatmo_outdoor_humidity",
-                "sensor.netatmo_outdoor_temperature",
-                "sensor.netatmo_outdoor_radio",
-                "sensor.netatmo_outdoor_radio_level",
-                "sensor.netatmo_outdoor_reachability",
-                "sensor.netatmo_outdoor_temperature_trend"
+                {
+                  "entity": "sensor.netatmo_outdoor_humidity"
+                },
+                {
+                  "entity": "sensor.netatmo_outdoor_temperature"
+                },
+                {
+                  "entity": "sensor.netatmo_outdoor_radio"
+                },
+                {
+                  "entity": "sensor.netatmo_outdoor_reachability"
+                },
+                {
+                  "entity": "sensor.netatmo_outdoor_temperature_trend"
+                }
               ]
             },
             {
@@ -1286,6 +1430,40 @@
               "type": "custom:neerslag-card",
               "entity": "sensor.neerslag_buienalarm_regen_data",
               "title": "Neerslag"
+            },
+            {
+              "type": "gauge",
+              "entity": "sensor.lucht_living_voc_level",
+              "name": "TVOC",
+              "needle": true,
+              "min": 0,
+              "max": 4000,
+              "segments": [
+                {
+                  "from": 0,
+                  "color": "green"
+                },
+                {
+                  "from": 220,
+                  "color": "yellow"
+                },
+                {
+                  "from": 660,
+                  "color": "orange"
+                },
+                {
+                  "from": 1430,
+                  "color": "red"
+                },
+                {
+                  "from": 2200,
+                  "color": "blue"
+                },
+                {
+                  "from": 3300,
+                  "color": "purple"
+                }
+              ]
             }
           ]
         },
