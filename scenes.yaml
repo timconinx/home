@@ -40,13 +40,13 @@
       effect: None
       state: 'on'
     switch.stekker_trap:
-      temperature: 34
+      temperature: 35
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
       state: 'on'
     switch.stekker_gang:
-      temperature: 34
+      temperature: 36
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
@@ -97,6 +97,9 @@
     switch.sonoff_3:
       friendly_name: Sonoff03
       state: 'on'
+    switch.stekker_kerst_switch:
+      friendly_name: Stekker Kerst Switch
+      state: 'on'
   icon: mdi:lightbulb-group
   metadata: {}
 - id: '1638746988177'
@@ -126,16 +129,16 @@
       supported_features: 44
       state: 'off'
     switch.stekker_trap:
+      temperature: 35
+      model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
-      temperature: 36
-      model: chuangmi.plug.hmi206
       state: 'off'
     switch.stekker_gang:
+      temperature: 36
+      model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
-      temperature: 37
-      model: chuangmi.plug.hmi206
       state: 'off'
     light.kaarslamp_commode:
       supported_color_modes:
@@ -165,15 +168,20 @@
       supported_color_modes:
       - brightness
       off_with_transition: false
-      off_brightness: 76
+      off_brightness:
       friendly_name: Kaarslamp Salon
       supported_features: 40
-      state: 'off'
+      color_mode: brightness
+      brightness: 76
+      state: 'on'
     switch.sonoff_1:
       friendly_name: Sonoff01
       state: 'off'
     switch.sonoff_3:
       friendly_name: Sonoff03
+      state: 'off'
+    switch.stekker_kerst_switch:
+      friendly_name: Stekker Kerst Switch
       state: 'off'
   icon: mdi:lightbulb-group
   metadata: {}
