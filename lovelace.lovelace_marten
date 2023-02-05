@@ -9,8 +9,28 @@
           "title": "Home",
           "cards": [
             {
+              "show_name": true,
+              "show_icon": true,
+              "type": "button",
+              "tap_action": {
+                "action": "toggle"
+              },
+              "entity": "switch.stekker_marten_switch",
+              "show_state": false,
+              "icon": "mdi:button-cursor"
+            },
+            {
               "type": "light",
               "entity": "light.bureaulampje_marten"
+            },
+            {
+              "type": "button",
+              "tap_action": {
+                "action": "toggle"
+              },
+              "entity": "switch.stekker_gang",
+              "name": "Ananas",
+              "icon": "mdi:fruit-pineapple"
             },
             {
               "type": "light",
@@ -21,10 +41,6 @@
               "entity": "light.kaarslamp_commode"
             },
             {
-              "type": "light",
-              "entity": "light.kaarslamp_salon"
-            },
-            {
               "type": "button",
               "tap_action": {
                 "action": "toggle"
@@ -32,15 +48,6 @@
               "entity": "switch.stekker_trap",
               "name": "Traplichtjes",
               "icon": "mdi:stairs"
-            },
-            {
-              "type": "button",
-              "tap_action": {
-                "action": "toggle"
-              },
-              "entity": "switch.stekker_gang",
-              "name": "Ananas",
-              "icon": "mdi:fruit-pineapple"
             },
             {
               "show_name": true,
@@ -61,15 +68,8 @@
               "entity": "light.schakelaar_salon"
             },
             {
-              "show_name": true,
-              "show_icon": true,
-              "type": "button",
-              "tap_action": {
-                "action": "toggle"
-              },
-              "entity": "switch.stekker_marten_switch",
-              "show_state": false,
-              "icon": "mdi:button-cursor"
+              "type": "light",
+              "entity": "light.kaarslamp_salon"
             }
           ]
         }

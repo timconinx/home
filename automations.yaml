@@ -287,6 +287,10 @@
     device_id: 31f93545d5ec6277a0a2c97d4c4de52c
     entity_id: switch.sonoff_1
     domain: switch
+  - type: turn_on
+    device_id: 485a618ba24d2a8097d856d62eaa3c5f
+    entity_id: switch.stekker_kerst_switch
+    domain: switch
   mode: single
 - id: '1668355492738'
   alias: Stekker Marten aan met switch

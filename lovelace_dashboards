@@ -22,7 +22,7 @@
         "id": "lovelace_marten"
       },
       {
-        "show_in_sidebar": true,
+        "show_in_sidebar": false,
         "icon": "mdi:sun-thermometer",
         "title": "Hittegolf!!",
         "require_admin": false,

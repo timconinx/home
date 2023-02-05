@@ -180,6 +180,10 @@
                     {
                       "entity": "binary_sensor.battery_capacity_low",
                       "state": "off"
+                    },
+                    {
+                      "entity": "sensor.battery_bus_current",
+                      "state_not": "0.0"
                     }
                   ],
                   "card": {
@@ -376,7 +380,7 @@
                   "type": "conditional",
                   "conditions": [
                     {
-                      "entity": "switch.bfloader",
+                      "entity": "switch.bfoplader",
                       "state": "on"
                     }
                   ],
@@ -388,16 +392,16 @@
                         "name": "Status"
                       },
                       {
-                        "entity": "switch.bfloader",
-                        "icon": "mdi:home-lightning-bolt-outline",
-                        "type": "attribute",
-                        "attribute": "current_consumption",
-                        "name": "Vermogen",
-                        "suffix": "W"
+                        "entity": "sensor.bfoplader_power",
+                        "name": "Vermogen"
+                      },
+                      {
+                        "entity": "switch.bfoplader",
+                        "name": "Knop"
                       }
                     ],
                     "title": "Bakfiets",
-                    "show_header_toggle": true
+                    "show_header_toggle": false
                   }
                 },
                 {
@@ -489,6 +493,19 @@
                     ],
                     "state_color": false
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "climate.zolder",
+                      "state": "heat"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## Zolder heating"
+                  }
                 }
               ],
               "view_layout": {
@@ -576,6 +593,11 @@
                           "suffix": "°C",
                           "attribute": "temperature",
                           "icon": "mdi:thermometer"
+                        },
+                        {
+                          "entity": "sensor.airpurifier_rounded_temp",
+                          "name": "Air Purifier",
+                          "icon": "mdi:thermometer"
                         }
                       ],
                       "title": "Temperatuur"
@@ -630,6 +652,10 @@
                           "suffix": "%",
                           "attribute": "humidity",
                           "icon": "mdi:water-percent"
+                        },
+                        {
+                          "entity": "sensor.airpurifier_humidity",
+                          "name": "Air Purifier"
                         }
                       ],
                       "title": "Vocht"
@@ -708,6 +734,37 @@
                       "color": "red"
                     }
                   ]
+                },
+                {
+                  "type": "gauge",
+                  "entity": "sensor.airpurifier_pm25",
+                  "name": "PM2.5",
+                  "needle": true,
+                  "unit": "ug/m3",
+                  "min": 0,
+                  "max": 200,
+                  "segments": [
+                    {
+                      "from": 0,
+                      "color": "green"
+                    },
+                    {
+                      "from": 12,
+                      "color": "yellow"
+                    },
+                    {
+                      "from": 36,
+                      "color": "orange"
+                    },
+                    {
+                      "from": 56,
+                      "color": "red"
+                    },
+                    {
+                      "from": 150,
+                      "color": "purple"
+                    }
+                  ]
                 }
               ],
               "view_layout": {
@@ -746,7 +803,7 @@
                 },
                 {
                   "type": "custom:mushroom-light-card",
-                  "entity": "light.kaarslamp_salon",
+                  "entity": "light.lampje_salon",
                   "show_brightness_control": true,
                   "collapsible_controls": true,
                   "layout": "horizontal"
@@ -763,6 +820,60 @@
                   "entity": "light.bureaulampje_marit",
                   "show_brightness_control": true,
                   "collapsible_controls": true,
+                  "layout": "horizontal"
+                },
+                {
+                  "type": "custom:mushroom-fan-card",
+                  "entity": "fan.steam_humidifier",
+                  "icon_animation": true,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-fan-card",
+                  "entity": "fan.humidifier",
+                  "icon_animation": true,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-fan-card",
+                  "entity": "fan.airpurifier",
+                  "name": "Air Purifier",
+                  "icon_animation": true,
+                  "show_percentage_control": false,
+                  "show_oscillate_control": false,
+                  "collapsible_controls": true,
+                  "fill_container": true,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-fan-card",
+                  "entity": "fan.fan",
+                  "icon_animation": true,
+                  "fill_container": false,
+                  "show_oscillate_control": false,
+                  "show_percentage_control": true,
+                  "collapsible_controls": true,
+                  "double_tap_action": {
+                    "action": "toggle"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  },
                   "layout": "horizontal"
                 }
               ]
@@ -832,16 +943,6 @@
                 },
                 {
                   "type": "custom:mushroom-entity-card",
-                  "entity": "switch.sonoff_3",
-                  "name": "Lichtjes buiten",
-                  "icon": "mdi:string-lights",
-                  "secondary_info": "none",
-                  "tap_action": {
-                    "action": "toggle"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-entity-card",
                   "entity": "switch.stekker_marten_switch",
                   "name": "Lampjes Marten",
                   "icon": "mdi:button-cursor",
@@ -849,44 +950,6 @@
                   "tap_action": {
                     "action": "toggle"
                   }
-                },
-                {
-                  "type": "custom:mushroom-fan-card",
-                  "entity": "fan.humidifier",
-                  "icon_animation": true,
-                  "tap_action": {
-                    "action": "more-info"
-                  },
-                  "double_tap_action": {
-                    "action": "toggle"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-fan-card",
-                  "entity": "fan.steam_humidifier",
-                  "icon_animation": true,
-                  "tap_action": {
-                    "action": "more-info"
-                  },
-                  "double_tap_action": {
-                    "action": "toggle"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-fan-card",
-                  "entity": "fan.fan",
-                  "icon_animation": true,
-                  "fill_container": false,
-                  "show_oscillate_control": false,
-                  "show_percentage_control": true,
-                  "collapsible_controls": true,
-                  "double_tap_action": {
-                    "action": "toggle"
-                  },
-                  "tap_action": {
-                    "action": "more-info"
-                  },
-                  "layout": "horizontal"
                 }
               ]
             }
@@ -1020,6 +1083,10 @@
                       {
                         "entity": "light.dressinglampje_level_on_off",
                         "name": "Dressing"
+                      },
+                      {
+                        "entity": "light.kaarslamp_salon",
+                        "name": "Bureaulicht"
                       }
                     ]
                   }
@@ -1464,6 +1531,11 @@
                   "color": "purple"
                 }
               ]
+            },
+            {
+              "type": "entity",
+              "entity": "sun.sun",
+              "state_color": true
             }
           ]
         },
