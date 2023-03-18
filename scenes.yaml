@@ -81,9 +81,6 @@
       friendly_name: Kaarslamp Commode
       supported_features: 40
       state: 'on'
-    switch.sonoff_1:
-      friendly_name: Sonoff01
-      state: 'on'
     light.lampje_salon:
       min_color_temp_kelvin: 2702
       max_color_temp_kelvin: 6535
@@ -173,9 +170,6 @@
       off_brightness: 65
       friendly_name: Bureaulampje Marten
       supported_features: 40
-      state: 'off'
-    switch.sonoff_1:
-      friendly_name: Sonoff01
       state: 'off'
     light.lampje_salon:
       min_color_temp_kelvin: 2702

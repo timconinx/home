@@ -69,13 +69,13 @@ homeassistant:
         - 192.168.1.0/24
       trusted_users:
         192.168.1.116: d532ccf3eda44a4bb67d04d47bd1e199
-        192.168.1.112: 1f229a830b52445597e3b468fad6c88b
   media_dirs:
     media: /mnt/NAS/music
 
 shell_command:
   restart_unifi: sudo /home/homeassistant/rootbin/restartunifi.sh
   restart_lms: sudo /home/homeassistant/rootbin/restartlms.sh
+  restart_solarconnection: sudo /home/homeassistant/rootbin/restartsolarconnection.sh
 
 zha:
   zigpy_config:
@@ -160,10 +160,10 @@ sensor:
     streetname: !secret afval_street
     dateobject: 1
     builtiniconsnew: 1
-  - platform: untappd
-    username: !secret untappd_username
-    id: !secret untappd_id
-    secret: !secret untappd_secret
+      #- platform: untappd
+      #username: !secret untappd_username
+      #id: !secret untappd_id
+      #secret: !secret untappd_secret
   - platform: fusion_solar_openapi
     credentials:
       username: !secret fusionsolar_username
@@ -171,6 +171,13 @@ sensor:
     plants:
       - id: !secret fusionsolar_station
         name: "zonthuis"
+  - platform: statistics
+    name: max_electricity_delivery_power_15m
+    entity_id: sensor.electricity_delivery_power_15m
+    unique_id: maxelectricitydeliverypower15m
+    state_characteristic: value_max
+    max_age:
+      hours: 24    
 
 ourgroceries:
   username: !secret ourgroceries_username
@@ -340,41 +347,6 @@ template:
         {%- endif %}
   - sensor:
     - name: electricity_delivery_power_15m
+      unique_id: electricitydeliverypower15m
       unit_of_measurement: "kW"
       state: "{{ (states('sensor.electricity_delivery_15m') | float(0)) * 4 | float }}"
-  - trigger:
-      platform: time_pattern
-      minutes: "/15"
-    sensor:
-    - name: electricity_delivery_power_daily_15m_max
-      state: >
-        {% if is_number(states('sensor.electricity_delivery_power_daily_15m_max')) %}
-          {% if ((now().hour == 0) and (now().minute < 15)) %}
-            {{ states('sensor.electricity_delivery_power_15m') | float }}
-         {% else %}
-           {% if ((states('sensor.electricity_delivery_power_daily_15m_max') | float) < (states('sensor.electricity_delivery_power_15m')) | float) %}
-             {{ states('sensor.electricity_delivery_power_15m') or 0 | float }}
-           {% else %}
-             {{ states('sensor.electricity_delivery_power_daily_15m_max') | float }} 
-           {% endif %}
-         {% endif %}
-        {% else %}
-          0
-        {% endif %}
-      unit_of_measurement: 'kW'
-    - name: electricity_delivery_power_monthly_15m_max
-      state: >
-        {% if is_number(states('sensor.electricity_delivery_power_monthly_15m_max')) %}
-          {% if ((now().day == 1) and (now().hour == 0) and (now().minute < 15)) %}
-            {{ states('sensor.electricity_delivery_power_15m') | float }}
-          {% else %}
-            {% if ((states('sensor.electricity_delivery_power_monthly_15m_max') | float) < (states('sensor.electricity_delivery_power_15m')) | float) %}
-              {{ states('sensor.electricity_delivery_power_15m') or 0 | float }}
-            {% else %}
-              {{ states('sensor.electricity_delivery_power_monthly_15m_max') | float }} 
-            {% endif %}
-          {% endif %}
-        {% else %}
-          0
-        {% endif %}
-      unit_of_measurement: 'kW'
