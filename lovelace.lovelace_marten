@@ -50,17 +50,6 @@
               "icon": "mdi:stairs"
             },
             {
-              "show_name": true,
-              "show_icon": true,
-              "type": "button",
-              "tap_action": {
-                "action": "toggle"
-              },
-              "entity": "switch.sonoff_1",
-              "name": "Guirlande",
-              "icon": "mdi:string-lights"
-            },
-            {
               "type": "button",
               "tap_action": {
                 "action": "toggle"
