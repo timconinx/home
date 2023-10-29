@@ -3,8 +3,9 @@ computer_licht_aan:
   sequence:
   - service: light.turn_on
     data:
-      entity_id: light.hue_play_1
       brightness_pct: 35
+    target:
+      device_id: 1fb67220e853acb1958d6d297f4ff11b
   - service: switch.turn_on
     entity_id: switch.stekker_onder_computer
   mode: single
@@ -52,3 +53,23 @@ de_ochtendstond:
     data: {}
   alias: de_morgenstond
   mode: single
+chauffage_badkamer_even_op:
+  alias: Chauffage badkamer even op
+  sequence:
+  - service: climate.set_temperature
+    data:
+      temperature: 20
+    target:
+      entity_id: climate.heat_bad
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - service: climate.set_temperature
+    data:
+      temperature: 17
+    target:
+      entity_id: climate.heat_bad
+  mode: single
+  icon: mdi:bathtub

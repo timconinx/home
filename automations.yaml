@@ -344,3 +344,132 @@
     entity_id: switch.stekker_marten_switch
     domain: switch
   mode: single
+- id: '1683136009987'
+  alias: Publish power produced to mqtt
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.power_produced
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.power_produced
+    above: 0.5
+  - condition: sun
+    before: sunset
+    after: sunrise
+  action:
+  - service: mqtt.publish
+    data:
+      topic: POWER
+      payload_template: '{{ states(''sensor.power_produced'') }} kW'
+  mode: single
+- id: '1685353333437'
+  alias: Publish battery state to mqtt
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.battery_state_of_capacity
+  condition:
+  - condition: sun
+    before: sunset
+    after: sunrise
+  action:
+  - service: mqtt.publish
+    data:
+      topic: POWER
+      payload_template: Batterij {{ states('sensor.battery_state_of_capacity') }}
+        %
+  mode: single
+- id: '1697053616343'
+  alias: Set Battery to Time of Use
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.daltarief
+    to: 'on'
+  condition: []
+  action:
+  - device_id: 6064c75181b3882bc79c73e4697ecda8
+    domain: select
+    entity_id: 3dac31fe37c1bc198c46e828c6c539c7
+    type: select_option
+    option: Time Of Use
+  - type: turn_on
+    device_id: 6064c75181b3882bc79c73e4697ecda8
+    entity_id: fb5c4056cb8c660009af4c1bef87391c
+    domain: switch
+  mode: single
+- id: '1697057645766'
+  alias: Set battery to self-consumption
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.daltarief
+    to: 'off'
+  condition: []
+  action:
+  - device_id: 6064c75181b3882bc79c73e4697ecda8
+    domain: select
+    entity_id: 3dac31fe37c1bc198c46e828c6c539c7
+    type: select_option
+    option: Maximise Self Consumption
+  - type: turn_off
+    device_id: 6064c75181b3882bc79c73e4697ecda8
+    entity_id: fb5c4056cb8c660009af4c1bef87391c
+    domain: switch
+  mode: single
+- id: '1697484774738'
+  alias: Badkamer warm on schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.badkamer_warm
+    to: 'on'
+  condition: []
+  action:
+  - service: climate.set_temperature
+    data:
+      temperature: 20
+    target:
+      entity_id: climate.heat_bad
+  mode: single
+- id: '1697484905243'
+  alias: Badkamer koud on schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.badkamer_warm
+    to: 'off'
+  condition: []
+  action:
+  - service: climate.set_temperature
+    data:
+      temperature: 16
+    target:
+      entity_id: climate.heat_bad
+  mode: single
+- id: '1698486723577'
+  alias: Badkamer op met switch
+  description: ''
+  trigger:
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  - device_id: 0156f8e1a492a2d497abf8671b8a1032
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: script.chauffage_badkamer_even_op
+    data: {}
+  mode: single

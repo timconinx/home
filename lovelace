@@ -35,7 +35,8 @@
                 {
                   "type": "weather-forecast",
                   "entity": "weather.thuisje_hourly",
-                  "show_forecast": false
+                  "show_forecast": false,
+                  "forecast_type": "legacy"
                 },
                 {
                   "type": "vertical-stack",
@@ -87,6 +88,18 @@
                       "tap_action": {
                         "action": "toggle"
                       },
+                      "entity": "switch.g3_flex_detections_motion",
+                      "icon": "mdi:eye",
+                      "name": "Camera",
+                      "icon_height": "75px"
+                    },
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
                       "entity": "switch.stekker_kelder_voor_buiten",
                       "icon_height": "75px",
                       "icon": "mdi:power-plug"
@@ -97,44 +110,89 @@
                   "type": "vertical-stack",
                   "cards": [
                     {
-                      "type": "horizontal-stack",
+                      "type": "grid",
+                      "square": true,
+                      "columns": 2,
                       "cards": [
                         {
                           "type": "picture",
-                          "image": "https://cdn-profiles.tunein.com/s308770/images/logoq.png?t=157070",
+                          "image": "/local/willy.png",
                           "tap_action": {
                             "action": "call-service",
                             "service": "media_player.play_media",
                             "service_data": {
                               "media_content_type": "music",
                               "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s308770&partnerId=16&username=timconinx",
-                              "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                              "entity_id": "media_player.kitchen_2"
                             }
                           }
                         },
                         {
                           "type": "picture",
-                          "image": "https://cdn-profiles.tunein.com/s2611/images/logoq.jpg",
+                          "image": "/local/willyclassx.jpg",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "media_player.play_media",
+                            "service_data": {
+                              "media_content_type": "music",
+                              "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s322560&formats=aac,ogg,mp3,wmpro,wma,wmvoice&partnerId=16",
+                              "entity_id": "media_player.kitchen_2"
+                            }
+                          }
+                        },
+                        {
+                          "type": "picture",
                           "tap_action": {
                             "action": "call-service",
                             "service": "media_player.play_media",
                             "service_data": {
                               "media_content_type": "music",
                               "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s2611&formats=aac,ogg,mp3,wmpro,wma,wmvoice&partnerId=16&serial=b577ead4739e8966396abc81d5db4e12",
-                              "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                              "entity_id": "media_player.kitchen_2"
                             }
-                          }
+                          },
+                          "image": "/local/stubru.jpg"
                         },
                         {
                           "type": "picture",
-                          "image": "https://cdn-profiles.tunein.com/s306462/images/logod.png?t=1",
+                          "image": "/local/stubrutijdloze.png",
                           "tap_action": {
                             "action": "call-service",
                             "service": "media_player.play_media",
                             "service_data": {
                               "media_content_type": "music",
                               "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s306462&formats=aac,ogg,mp3,wmpro,wma,wmvoice,hls,real&partnerId=16",
-                              "entity_id": "media_player.libratone_zipp2_709c2c_3"
+                              "entity_id": "media_player.kitchen_2"
+                            }
+                          }
+                        },
+                        {
+                          "type": "picture",
+                          "image": "/local/qmusic.jpg",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "media_player.play_media",
+                            "data": {
+                              "media_content_type": "music",
+                              "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s2398&formats=aac,ogg,mp3&partnerId=16"
+                            },
+                            "target": {
+                              "entity_id": "media_player.kitchen_2"
+                            }
+                          }
+                        },
+                        {
+                          "type": "picture",
+                          "image": "/local/klaracontinuo.png",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "media_player.play_media",
+                            "data": {
+                              "media_content_type": "music",
+                              "media_content_id": "http://opml.radiotime.com/Tune.ashx?id=s55196&formats=aac,ogg,mp3&partnerId=16"
+                            },
+                            "target": {
+                              "entity_id": "media_player.kitchen_2"
                             }
                           }
                         }
@@ -142,7 +200,7 @@
                     },
                     {
                       "type": "custom:mini-media-player",
-                      "entity": "media_player.libratone_zipp2_709c2c_3",
+                      "entity": "media_player.kitchen_2",
                       "info": "short",
                       "idle_view": "when_paused",
                       "volume_stateless": true,
@@ -176,6 +234,27 @@
                   "type": "conditional",
                   "conditions": [
                     {
+                      "entity": "binary_sensor.battery_capacity_low",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "gauge",
+                    "entity": "sensor.electricity_delivery_power_15m",
+                    "name": "Kwartierverbruik",
+                    "max": 4,
+                    "severity": {
+                      "green": 0,
+                      "yellow": 2,
+                      "red": 3
+                    },
+                    "needle": true
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
                       "entity": "sensor.battery_status",
                       "state": "Running"
                     },
@@ -185,11 +264,22 @@
                     }
                   ],
                   "card": {
-                    "type": "gauge",
-                    "entity": "sensor.battery_state_of_capacity",
-                    "name": "Batterij niveau",
-                    "min": 0,
-                    "max": 102
+                    "type": "custom:card-templater",
+                    "card": {
+                      "type": "gauge",
+                      "entity": "sensor.battery_state_of_capacity",
+                      "name_template": "{{ states(\"select.battery_working_mode\") }}",
+                      "min": 0,
+                      "max": 102
+                    },
+                    "entities": [
+                      {
+                        "entity": "select.battery_working_mode"
+                      },
+                      {
+                        "entity": "sensor.battery_state_of_capacity"
+                      }
+                    ]
                   }
                 },
                 {
@@ -302,8 +392,8 @@
                       "state": "on"
                     },
                     {
-                      "entity": "sensor.ac2003_battery_state",
-                      "state_not": "charging"
+                      "entity": "sensor.ac2003_charger_type",
+                      "state_not": "ac"
                     }
                   ],
                   "card": {
@@ -363,7 +453,7 @@
                       "state": "on"
                     },
                     {
-                      "entity": "fan.humidifier",
+                      "entity": "humidifier.humidifier",
                       "state": "on"
                     }
                   ],
@@ -378,7 +468,7 @@
                   "type": "conditional",
                   "conditions": [
                     {
-                      "entity": "switch.bfoplader",
+                      "entity": "switch.bfloader",
                       "state": "on"
                     }
                   ],
@@ -386,7 +476,7 @@
                     "type": "entities",
                     "entities": [
                       {
-                        "entity": "sensor.bakfiets_oplader_status",
+                        "entity": "switch.bfloader",
                         "name": "Status"
                       },
                       {
@@ -567,12 +657,8 @@
                           "icon": "mdi:compass"
                         },
                         {
-                          "entity": "fan.humidifier",
-                          "type": "attribute",
-                          "name": "Humidifier",
-                          "suffix": "°C",
-                          "attribute": "temperature",
-                          "icon": "mdi:thermometer"
+                          "entity": "sensor.humidifier_temperature",
+                          "name": "Humidifier"
                         },
                         {
                           "entity": "sensor.netatmo_indoor_temperature",
@@ -587,12 +673,8 @@
                           "name": "Nest"
                         },
                         {
-                          "entity": "fan.steam_humidifier",
-                          "type": "attribute",
-                          "name": "Steam Humidifier",
-                          "suffix": "°C",
-                          "attribute": "temperature",
-                          "icon": "mdi:thermometer"
+                          "entity": "sensor.steam_humidifier_temperature",
+                          "name": "Steam Humidifier"
                         },
                         {
                           "entity": "sensor.airpurifier_temperature",
@@ -626,12 +708,8 @@
                           "name": "druk binnen"
                         },
                         {
-                          "entity": "fan.humidifier",
-                          "type": "attribute",
-                          "name": "Humidifier",
-                          "suffix": "%",
-                          "attribute": "humidity",
-                          "icon": "mdi:water-percent"
+                          "entity": "sensor.humidifier_humidity",
+                          "name": "Humidifier"
                         },
                         {
                           "entity": "sensor.netatmo_indoor_humidity",
@@ -646,12 +724,8 @@
                           "name": "Nest"
                         },
                         {
-                          "entity": "fan.steam_humidifier",
-                          "type": "attribute",
-                          "name": "Steam Humidifier",
-                          "suffix": "%",
-                          "attribute": "humidity",
-                          "icon": "mdi:water-percent"
+                          "entity": "sensor.steam_humidifier_humidity",
+                          "name": "Steam Humidifier"
                         },
                         {
                           "entity": "sensor.airpurifier_humidity",
@@ -786,7 +860,7 @@
               "cards": [
                 {
                   "type": "custom:mushroom-light-card",
-                  "entity": "light.hue_play_1",
+                  "entity": "light.hue_play_light",
                   "show_brightness_control": true,
                   "name": "Computer",
                   "collapsible_controls": true,
@@ -794,7 +868,10 @@
                   "layout": "horizontal",
                   "double_tap_action": {
                     "action": "more-info"
-                  }
+                  },
+                  "use_light_color": true,
+                  "show_color_control": true,
+                  "show_color_temp_control": true
                 },
                 {
                   "type": "custom:mushroom-light-card",
@@ -825,26 +902,37 @@
                   "layout": "horizontal"
                 },
                 {
-                  "type": "custom:mushroom-fan-card",
-                  "entity": "fan.steam_humidifier",
-                  "icon_animation": true,
+                  "type": "custom:mushroom-humidifier-card",
+                  "entity": "humidifier.steam_humidifier",
+                  "name": "Steam Humidifier",
+                  "show_target_humidity_control": false,
+                  "collapsible_controls": true,
                   "tap_action": {
                     "action": "more-info"
                   },
                   "double_tap_action": {
                     "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   }
                 },
                 {
-                  "type": "custom:mushroom-fan-card",
-                  "entity": "fan.humidifier",
-                  "icon_animation": true,
+                  "type": "custom:mushroom-humidifier-card",
+                  "entity": "humidifier.humidifier",
+                  "collapsible_controls": true,
+                  "show_target_humidity_control": false,
                   "tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
                     "action": "more-info"
                   },
                   "double_tap_action": {
                     "action": "toggle"
-                  }
+                  },
+                  "name": "Humidifier",
+                  "secondary_info": "state"
                 },
                 {
                   "type": "custom:mushroom-fan-card",
@@ -885,6 +973,26 @@
               "cards": [
                 {
                   "type": "custom:mushroom-entity-card",
+                  "entity": "switch.stekker_onder_computer",
+                  "secondary_info": "none",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:laptop",
+                  "name": "Computer"
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "switch.stekker_onder_kast_switch",
+                  "icon": "mdi:bird",
+                  "name": "Stekker onder kast",
+                  "secondary_info": "none",
+                  "tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
                   "entity": "switch.tradfri_stekker_1_on_off",
                   "tap_action": {
                     "action": "toggle"
@@ -895,13 +1003,13 @@
                 },
                 {
                   "type": "custom:mushroom-entity-card",
-                  "entity": "switch.stekker_onder_computer",
+                  "entity": "light.schakelaar_salon",
                   "secondary_info": "none",
                   "tap_action": {
                     "action": "toggle"
                   },
-                  "icon": "mdi:laptop",
-                  "name": "Computer"
+                  "icon": "mdi:sofa",
+                  "name": "Salon"
                 },
                 {
                   "type": "custom:mushroom-entity-card",
@@ -922,16 +1030,6 @@
                   },
                   "icon": "mdi:fruit-pineapple",
                   "name": "Ananas"
-                },
-                {
-                  "type": "custom:mushroom-entity-card",
-                  "entity": "light.schakelaar_salon",
-                  "secondary_info": "none",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "icon": "mdi:sofa",
-                  "name": "Salon"
                 },
                 {
                   "type": "custom:mushroom-entity-card",
@@ -1003,6 +1101,21 @@
                         }
                       ],
                       "show_name": false
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "thermostat",
+                      "entity": "climate.heat_bad",
+                      "name": "Badkamer"
+                    },
+                    {
+                      "type": "thermostat",
+                      "entity": "climate.heat_strijk",
+                      "name": "Strijkkamer"
                     }
                   ]
                 },
@@ -1134,6 +1247,8 @@
                   "title": "Droogkast"
                 },
                 {
+                  "show_name": true,
+                  "show_icon": true,
                   "type": "button",
                   "tap_action": {
                     "action": "toggle"
@@ -1144,6 +1259,10 @@
                 {
                   "type": "entities",
                   "entities": [
+                    {
+                      "entity": "switch.sonoff_1",
+                      "name": "Printer reset"
+                    },
                     {
                       "type": "section",
                       "label": "HP"
@@ -1198,6 +1317,25 @@
         },
         {
           "theme": "Backend-selected",
+          "title": "Camera",
+          "path": "camera",
+          "icon": "mdi:video-outline",
+          "type": "panel",
+          "badges": [],
+          "cards": [
+            {
+              "show_state": true,
+              "show_name": true,
+              "camera_view": "auto",
+              "type": "picture-entity",
+              "entity": "sensor.g3_flex_last_motion_detected",
+              "camera_image": "camera.g3_flex_high",
+              "name": "Last motion"
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
           "title": "Capaciteitstarief",
           "icon": "mdi:lightning-bolt-circle",
           "badges": [],
@@ -1209,13 +1347,27 @@
                   "type": "entities",
                   "entities": [
                     {
-                      "entity": "sensor.power_consumed"
+                      "entity": "sensor.power_consumed",
+                      "name": "Stroomverbruik"
                     },
                     {
-                      "entity": "sensor.electricity_delivery_power_15m"
+                      "entity": "sensor.electricity_delivery_power_15m",
+                      "name": "Kwartierverbruik",
+                      "icon": "mdi:flash"
                     },
                     {
-                      "entity": "sensor.statistical_characteristic"
+                      "entity": "sensor.electricity_delivery_power_daily_15m_max",
+                      "name": "max KV /dag",
+                      "icon": "mdi:calculator"
+                    },
+                    {
+                      "entity": "sensor.statistical_characteristic",
+                      "name": "max KV /dag (alt)"
+                    },
+                    {
+                      "entity": "sensor.electricity_delivery_power_monthly_15m_max",
+                      "name": "max KV /maand",
+                      "icon": "mdi:calculator"
                     }
                   ],
                   "state_color": false,
@@ -1440,17 +1592,6 @@
               "type": "button",
               "tap_action": {
                 "action": "call-service",
-                "service": "shell_command.restart_unifi",
-                "service_data": {},
-                "target": {}
-              },
-              "name": "Restart Unifi (for memory)",
-              "icon": "mdi:memory"
-            },
-            {
-              "type": "button",
-              "tap_action": {
-                "action": "call-service",
                 "service": "shell_command.restart_lms",
                 "service_data": {},
                 "target": {}
@@ -1512,71 +1653,6 @@
               ]
             },
             {
-              "type": "weather-forecast",
-              "entity": "weather.thuisje_hourly",
-              "show_forecast": false
-            },
-            {
-              "type": "entities",
-              "entities": [
-                {
-                  "entity": "light.hue_play_1",
-                  "name": "Computer"
-                },
-                {
-                  "entity": "light.kaarslamp_commode"
-                },
-                {
-                  "entity": "light.kaarslamp_salon"
-                },
-                {
-                  "entity": "light.bureaulampje_marit"
-                },
-                {
-                  "entity": "light.bureaulampje_marten"
-                }
-              ],
-              "title": "Lampjes",
-              "show_header_toggle": false
-            },
-            {
-              "type": "entities",
-              "entities": [
-                {
-                  "entity": "switch.tradfri_stekker_1_on_off",
-                  "name": "Huislampje",
-                  "icon": "mdi:greenhouse"
-                },
-                {
-                  "entity": "switch.stekker_onder_computer",
-                  "name": "Computer",
-                  "icon": "mdi:laptop"
-                },
-                {
-                  "entity": "switch.stekker_trap",
-                  "name": "Traplichtjes",
-                  "icon": "mdi:stairs"
-                },
-                {
-                  "entity": "switch.stekker_gang",
-                  "icon": "mdi:fruit-pineapple",
-                  "name": "Ananas"
-                },
-                {
-                  "entity": "switch.sonoff_2",
-                  "name": "Guirlande",
-                  "icon": "mdi:string-lights"
-                }
-              ],
-              "title": "Stekkers",
-              "show_header_toggle": false
-            },
-            {
-              "type": "entity",
-              "entity": "sensor.humidifier_water_level",
-              "unit": "%"
-            },
-            {
               "type": "entity",
               "entity": "binary_sensor.beweging"
             },
@@ -1632,45 +1708,6 @@
               }
             },
             {
-              "type": "custom:neerslag-card",
-              "entity": "sensor.neerslag_buienalarm_regen_data",
-              "title": "Neerslag"
-            },
-            {
-              "type": "gauge",
-              "entity": "sensor.lucht_living_voc_level",
-              "name": "TVOC",
-              "needle": true,
-              "min": 0,
-              "max": 4000,
-              "segments": [
-                {
-                  "from": 0,
-                  "color": "green"
-                },
-                {
-                  "from": 220,
-                  "color": "yellow"
-                },
-                {
-                  "from": 660,
-                  "color": "orange"
-                },
-                {
-                  "from": 1430,
-                  "color": "red"
-                },
-                {
-                  "from": 2200,
-                  "color": "blue"
-                },
-                {
-                  "from": 3300,
-                  "color": "purple"
-                }
-              ]
-            },
-            {
               "type": "entity",
               "entity": "sun.sun",
               "state_color": true
@@ -1687,6 +1724,19 @@
               },
               "name": "Restart Solar Connection",
               "icon": "mdi:solar-power-variant"
+            },
+            {
+              "square": true,
+              "columns": 2,
+              "type": "grid",
+              "cards": []
+            },
+            {
+              "type": "custom:mushroom-template-card",
+              "primary": "Battery at {{ states('sensor.battery_state_of_capacity') }} %",
+              "secondary": "{{ states('select.battery_working_mode') }}",
+              "icon": "mdi:battery",
+              "entity": "sensor.battery_state_of_capacity"
             }
           ]
         },
@@ -1744,10 +1794,6 @@
                   ]
                 },
                 {
-                  "type": "media-control",
-                  "entity": "media_player.libratone_zipp2_709c2c_3"
-                },
-                {
                   "type": "horizontal-stack",
                   "cards": [
                     {
@@ -1776,6 +1822,19 @@
                 {
                   "type": "media-control",
                   "entity": "media_player.emby_lenovo_tab_m8"
+                },
+                {
+                  "type": "media-control",
+                  "entity": "media_player.rudy"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "media-control",
+                      "entity": "media_player.keuken"
+                    }
+                  ]
                 }
               ]
             }

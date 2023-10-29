@@ -25,17 +25,17 @@
         "id": "5940e638f18a4a2898fbabd30defff07"
       },
       {
-        "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js?hacstag=253019926314",
+        "url": "/hacsfiles/mini-humidifier/mini-humidifier-bundle.js?hacstag=253019926315",
         "type": "module",
         "id": "a719eb4b3011474396d9cdf5dd51667e"
       },
       {
-        "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663243",
+        "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663260",
         "type": "module",
         "id": "2d86653721d14413ba82ed28e81c6c0a"
       },
       {
-        "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524320",
+        "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524323",
         "type": "module",
         "id": "c6a52c47bf194d46a43b2ac5e8505313"
       },
@@ -45,12 +45,7 @@
         "id": "2363fb2bbe2e45d8a4def97c4b656799"
       },
       {
-        "url": "/hacsfiles/person-entity-card/person-entity-card-bundle.js?hacstag=413430860080",
-        "type": "module",
-        "id": "b1e67d5ccd8a4c48becf55ca41edb475"
-      },
-      {
-        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375261",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375310",
         "type": "module",
         "id": "8831f4f9fbfb4e2f9f55f9ac2576b295"
       },
@@ -65,12 +60,12 @@
         "id": "829d0d2e6daa4b19aa47f3bcb9ba8ff7"
       },
       {
-        "url": "/hacsfiles/lovelace-home-feed-card/lovelace-home-feed-card.js?hacstag=174016256063",
+        "url": "/hacsfiles/lovelace-home-feed-card/lovelace-home-feed-card.js?hacstag=174016256064",
         "type": "module",
         "id": "5a6667062d754768a54a64d95547404d"
       },
       {
-        "url": "/hacsfiles/mini-climate-card/mini-climate-card-bundle.js?hacstag=268163975244",
+        "url": "/hacsfiles/mini-climate-card/mini-climate-card-bundle.js?hacstag=268163975262",
         "type": "module",
         "id": "dedec11390ef4ecf8586ea1481587beb"
       },
@@ -85,9 +80,19 @@
         "id": "2145db62281342a1a05ed4d9125a544d"
       },
       {
-        "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152202",
+        "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152204",
         "type": "module",
         "id": "04a66907c7c440ec87cc144713bd35d4"
+      },
+      {
+        "url": "/hacsfiles/surveillance-card/surveillance-card.js?hacstag=147764937007",
+        "type": "module",
+        "id": "e230213b45c04d89bbdebd7e50ddb4a1"
+      },
+      {
+        "id": "795ed33044a8402ca62434ae1587feb9",
+        "url": "/hacsfiles/lovelace-card-templater/lovelace-card-templater.js?hacstag=1843331630017",
+        "type": "module"
       }
     ]
   }

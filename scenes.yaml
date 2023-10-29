@@ -7,46 +7,14 @@
     switch.tradfri_stekker_1_on_off:
       friendly_name: Stekker Huislampje
       state: 'on'
-    light.hue_play_1:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - None
-      - candle
-      - fire
-      supported_color_modes:
-      - color_temp
-      - xy
-      mode: normal
-      dynamics: none
-      friendly_name: Hue Play 1
-      supported_features: 44
-      color_mode: color_temp
-      brightness: 89
-      color_temp_kelvin: 2732
-      color_temp: 366
-      hs_color:
-      - 28.327
-      - 64.71
-      rgb_color:
-      - 255
-      - 167
-      - 89
-      xy_color:
-      - 0.524
-      - 0.387
-      effect: None
-      state: 'on'
     switch.stekker_trap:
-      temperature: 36
+      temperature: 48
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
       state: 'on'
     switch.stekker_gang:
-      temperature: 28
+      temperature: 48
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
@@ -64,22 +32,18 @@
     light.bureaulampje_marten:
       supported_color_modes:
       - brightness
-      off_with_transition: false
-      off_brightness:
       friendly_name: Bureaulampje Marten
       supported_features: 40
-      color_mode: brightness
-      brightness: 65
-      state: 'on'
+      state: unavailable
     light.kaarslamp_commode:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 66
       off_with_transition: false
       off_brightness:
       friendly_name: Kaarslamp Commode
       supported_features: 40
+      color_mode: brightness
+      brightness: 66
       state: 'on'
     light.lampje_salon:
       min_color_temp_kelvin: 2702
@@ -88,6 +52,10 @@
       max_mireds: 370
       supported_color_modes:
       - color_temp
+      off_with_transition: false
+      off_brightness:
+      friendly_name: Lampje salon
+      supported_features: 40
       color_mode: color_temp
       brightness: 13
       color_temp_kelvin: 2702
@@ -102,10 +70,38 @@
       xy_color:
       - 0.526
       - 0.387
+      state: 'on'
+    switch.stekker_onder_kast_switch:
+      friendly_name: Stekker onder kast Switch
+      state: 'on'
+    light.hue_play_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
       off_with_transition: false
       off_brightness:
-      friendly_name: Lampje salon
-      supported_features: 40
+      friendly_name: Hue Play Light
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 87
+      color_temp_kelvin: 2666
+      color_temp: 375
+      hs_color:
+      - 28.47
+      - 66.821
+      rgb_color:
+      - 255
+      - 165
+      - 84
+      xy_color:
+      - 0.53
+      - 0.388
       state: 'on'
   icon: mdi:lightbulb-group
   metadata: {}
@@ -118,31 +114,14 @@
     switch.tradfri_stekker_1_on_off:
       friendly_name: Stekker Huislampje
       state: 'off'
-    light.hue_play_1:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - None
-      - candle
-      - fire
-      supported_color_modes:
-      - color_temp
-      - xy
-      mode: normal
-      dynamics: none
-      friendly_name: Hue Play 1
-      supported_features: 44
-      state: 'off'
     switch.stekker_trap:
-      temperature: 39
+      temperature: 48
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
       state: 'off'
     switch.stekker_gang:
-      temperature: 37
+      temperature: 48
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
@@ -182,6 +161,131 @@
       off_brightness: 13
       friendly_name: Lampje salon
       supported_features: 40
+      state: 'off'
+    switch.stekker_onder_kast_switch:
+      friendly_name: Stekker onder kast Switch
+      state: 'off'
+    switch.zhimi_ca4_da60_dry:
+      entity_class: MiotSwitchSubEntity
+      parent_entity_id: humidifier.humidifier
+      service_description: Humidifier
+      property_description: dry
+      humidifier.on: false
+      humidifier.dry: true
+      icon: mdi:power
+      friendly_name: Humidifier Humidifier dry
+      supported_features: 0
+      state: 'on'
+    number.zhimi_ca4_da60_speed_level:
+      min: 200
+      max: 2000
+      step: 10
+      mode: auto
+      entity_class: MiotNumberSubEntity
+      parent_entity_id: humidifier.humidifier
+      service_description: Humidifier
+      property_description: 设定速度
+      humidifier.speed_level: 200
+      friendly_name: Humidifier Humidifier 设定速度
+      supported_features: 0
+      state: '200'
+    select.zhimi_ca4_da60_brightness:
+      options:
+      - Dark
+      - Glimmer
+      - Brightest
+      entity_class: MiotSelectSubEntity
+      parent_entity_id: humidifier.humidifier
+      service_description: Screen
+      property_description: 亮度
+      screen.brightness: 0
+      friendly_name: Humidifier Screen 亮度
+      supported_features: 0
+      state: Dark
+    switch.zhimi_ca4_da60_alarm:
+      entity_class: MiotSwitchSubEntity
+      parent_entity_id: humidifier.humidifier
+      service_description: Alarm
+      property_description: Alarm
+      alarm: false
+      friendly_name: Humidifier Alarm
+      supported_features: 0
+      state: 'off'
+    switch.zhimi_ca4_da60_clean:
+      entity_class: MiotSwitchSubEntity
+      parent_entity_id: humidifier.humidifier
+      service_description: other
+      property_description: clean
+      other.clean: false
+      friendly_name: Humidifier other clean
+      supported_features: 0
+      state: 'off'
+    humidifier.humidifier:
+      min_humidity: 30
+      max_humidity: 80
+      available_modes:
+      - 'Off'
+      - Auto
+      - Level1
+      - Level2
+      - Level3
+      humidity: 50
+      mode: 'Off'
+      model: zhimi.humidifier.ca4
+      lan_ip: 192.168.1.227
+      mac_address: 54:48:E6:4C:DA:60
+      entity_class: MiotHumidifierEntity
+      home_room: thuisje Living room
+      miot_type: urn:miot-spec-v2:device:humidifier:0000A00E:zhimi-ca4:2
+      humidifier.on: false
+      humidifier.fault: 0
+      humidifier.fan_level: 0
+      humidifier.target_humidity: 50
+      humidifier.water_level: 0
+      humidifier.speed_level: 200
+      humidifier.dry: true
+      humidifier.use_time: 4248905
+      humidifier.button_pressed: 2
+      other.actual_speed: 0
+      other.power_time: 6004156
+      other.country_code: 44
+      other.clean: false
+      physical_controls_locked: false
+      screen.brightness: 0
+      alarm: false
+      environment.temperature: 23.1
+      environment.relative_humidity: 66
+      environment.fahrenheit: 73.5
+      state_updater: lan
+      sub_entities:
+      - humidifier-2.water_level-7
+      - other-7.actual_speed-1
+      - humidifier-2.dry-8
+      - alarm-4.alarm-1
+      - other-7.clean-5
+      - humidifier-2.speed_level-11
+      - screen-5.brightness-2
+      - environment-3.temperature-7
+      - environment-3.relative_humidity-9
+      - physical_controls_locked-6.physical_controls_locked-1
+      device_class: humidifier
+      friendly_name: Humidifier Humidifier
+      supported_features: 1
+      state: 'off'
+    light.hue_play_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      off_with_transition: false
+      off_brightness: 87
+      friendly_name: Hue Play Light
+      supported_features: 44
       state: 'off'
   icon: mdi:lightbulb-group
   metadata: {}

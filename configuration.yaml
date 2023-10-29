@@ -107,17 +107,17 @@ sonoff:
   username: !secret sonoff_username
   password: !secret sonoff_password
 # Xiaomi
-fan:
-  - platform: xiaomi_miio_airpurifier
-    name: Humidifier
-    host: 192.168.1.227
-    token: !secret xiaomi_token
-    model: zhimi.humidifier.ca4
-  - platform: xiaomi_miio_airpurifier
-    name: Steam Humidifier
-    host: 192.168.1.19
-    token: !secret xiaomi_token2
-    model: deerma.humidifier.jsq
+#fan:
+#- platform: xiaomi_miio_airpurifier
+#name: Humidifier
+#host: 192.168.1.227
+#token: !secret xiaomi_token
+#model: zhimi.humidifier.ca4
+#- platform: xiaomi_miio_airpurifier
+#name: Steam Humidifier
+#host: 192.168.1.19
+#token: !secret xiaomi_token2
+#model: deerma.humidifier.jsq
       #- platform: xiaomi_miio_fan
       #name: Fan
       #host: 192.168.1.245
@@ -210,11 +210,11 @@ template:
   - binary_sensor:
     - name: Humidifier Water Level Low
       unique_id: humidifierwaterlevellow
-      state: "{{ state_attr('fan.humidifier', 'water_level')|int < 25 }}"
+      state: "{{ states('sensor.humidifier_water_level')|int < 25 }}"
   - binary_sensor:
     - name: Battery Capacity Low
       unique_id: batterycapacitylow
-      state: "{{ states('sensor.battery_state_of_capacity')|int < 3 }}"
+      state: "{{ states('sensor.battery_state_of_capacity')|int < 6 }}"
   - binary_sensor:
     - name: Restafval Ophaling
       unique_id: restafvalophaling
@@ -300,10 +300,6 @@ template:
           drogen
         {%- endif %}
   - sensor:
-    - name: Humidifier Water Level
-      unique_id: humidifierwaterlevel
-      state: "{{ state_attr('fan.humidifier', 'water_level') }}"
-  - sensor:
     - name: Berekende Windrichting
       unique_id: berekendewindrichting
       state: >
@@ -350,3 +346,43 @@ template:
       unique_id: electricitydeliverypower15m
       unit_of_measurement: "kW"
       state: "{{ (states('sensor.electricity_delivery_15m') | float(0)) * 4 | float }}"
+  - trigger:
+      platform: state
+      entity_id: sensor.electricity_delivery_power_15m
+    sensor:
+    - name: electricity_delivery_power_daily_15m_max
+      state: >
+        {% if is_number(states('sensor.electricity_delivery_power_daily_15m_max')) %}
+          {% if ((now().hour == 0) and (now().minute < 15)) %}
+            {{ states('sensor.electricity_delivery_power_15m') | float }}
+          {% else %}
+            {% if ((states('sensor.electricity_delivery_power_daily_15m_max') | float) < (states('sensor.electricity_delivery_power_15m')) | float) %}
+              {{ states('sensor.electricity_delivery_power_15m') or 0 | float }}
+            {% else %}
+              {{ states('sensor.electricity_delivery_power_daily_15m_max') | float }} 
+            {% endif %}
+          {% endif %}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: 'kW'
+  - trigger:
+      platform: state
+      entity_id: sensor.electricity_delivery_power_15m
+    sensor:
+    - name: electricity_delivery_power_monthly_15m_max
+      state: >
+        {% if is_number(states('sensor.electricity_delivery_power_monthly_15m_max')) %}
+          {% if ((now().day == 1) and (now().hour == 0) and (now().minute < 15)) %}
+            {{ states('sensor.electricity_delivery_power_15m') | float }}
+          {% else %}
+            {% if ((states('sensor.electricity_delivery_power_monthly_15m_max') | float) < (states('sensor.electricity_delivery_power_15m')) | float) %}
+              {{ states('sensor.electricity_delivery_power_15m') or 0 | float }}
+            {% else %}
+              {{ states('sensor.electricity_delivery_power_monthly_15m_max') | float }} 
+            {% endif %}
+          {% endif %}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: 'kW'
