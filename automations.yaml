@@ -26,36 +26,6 @@
   - service: script.computer_licht_af
     data: {}
   mode: single
-- id: detectsoffe
-  alias: Detecteer boeven
-  description: knip toilet aan wanneer beweging aan de auto na zonsondergang
-  trigger:
-  - type: motion
-    platform: device
-    device_id: d96497e327bb579b168acbf6fee74b6c
-    entity_id: binary_sensor.waakhond_buiten_ias_zone
-    domain: binary_sensor
-  condition:
-  - condition: sun
-    after: sunset
-  - condition: device
-    type: is_off
-    device_id: 0fe724dc90023e4571abfb10876f1dd7
-    entity_id: light.hue_play_1
-    domain: light
-  action:
-  - service: light.turn_on
-    target:
-      device_id: 01b7a129f2b2f754edd93b2d541ac326
-  - delay:
-      hours: 0
-      minutes: 10
-      seconds: 0
-      milliseconds: 0
-  - service: light.turn_off
-    target:
-      device_id: 01b7a129f2b2f754edd93b2d541ac326
-  mode: single
 - id: '1608849893807'
   alias: Dressing aan met switch
   description: ''
@@ -388,15 +358,15 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.daltarief
-    to: 'on'
+    - schedule.piektarief
+    to: 'off'
   condition: []
   action:
   - device_id: 6064c75181b3882bc79c73e4697ecda8
     domain: select
     entity_id: 3dac31fe37c1bc198c46e828c6c539c7
     type: select_option
-    option: Time Of Use
+    option: time_of_use_luna2000
   - type: turn_on
     device_id: 6064c75181b3882bc79c73e4697ecda8
     entity_id: fb5c4056cb8c660009af4c1bef87391c
@@ -408,15 +378,15 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.daltarief
-    to: 'off'
+    - schedule.piektarief
+    to: 'on'
   condition: []
   action:
   - device_id: 6064c75181b3882bc79c73e4697ecda8
     domain: select
     entity_id: 3dac31fe37c1bc198c46e828c6c539c7
     type: select_option
-    option: Maximise Self Consumption
+    option: maximise_self_consumption
   - type: turn_off
     device_id: 6064c75181b3882bc79c73e4697ecda8
     entity_id: fb5c4056cb8c660009af4c1bef87391c
@@ -434,7 +404,7 @@
   action:
   - service: climate.set_temperature
     data:
-      temperature: 20
+      temperature: 18
     target:
       entity_id: climate.heat_bad
   mode: single
@@ -450,7 +420,7 @@
   action:
   - service: climate.set_temperature
     data:
-      temperature: 16
+      temperature: 14
     target:
       entity_id: climate.heat_bad
   mode: single
@@ -471,5 +441,79 @@
   condition: []
   action:
   - service: script.chauffage_badkamer_even_op
+    data: {}
+  mode: single
+- id: '1701804215115'
+  alias: Lampjes Marit toggle
+  description: ''
+  trigger:
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  - device_id: 33f3807eb386401973cc13e8468cb19a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - type: toggle
+    device_id: f42c2b3d068ed036d43a09b908ecfd1c
+    entity_id: 23ef61d420268d59e4f2d54f5b9045f1
+    domain: switch
+  mode: single
+- id: '1701980026087'
+  alias: Badkamer heater off when raam open
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 56b5a58590da9e5187780e78fa65ceb2
+    entity_id: c7a94997140b9a524a52730144ce20f4
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition: []
+  action:
+  - device_id: 7d13e1eee46ac7027f84f52ae661c007
+    domain: climate
+    entity_id: c71d744ef6263d6d0e27c6d0f224a22f
+    type: set_hvac_mode
+    hvac_mode: 'off'
+  mode: single
+- id: '1701980073578'
+  alias: Badkamer heater on when raam closed
+  description: ''
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 56b5a58590da9e5187780e78fa65ceb2
+    entity_id: c7a94997140b9a524a52730144ce20f4
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition: []
+  action:
+  - device_id: 7d13e1eee46ac7027f84f52ae661c007
+    domain: climate
+    entity_id: c71d744ef6263d6d0e27c6d0f224a22f
+    type: set_hvac_mode
+    hvac_mode: heat
+  mode: single
+- id: '1706571667877'
+  alias: Stop laden om 5u30
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:30:00
+  condition: []
+  action:
+  - service: script.auto_laden_stop
     data: {}
   mode: single

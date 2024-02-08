@@ -19,3 +19,6 @@ zigbee.db*
 zigpy_ota
 .vscode/settings.json
 appdaemon/
+scans
+blueprints/
+

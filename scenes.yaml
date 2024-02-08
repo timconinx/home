@@ -8,13 +8,13 @@
       friendly_name: Stekker Huislampje
       state: 'on'
     switch.stekker_trap:
-      temperature: 48
+      temperature: 45
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
       state: 'on'
     switch.stekker_gang:
-      temperature: 48
+      temperature: 46
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
@@ -32,9 +32,13 @@
     light.bureaulampje_marten:
       supported_color_modes:
       - brightness
+      off_with_transition: false
+      off_brightness:
       friendly_name: Bureaulampje Marten
       supported_features: 40
-      state: unavailable
+      color_mode: brightness
+      brightness: 102
+      state: 'on'
     light.kaarslamp_commode:
       supported_color_modes:
       - brightness
@@ -103,8 +107,16 @@
       - 0.53
       - 0.388
       state: 'on'
+    switch.guirlandes:
+      entity_id:
+      - switch.sonoff_3
+      - switch.stekker_guirlande_switch
+      friendly_name: Guirlandes
+      state: 'on'
   icon: mdi:lightbulb-group
-  metadata: {}
+  metadata:
+    switch.guirlandes:
+      entity_only: true
 - id: '1638746988177'
   name: Alles af
   entities:
@@ -115,13 +127,13 @@
       friendly_name: Stekker Huislampje
       state: 'off'
     switch.stekker_trap:
-      temperature: 48
+      temperature: 42
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker Trap
       state: 'off'
     switch.stekker_gang:
-      temperature: 48
+      temperature: 44
       model: chuangmi.plug.hmi206
       icon: mdi:power-socket
       friendly_name: Stekker gang
@@ -129,6 +141,8 @@
     light.kaarslamp_commode:
       supported_color_modes:
       - brightness
+      color_mode:
+      brightness:
       off_with_transition: false
       off_brightness: 66
       friendly_name: Kaarslamp Commode
@@ -137,6 +151,8 @@
     light.bureaulampje_marit:
       supported_color_modes:
       - brightness
+      color_mode:
+      brightness:
       off_with_transition: false
       off_brightness: 48
       friendly_name: Bureaulampje Marit
@@ -145,8 +161,10 @@
     light.bureaulampje_marten:
       supported_color_modes:
       - brightness
+      color_mode:
+      brightness:
       off_with_transition: false
-      off_brightness: 65
+      off_brightness: 102
       friendly_name: Bureaulampje Marten
       supported_features: 40
       state: 'off'
@@ -157,6 +175,13 @@
       max_mireds: 370
       supported_color_modes:
       - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
       off_with_transition: false
       off_brightness: 13
       friendly_name: Lampje salon
@@ -229,7 +254,7 @@
       - Level1
       - Level2
       - Level3
-      humidity: 50
+      humidity: 55
       mode: 'Off'
       model: zhimi.humidifier.ca4
       lan_ip: 192.168.1.227
@@ -240,22 +265,22 @@
       humidifier.on: false
       humidifier.fault: 0
       humidifier.fan_level: 0
-      humidifier.target_humidity: 50
-      humidifier.water_level: 0
+      humidifier.target_humidity: 55
+      humidifier.water_level: 43
       humidifier.speed_level: 200
       humidifier.dry: true
-      humidifier.use_time: 4248905
-      humidifier.button_pressed: 2
+      humidifier.use_time: 4293150
+      humidifier.button_pressed: 0
       other.actual_speed: 0
-      other.power_time: 6004156
+      other.power_time: 4001179
       other.country_code: 44
       other.clean: false
       physical_controls_locked: false
       screen.brightness: 0
       alarm: false
-      environment.temperature: 23.1
-      environment.relative_humidity: 66
-      environment.fahrenheit: 73.5
+      environment.temperature: 20.7
+      environment.relative_humidity: 57
+      environment.fahrenheit: 69.3
       state_updater: lan
       sub_entities:
       - humidifier-2.water_level-7
@@ -282,10 +307,164 @@
       supported_color_modes:
       - color_temp
       - xy
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      effect:
       off_with_transition: false
       off_brightness: 87
       friendly_name: Hue Play Light
       supported_features: 44
       state: 'off'
+    switch.guirlandes:
+      entity_id:
+      - switch.sonoff_3
+      - switch.stekker_guirlande_switch
+      friendly_name: Guirlandes
+      state: 'off'
+    humidifier.steam_humidifier:
+      min_humidity: 40
+      max_humidity: 99
+      available_modes:
+      - 'Off'
+      - Low
+      - Medium
+      - High
+      - ConstHumidity
+      humidity: 53
+      mode: 'Off'
+      model: deerma.humidifier.jsq
+      lan_ip: 192.168.1.19
+      mac_address: 44:23:7C:BD:24:F2
+      entity_class: MiotHumidifierEntity
+      home_room: thuisje Living room
+      exclude_miot_services:
+      - custom
+      miot_type: urn:miot-spec-v2:device:humidifier:0000A00E:deerma-jsq:1
+      humidifier.on: false
+      humidifier.target_humidity: 53
+      humidifier.water_status: true
+      humidifier.tank_status: true
+      humidifier.fan_level: 4
+      alarm: true
+      indicator_light.on: true
+      environment.relative_humidity: 48
+      environment.temperature: 24
+      state_updater: lan
+      sub_entities:
+      - alarm-5.alarm-1
+      - environment-3.relative_humidity-1
+      - environment-3.temperature-2
+      - indicator_light-4
+      device_class: humidifier
+      friendly_name: Humidifier Steam Humidifier
+      supported_features: 1
+      state: 'off'
+    switch.deerma_jsq_24f2_alarm:
+      entity_class: MiotSwitchSubEntity
+      parent_entity_id: humidifier.steam_humidifier
+      service_description: Alarm
+      property_description: Alarm
+      alarm: true
+      friendly_name: Humidifier Steam Alarm
+      supported_features: 0
+      state: 'on'
+    light.deerma_jsq_24f2_indicator_light:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      indicator_light.on: true
+      friendly_name: Humidifier Steam Indicator Light
+      supported_features: 0
+      state: 'on'
+    light.zhimi_mb3a_2c46_indicator_light:
+      supported_color_modes:
+      - brightness
+      friendly_name: Mi Air Purifier Indicator Light
+      supported_features: 0
+      color_mode:
+      brightness:
+      air_purifier.on: false
+      indicator_light.brightness: 0
+      state: 'off'
+    fan.airpurifier:
+      preset_modes:
+      - Auto
+      - Sleep
+      - Favorite
+      - None
+      friendly_name: Mi Air Purifier Air Purifier
+      supported_features: 9
+      percentage:
+      percentage_step: 33
+      preset_mode: Sleep
+      model: zhimi.airp.mb3a
+      lan_ip: 192.168.1.151
+      mac_address: 58:B6:23:5A:2C:46
+      entity_class: MiotFanEntity
+      home_room: thuisje Living room
+      miot_type: urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-mb3a:1
+      air_purifier.fault: 0
+      air_purifier.on: false
+      air_purifier.fan_level: 1
+      air_purifier.mode: 1
+      others.app_extra: 0
+      others.buttom_door: false
+      others.reboot_cause: 0
+      others.hw_version: 0
+      others.iic_error_count: -1
+      others.manual_level: 1
+      others.country_code: 44
+      others.temperature_unit: 0
+      rfid.rfid_tag: 80:70:a1:52:ee:b1:4
+      rfid.rfid_factory_id: 0:0:41:50
+      rfid.rfid_product_id: 0:0:31:31
+      rfid.rfid_time: 0:21:5:7
+      rfid.rfid_serial_num: 0:37:16:10
+      aqi.purify_volume: 46774
+      aqi.average_aqi: 72
+      aqi.average_aqi_cnt: 6585
+      aqi.aqi_zone: 35,75,115,150,250
+      aqi.sensor_state: ready
+      aqi.aqi_goodh: 75
+      aqi.aqi_runstate: 0
+      aqi.aqi_state: 3
+      aqi.aqi_updata_heartbeat: 0
+      use_time: 1975500
+      motor_speed.motor_high: 1900
+      motor_speed.motor_med: 1600
+      motor_speed.motor_low: 770
+      motor_speed.motor_silent: 390
+      motor_speed.motor_favorite: 2150
+      motor_speed: 390
+      motor_speed.motor_set_speed: 390
+      motor_speed.favorite_fan_level: 14
+      filter_time.filter_max_time: 3500
+      filter_time.filter_hour_debug: 694
+      button.button_pressed.error: -4001 Property is not readable
+      physical_controls_locked: false
+      indicator_light.brightness: 0
+      alarm: false
+      filter.filter_life_level: 80
+      filter.filter_used_time: 694
+      environment.pm2_5_density: 150
+      environment.relative_humidity: 58
+      environment.temperature: 19
+      state_updater: lan
+      sub_entities:
+      - environment-3.pm2_5_density-6
+      - environment-3.relative_humidity-7
+      - environment-3.temperature-8
+      - filter-4.filter_life_level-3
+      - filter-4.filter_used_time-5
+      - physical_controls_locked-7.physical_controls_locked-1
+      - indicator_light-6
+      state: 'off'
   icon: mdi:lightbulb-group
-  metadata: {}
+  metadata:
+    switch.guirlandes:
+      entity_only: true

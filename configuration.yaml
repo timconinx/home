@@ -4,13 +4,17 @@ default_config:
 
 automation: !include automations.yaml
 
+zha_toolkit:
 # https
 http:
   server_port: 8123
-  ssl_certificate: !secret ssl_certificate
-  ssl_key: !secret ssl_key
-  ip_ban_enabled: true
-  login_attempts_threshold: 3
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.1.2
+    #ssl_certificate: !secret ssl_certificate
+    #ssl_key: !secret ssl_key
+    #ip_ban_enabled: true
+    #login_attempts_threshold: 3
 
 notify:
   - platform: html5
@@ -49,7 +53,8 @@ recorder:
 
 logger:
   default: warn
-    #logs:
+  logs:
+    custom_components.zha_toolkit: debug
     #homeassistant.components.zha: debug
     #zigpy: debug
     #logs:
@@ -67,8 +72,6 @@ homeassistant:
     - type: trusted_networks
       trusted_networks:
         - 192.168.1.0/24
-      trusted_users:
-        192.168.1.116: d532ccf3eda44a4bb67d04d47bd1e199
   media_dirs:
     media: /mnt/NAS/music
 
@@ -141,14 +144,6 @@ sensor:
       - 'time_date'
       - 'time_utc'
       - 'beat'
-  - platform: systemmonitor
-    resources:
-      - type: memory_use_percent
-      - type: load_1m
-      - type: load_5m
-      - type: load_15m
-      - type: processor_use
-      - type: processor_temperature
   - platform: afvalbeheer
     wastecollector: RecycleApp
     resources:
@@ -179,9 +174,24 @@ sensor:
     max_age:
       hours: 24    
 
-ourgroceries:
-  username: !secret ourgroceries_username
-  password: !secret ourgroceries_password
+schedule:
+  piektarief:
+    name: "Piek tarief"
+    monday:
+      - from: "6:00:00"
+        to: "23:00:00"
+    tuesday:
+      - from: "6:00:00"
+        to: "23:00:00"
+    wednesday:
+      - from: "6:00:00"
+        to: "23:00:00"
+    thursday:
+      - from: "6:00:00"
+        to: "23:00:00"
+    friday:
+      - from: "6:00:00"
+        to: "23:00:00"
 
     #device_tracker:
     #- platform: traccar

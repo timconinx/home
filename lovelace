@@ -36,73 +36,131 @@
                   "type": "weather-forecast",
                   "entity": "weather.thuisje_hourly",
                   "show_forecast": false,
-                  "forecast_type": "legacy"
+                  "forecast_type": "daily"
                 },
                 {
                   "type": "vertical-stack",
                   "cards": [
                     {
-                      "type": "button",
-                      "name": "Beneden alles af",
-                      "icon": "hass:power-sleep",
-                      "tap_action": {
-                        "action": "call-service",
-                        "service": "scene.turn_on",
-                        "service_data": {},
-                        "target": {
-                          "entity_id": "scene.alles_af"
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "button",
+                          "name": "Beneden alles af",
+                          "icon": "hass:power-sleep",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "scene.turn_on",
+                            "service_data": {},
+                            "target": {
+                              "entity_id": "scene.alles_af"
+                            }
+                          },
+                          "show_icon": true,
+                          "icon_height": "75px",
+                          "hold_action": {
+                            "action": "none"
+                          },
+                          "entity": "scene.alles_af",
+                          "show_state": false
+                        },
+                        {
+                          "type": "button",
+                          "show_icon": true,
+                          "icon_height": "75px",
+                          "hold_action": {
+                            "action": "none"
+                          },
+                          "entity": "scene.alles_aan",
+                          "show_state": false,
+                          "show_name": true,
+                          "name": "Beneden alles aan",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "scene.turn_on",
+                            "service_data": {},
+                            "target": {
+                              "entity_id": "scene.alles_aan"
+                            }
+                          }
                         }
-                      },
-                      "show_icon": true,
-                      "icon_height": "75px",
-                      "hold_action": {
-                        "action": "none"
-                      },
-                      "entity": "scene.alles_af",
-                      "show_state": false
+                      ]
                     },
                     {
-                      "type": "button",
-                      "show_icon": true,
-                      "icon_height": "75px",
-                      "hold_action": {
-                        "action": "none"
-                      },
-                      "entity": "scene.alles_aan",
-                      "show_state": false,
-                      "show_name": true,
-                      "name": "Beneden alles aan",
-                      "tap_action": {
-                        "action": "call-service",
-                        "service": "scene.turn_on",
-                        "service_data": {},
-                        "target": {
-                          "entity_id": "scene.alles_aan"
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "entity": "switch.g3_flex_detections_motion",
+                          "icon": "mdi:eye",
+                          "name": "Camera",
+                          "icon_height": "75px"
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "entity": "switch.stekker_kelder_voor_buiten",
+                          "name": "stekker buiten",
+                          "icon_height": "75px",
+                          "icon": "mdi:power-plug"
                         }
+                      ]
+                    },
+                    {
+                      "type": "entity-filter",
+                      "entities": [
+                        {
+                          "entity": "climate.heat_bad",
+                          "name": "badkamer",
+                          "state_filter": [
+                            {
+                              "operator": ">",
+                              "value": 14,
+                              "attribute": "temperature"
+                            }
+                          ]
+                        },
+                        {
+                          "entity": "climate.heat_strijk",
+                          "name": "strijkkamer",
+                          "state_filter": [
+                            {
+                              "operator": ">",
+                              "value": 14,
+                              "attribute": "temperature"
+                            }
+                          ]
+                        },
+                        {
+                          "entity": "climate.heater_zolder",
+                          "name": "zolder",
+                          "state_filter": [
+                            "on"
+                          ]
+                        },
+                        {
+                          "entity": "climate.living_room",
+                          "name": "living",
+                          "type": "attribute",
+                          "attribute": "temperature",
+                          "state_filter": [
+                            "heat"
+                          ]
+                        }
+                      ],
+                      "card": {
+                        "type": "entities",
+                        "title": "Verwarming"
                       }
-                    },
-                    {
-                      "show_name": true,
-                      "show_icon": true,
-                      "type": "button",
-                      "tap_action": {
-                        "action": "toggle"
-                      },
-                      "entity": "switch.g3_flex_detections_motion",
-                      "icon": "mdi:eye",
-                      "name": "Camera",
-                      "icon_height": "75px"
-                    },
-                    {
-                      "show_name": true,
-                      "show_icon": true,
-                      "type": "button",
-                      "tap_action": {
-                        "action": "toggle"
-                      },
-                      "entity": "switch.stekker_kelder_voor_buiten",
-                      "icon_height": "75px",
-                      "icon": "mdi:power-plug"
                     }
                   ]
                 },
@@ -231,72 +289,117 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "conditional",
-                  "conditions": [
-                    {
-                      "entity": "binary_sensor.battery_capacity_low",
-                      "state": "on"
-                    }
-                  ],
+                  "type": "custom:card-templater",
                   "card": {
                     "type": "gauge",
-                    "entity": "sensor.electricity_delivery_power_15m",
-                    "name": "Kwartierverbruik",
-                    "max": 4,
+                    "entity": "sensor.idsoffe_state_of_charge",
+                    "name_template": "{% if is_state(\"sensor.idsoffe_charging_state\", \"charging\") %}\n  Charging: {{ states(\"sensor.idsoffe_charge_power\") }} kW / {{ states(\"sensor.idsoffe_charge_rate\") }} km/h / {{ states(\"sensor.idsoffe_remaining_charging_time\") }} mins to {{ states(\"sensor.idsoffe_target_state_of_charge\") }} %\n{% else %}\n  {{ states(\"sensor.idsoffe_range\") }} km left\n{% endif %}",
+                    "needle": false,
                     "severity": {
-                      "green": 0,
-                      "yellow": 2,
-                      "red": 3
+                      "blue": 80,
+                      "green": 40,
+                      "yellow": 20,
+                      "red": 10
+                    }
+                  },
+                  "entities": [
+                    {
+                      "entity": "sensor.idsoffe_state_of_charge"
                     },
-                    "needle": true
-                  }
+                    {
+                      "entity": "sensor.idsoffe_range"
+                    },
+                    {
+                      "entity": "sensor.idsoffe_charge_power"
+                    },
+                    {
+                      "entity": "sensor.idsoffe_charge_rate"
+                    },
+                    {
+                      "entity": "sensor.idsoffe_charging_state"
+                    },
+                    {
+                      "entity": "sensor.idsoffe_remaining_charging_time"
+                    },
+                    {
+                      "entity": "sensor.idsoffe_target_state_of_charge"
+                    }
+                  ]
                 },
                 {
-                  "type": "conditional",
-                  "conditions": [
+                  "type": "horizontal-stack",
+                  "cards": [
                     {
-                      "entity": "sensor.battery_status",
-                      "state": "Running"
-                    },
-                    {
-                      "entity": "binary_sensor.battery_capacity_low",
-                      "state": "off"
-                    }
-                  ],
-                  "card": {
-                    "type": "custom:card-templater",
-                    "card": {
-                      "type": "gauge",
-                      "entity": "sensor.battery_state_of_capacity",
-                      "name_template": "{{ states(\"select.battery_working_mode\") }}",
-                      "min": 0,
-                      "max": 102
-                    },
-                    "entities": [
-                      {
-                        "entity": "select.battery_working_mode"
-                      },
-                      {
-                        "entity": "sensor.battery_state_of_capacity"
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "numeric_state",
+                          "entity": "sensor.battery_state_of_capacity",
+                          "below": 6
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "entity": "sensor.electricity_delivery_power_15m",
+                        "name": "Kwartierverbruik",
+                        "max": 4,
+                        "severity": {
+                          "green": 0,
+                          "yellow": 2,
+                          "red": 3
+                        },
+                        "needle": true
                       }
-                    ]
-                  }
-                },
-                {
-                  "type": "conditional",
-                  "conditions": [
+                    },
                     {
-                      "entity": "sun.sun",
-                      "state_not": "below_horizon"
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.battery_status",
+                          "state": "Running"
+                        },
+                        {
+                          "condition": "numeric_state",
+                          "entity": "sensor.battery_state_of_capacity",
+                          "above": 5
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:card-templater",
+                        "card": {
+                          "type": "gauge",
+                          "entity": "sensor.battery_state_of_capacity",
+                          "name_template": "{{ states(\"select.battery_working_mode\") }}",
+                          "min": 0,
+                          "max": 102
+                        },
+                        "entities": [
+                          {
+                            "entity": "select.battery_working_mode"
+                          },
+                          {
+                            "entity": "sensor.battery_state_of_capacity"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sun.sun",
+                          "state_not": "below_horizon"
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "entity": "sensor.inverter_input_power",
+                        "name": "Power van panelen",
+                        "min": -20,
+                        "max": 4000
+                      }
                     }
-                  ],
-                  "card": {
-                    "type": "gauge",
-                    "entity": "sensor.inverter_input_power",
-                    "name": "Power van panelen",
-                    "min": -20,
-                    "max": 4000
-                  }
+                  ]
                 },
                 {
                   "type": "conditional",
@@ -343,8 +446,9 @@
                   "type": "conditional",
                   "conditions": [
                     {
-                      "entity": "sensor.droogkast_status",
-                      "state_not": "off"
+                      "condition": "numeric_state",
+                      "entity": "sensor.stekker_droogkast_electrical_measurement",
+                      "above": 0
                     }
                   ],
                   "card": {
@@ -449,17 +553,18 @@
                   "type": "conditional",
                   "conditions": [
                     {
-                      "entity": "binary_sensor.humidifier_water_level_low",
+                      "entity": "humidifier.humidifier",
                       "state": "on"
                     },
                     {
-                      "entity": "humidifier.humidifier",
-                      "state": "on"
+                      "condition": "numeric_state",
+                      "entity": "sensor.zhimi_ca4_da60_water_level",
+                      "below": 20
                     }
                   ],
                   "card": {
                     "type": "entity",
-                    "entity": "sensor.humidifier_water_level",
+                    "entity": "sensor.zhimi_ca4_da60_water_level",
                     "name": "Humidifier Level Low",
                     "unit": "%"
                   }
@@ -580,19 +685,6 @@
                       }
                     ],
                     "state_color": false
-                  }
-                },
-                {
-                  "type": "conditional",
-                  "conditions": [
-                    {
-                      "entity": "climate.zolder",
-                      "state": "heat"
-                    }
-                  ],
-                  "card": {
-                    "type": "markdown",
-                    "content": "## Zolder heating"
                   }
                 }
               ],
@@ -1023,6 +1115,15 @@
                 },
                 {
                   "type": "custom:mushroom-entity-card",
+                  "entity": "switch.guirlandes",
+                  "secondary_info": "none",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:string-lights"
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
                   "entity": "switch.stekker_gang",
                   "secondary_info": "none",
                   "tap_action": {
@@ -1034,7 +1135,7 @@
                 {
                   "type": "custom:mushroom-entity-card",
                   "entity": "switch.stekker_marten_switch",
-                  "name": "Lampjes Marten",
+                  "name": "Lampjes Marit",
                   "icon": "mdi:button-cursor",
                   "secondary_info": "none",
                   "tap_action": {
@@ -1204,6 +1305,104 @@
           ]
         },
         {
+          "title": "Auto",
+          "path": "auto",
+          "icon": "mdi:car",
+          "type": "custom:vertical-layout",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.idsoffe_charging_state",
+                  "name": "Batterij laad status"
+                },
+                {
+                  "entity": "sensor.idsoffe_max_charge_current_ac",
+                  "name": "Batterij laad modus"
+                },
+                {
+                  "entity": "sensor.idsoffe_range",
+                  "name": "Bereik"
+                },
+                {
+                  "entity": "sensor.idsoffe_remaining_charging_time",
+                  "name": "Tijd tot opgeladen"
+                }
+              ],
+              "header": {
+                "type": "picture",
+                "image": "/local/id4.jpg",
+                "tap_action": {
+                  "action": "none"
+                },
+                "hold_action": {
+                  "action": "none"
+                }
+              }
+            },
+            {
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "entity": "sensor.idsoffe_state_of_charge",
+                  "name": "Batterij status"
+                },
+                {
+                  "type": "gauge",
+                  "entity": "sensor.idsoffe_charge_power",
+                  "max": 20,
+                  "needle": true,
+                  "name": "Laad power"
+                }
+              ]
+            },
+            {
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "script.auto_laden_start"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "script.auto_laden_stop"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "script.auto_laden_maximum"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "script.auto_laden_reduced"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "theme": "Backend-selected",
           "title": "Kelder",
           "path": "kelder",
@@ -1361,10 +1560,6 @@
                       "icon": "mdi:calculator"
                     },
                     {
-                      "entity": "sensor.statistical_characteristic",
-                      "name": "max KV /dag (alt)"
-                    },
-                    {
                       "entity": "sensor.electricity_delivery_power_monthly_15m_max",
                       "name": "max KV /maand",
                       "icon": "mdi:calculator"
@@ -1509,6 +1704,9 @@
                 },
                 {
                   "entity": "person.sophie_nauwelaerts"
+                },
+                {
+                  "entity": "device_tracker.idsoffe_tracker"
                 }
               ],
               "dark_mode": false
@@ -1737,6 +1935,53 @@
               "secondary": "{{ states('select.battery_working_mode') }}",
               "icon": "mdi:battery",
               "entity": "sensor.battery_state_of_capacity"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.energy_next_hour",
+                  "name": "Estimated energy production - next hour"
+                },
+                {
+                  "entity": "sensor.energy_production_today_remaining",
+                  "name": "Estimated energy production - remaining today"
+                },
+                {
+                  "entity": "sensor.energy_current_hour",
+                  "name": "Estimated energy production - this hour"
+                },
+                {
+                  "entity": "sensor.energy_production_today",
+                  "name": "Estimated energy production - today"
+                },
+                {
+                  "entity": "sensor.energy_production_tomorrow",
+                  "name": "Estimated energy production - tomorrow"
+                },
+                {
+                  "entity": "sensor.power_production_next_24hours",
+                  "name": "Estimated power production - next 24 hours"
+                },
+                {
+                  "entity": "sensor.power_production_now",
+                  "name": "Estimated power production - now"
+                },
+                {
+                  "entity": "sensor.power_highest_peak_time_today",
+                  "name": "Highest power peak time - today"
+                },
+                {
+                  "entity": "sensor.power_highest_peak_time_tomorrow",
+                  "name": "Highest power peak time - tomorrow"
+                }
+              ],
+              "title": "Solar production forecast"
+            },
+            {
+              "type": "todo-list",
+              "entity": "todo.spar",
+              "title": "Spar"
             }
           ]
         },
@@ -1849,7 +2094,7 @@
           "cards": [
             {
               "type": "iframe",
-              "url": "https://lms.nauwelaerts.synology.me",
+              "url": "http://192.168.1.2:9000",
               "aspect_ratio": "50%"
             }
           ]
